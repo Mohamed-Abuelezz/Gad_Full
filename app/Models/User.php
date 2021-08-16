@@ -42,15 +42,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
+    
 
     public function profiles()
     {
         return $this->hasMany(Profiles::class);
     }
-
-
-
+    public function favouritesProfile()
+    {
+        return $this->hasMany(FavouritesProfile::class);
+    }
+    public function commentsProfiles()
+    {
+        return $this->hasMany(CommentsProfiles::class);
+    }
+    public function ContactUs()
+    {
+        return $this->hasMany(ContactUs::class);
+    }
     public function countries()
     {
         return $this->belongsTo(Countries::class,'country_id');

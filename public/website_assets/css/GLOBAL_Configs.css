@@ -1,0 +1,193 @@
+* ,
+.col,
+.col-1,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-10,
+.col-11,
+.col-12
+{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: myFontsRegular;
+
+}
+
+
+
+/* My Fonts Family*/
+@font-face {
+    font-family: myFontsLight;
+    src: url(../assets/fonts/Almarai-Light.ttf);
+  }
+  @font-face {
+    font-family: myFontsRegular;
+    src: url(../assets/fonts/Almarai-Regular.ttf);
+  }
+
+  @font-face {
+    font-family: myFontsBold;
+    src: url(../assets/fonts/Almarai-Bold.ttf);
+  }
+
+  @font-face {
+    font-family: myFontsExtraBold;
+    src: url(../assets/fonts/Almarai-ExtraBold.ttf);
+  }
+
+
+  /* My Fonts Sizing*/
+
+.s1{
+      font-size: 3rem;
+  }
+.s2{
+    font-size: 2.5rem;
+}
+.s3{
+    font-size:2rem;
+}
+.s4{
+    font-size: 1.5rem;
+}
+.s5{
+    font-size: 1rem;
+}
+
+.s6{
+    font-size: .8rem;
+}
+.s7{
+  font-size: .5rem;
+}
+  /* My Colors*/
+
+  :root {
+    --primaryColor:  #7c83fd;
+    --secondryColor:   #81e9e6;
+    --thirdColor: #f1cf4f;
+  }
+
+  /* options */
+
+  .wrapContent{
+      padding-left: 100px;
+      padding-right: 100px;
+  }
+
+.btn{
+      padding: 10px 26px;
+      border: 1px solid var(--primaryColor);
+      background-color: var(--thirdColor);
+      color: white;
+      font-family: myFontsBold;
+      border-radius: 8px;
+      transition: background-color 1s;
+  }
+
+.btn:hover{
+    background-color: var(--primaryColor);
+    color: white;
+
+    cursor: pointer;
+  }
+
+  .drop-btn{
+    padding: 5px 10px;
+    background-color: white;
+    color:var(--primaryColor);
+    border: .5px solid var(--primaryColor);
+    border-radius: 20px;
+box-shadow: 1px 1px 2px var(--primaryColor);
+text-align: center;
+
+  }
+  .dropdown-item{
+    text-align: center;
+  }
+ .dropdown-item:hover{
+    background-color: var(--primaryColor);
+    color: white;
+}
+.input-textfield{
+  padding: 8px;
+  border: .5px solid var(--primaryColor);
+  box-shadow: 1px 1px 1px 1px var(--primaryColor);
+  border-radius: 20px;
+}
+.input-textfield:focus{
+  outline: none;
+}
+/***************************************************/
+/* X-Small devices (portrait phones, less than 576px)*/
+@media (min-width: 0px) and (max-width: 991px){ 
+  
+    .wrapContent{
+        padding-left: 10px;
+      padding-right: 10px;
+    }
+
+
+.s1{
+      font-size: 2rem;
+  }
+.s2{
+    font-size: 1.8rem;
+}
+.s3{
+    font-size:1.3rem;
+}
+.s4{
+    font-size: 1rem;
+}
+.s5{
+    font-size: .8rem;
+}
+
+.s6{
+    font-size: .5rem;
+}
+
+.s7{
+  font-size: .2rem;
+}
+}
+
+/* Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) { 
+
+ }
+
+/* Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) { 
+    
+ }
+
+/* Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) { 
+    .wrapContent{
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+ }
+
+/* X-Large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) { 
+    
+ }
+
+/* XX-Large devices (larger desktops, 1400px and up)*/
+@media (min-width: 1400px) { 
+    
+ }
+
+/*******************************************************************************************/
+
+

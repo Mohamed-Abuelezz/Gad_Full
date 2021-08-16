@@ -40,7 +40,12 @@ public function showLogin(Request $request) {
     public function postLogin(Request $request)
         {
 
-           
+            // $admin = new Admin;
+
+            // $admin->name = 'mohamed AbuElEzz';
+            // $admin->email = 'm.abuelezz62@gmail.com';
+            // $admin->password = Hash::make('adamezz1997');
+            // $admin->save();
 
 
             $credentials = $request->validate([
@@ -61,7 +66,10 @@ public function showLogin(Request $request) {
             } else {
                 return back()->with('error','your Email and Password are wrong.');
             }
-      
+            
+            
+           return back()->with('error','your Email and Password are wrong.');
+
          }
   
 

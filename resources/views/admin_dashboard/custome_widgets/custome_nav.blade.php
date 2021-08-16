@@ -73,15 +73,28 @@
                             </nav>
                         </div>
 
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseSlider2" aria-expanded="false" aria-controls="pagesCollapseSlider2">
+                            الموقع
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="pagesCollapseSlider2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{{URL::to('admin/contactUs')}}">تواصل معنا</a>
+                            </nav>
+                        </div>
+                        <div class="collapse" id="pagesCollapseSlider2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{{URL::to('admin/homeSliders')}}">Sliders</a>
+                            </nav>
+                        </div>
+
+
+
+
+
                  </div>
 
-
-
-
-
-
-
-
-
-    </nav>
+                    </nav>
+    
 </div>

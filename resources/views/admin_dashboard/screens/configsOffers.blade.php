@@ -32,6 +32,7 @@
     <input type="text" class="form-control @error('price_ar') is-invalid @enderror" id="exampleInputEmail1"  name="price_ar" >
     @error('price_ar')
     <div class="alert alert-danger">{{ $message }}</div>
+    
 @enderror
 
 <br>

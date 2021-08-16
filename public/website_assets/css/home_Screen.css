@@ -1,0 +1,375 @@
+
+
+
+/* Start Search Styles ******************************************************************************/
+.sectionSearch{
+    margin-top: 50px;
+    
+}
+.sectionSearch .sectionSearchBar{
+    margin: auto;
+    background-color: var(--primaryColor);
+    border-radius: 20px;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+.sectionSearch .sectionSearchBar > ul{
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.sectionSearch .sectionSearchBar > ul li{
+margin: 10px;
+text-align: center;
+flex-grow: .01;
+
+}
+.sectionSearch .sectionSearchBar > ul li:first-child{
+    color: white;
+    flex-grow: 1;
+    text-align: left;
+    padding-top: 10px;
+}
+[dir="rtl"] .sectionSearch .sectionSearchBar > ul li:first-child{
+    color: white;
+    flex-grow: 1;
+    text-align: right;
+    padding-top: 10px;
+}
+.sectionSearch .sectionSearchBar .dropdown-menu .dropdown-item:hover{
+    background-color: var(--primaryColor);
+    color: white;
+}
+
+.sectionSearch .search-drop-btn{
+    padding: 5px 10px;
+    background-color: white;
+    color:var(--primaryColor);
+    border: none;
+    border-radius: 20px;
+box-shadow: 1px 1px 2px var(--secondryColor);
+}
+
+
+
+@media(min-width: 0px) and (max-width: 991px){ 
+
+    .sectionSearch .sectionSearchBar{
+        padding: 0;
+        margin: 0;
+        padding-bottom: 0px;
+    }
+    .sectionSearch .sectionSearchBar > ul{
+        display: flex;
+        flex-wrap: wrap;
+        list-style-type: none;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .sectionSearch .search-drop-btn{
+        padding: 5px 10px;
+        background-color: white;
+        color:var(--primaryColor);
+        border: none;
+        border-radius: 20px;
+        font-size: 15px;
+    box-shadow: 1px 1px 2px var(--secondryColor);
+    }
+
+
+    .sectionSearch .title {
+        width: 100%;
+text-align: center;
+    }
+    .sectionSearch .title p{
+text-align: center;
+padding: 0;
+font-family: myFontsBold;
+
+    }
+
+
+
+}
+
+/* End Search Styles ******************************************************************************/
+
+
+
+/* Start TabBar Styles ******************************************************************************/
+
+.sectionTaps{
+    width: 100%;
+    margin-top: 50px;
+}
+
+.sectionTaps ul{
+ width: 250px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: var(--primaryColor);
+    border: 1px solid var(--primaryColor);
+    border-radius: 10px;
+    margin: auto;
+}
+
+.sectionTaps ul li{
+    text-align: center;
+    
+}
+
+.sectionTaps ul li a{
+
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+
+}
+
+.activeSelect{
+    color: var(--thirdColor) !important;
+}
+.sectionTaps ul li a:hover{
+    color: var(--secondryColor);
+}
+
+
+
+/* End TabBar Styles ******************************************************************************/
+
+/* Start TeachersCards Styles ******************************************************************************/
+
+
+.sectionTeachers{
+    margin-top: 50px;
+}
+
+.sectionTeachers .search-arrange > ul{
+display: flex;
+justify-content:space-between;
+list-style-type: none;
+}
+#orderBy{
+    display: none;
+}
+.sectionTeachers .teacher-cards{
+    margin-top: 25px;
+    position: relative;
+}
+
+.sectionTeachers .square {
+    background: white;
+    border: 1px solid var(--primaryColor);
+    box-shadow: 1px 1px 2px var(--primaryColor);
+    border-radius: 5px;
+    height: 100px;
+    margin: 15px auto;
+    transition:  1s;
+    width: 60%;
+    height: auto;
+    padding: 0;
+  }
+  .square:hover {
+    transform: scale(1.2);
+    border-radius: 15px;
+    cursor: pointer;
+    background: var(--primaryColor);
+    color: white;
+  }
+  .checked {
+    color: orange;
+  }
+  
+  .sectionTeachers .teacher-cards .card-headerr{
+      height: 40%;
+      padding: 0;
+    text-align: center;
+  }
+  .sectionTeachers .teacher-cards .card-headerr img{
+
+width: 100%;
+height: 100%;
+border-top: 1px solid black;
+  }
+  .sectionTeachers .teacher-cards .card-headerr p{
+      text-align: center;
+      padding-top: 15px;
+      font-family: myFontsBold;
+  }
+  .sectionTeachers .teacher-cards .card-headerr .stars{
+      width:100%;
+      text-align: center;
+      font-size: 8px;
+
+  }
+
+  .sectionTeachers .teacher-cards .card-contentt{
+      padding:5px;
+      display: flex;
+      font-size: 5px;
+      justify-content:space-evenly;
+      
+  }
+
+  .sectionTeachers .teacher-cards .card-contentt ul{
+      padding: 0px;
+      margin: 0;
+      text-align: left;
+      list-style-position: inside;
+list-style-type: none;
+  }
+
+  .sectionTeachers .teacher-cards .card-contentt ol{
+    padding: 0px;
+    margin: 0;
+    text-align: left;
+    list-style-position: inside;
+}
+
+.sectionTeachers .teacher-cards .more{
+    text-align: center;
+    padding: 5px;
+}
+.sectionTeachers .teacher-cards .more-btn{
+    padding: 5px 20px;
+    font-size: 12px;
+    text-align: center;
+    margin: auto;
+    background-color:var(--primaryColor);
+}
+.sectionTeachers .teacher-cards .more-btn:hover{
+background-color: var(--thirdColor);
+
+}
+/* Set the size of the div element that contains the map */
+#map {
+    height: 500px;
+    /* The height is 400 pixels */
+    width: 90%;
+    /* The width is the width of the web page */
+    margin: auto;
+    border-radius: 20px;
+    margin-bottom: 50px;
+  }
+@media(min-width: 0px) and (max-width: 991px){ 
+    .sectionTeachers .search-arrange > ul{
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        list-style-type: none;
+    }
+
+    .sectionTeachers .search-arrange > ul li{
+        margin-bottom: 10px;
+    }
+}
+  
+
+.gm-style .gm-style-iw-d::-webkit-scrollbar-track, 
+.gm-style .gm-style-iw-d::-webkit-scrollbar-track-piece,
+.gm-style .gm-style-iw-c,
+.gm-style .gm-style-iw-t:hover{
+    background-color:var(--primaryColor);
+    color: white;
+    padding-right: 5px;
+
+}
+
+.mapInfoClick{
+    margin: auto;
+    text-align: center;
+    font-size: 14px;
+    background-color: var(--primaryColor);
+}
+.mapInfoClick p{
+    margin-top: 5px;
+    font-family:myFontsBold ;
+
+}
+.mapInfoClick img{
+width: 100px;
+height: 100px;
+border-radius: 50px;
+}
+.mapInfoClick .btn{
+margin: 15px;
+padding: 4px 15px;
+}
+
+
+/* End TeachersCards Styles ******************************************************************************/
+/* Start Footer Styles ******************************************************************************/
+.sectionFooter{
+    background-color: var(--primaryColor);
+    padding-top: 40px;
+    padding-bottom: 40px;
+    overflow: hidden;
+}
+
+.sectionFooter .title{
+    color: white;
+    font-family:myFontsBold ;
+    margin-bottom: 5px;
+}
+.sectionFooter ul{
+    list-style-type: none;
+    width: 100%;
+    padding: 0;
+    
+    margin-bottom: 10px;
+
+}
+.sectionFooter ul li{
+float: left;
+margin: 3px;
+
+}
+[dir="rtl"] .sectionFooter ul li{
+    float: right;
+    
+    }
+.sectionFooter ul li img{
+    width: 30px;
+    height: 30px;
+    border-radius: 90px;
+}
+
+.sectionFooter .links ul{
+    list-style-type: none;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 10px;
+
+}
+
+.sectionFooter .links ul li{
+float: none;
+margin: 10px;
+}
+
+.sectionFooter .links ul li a{
+color: white;
+}
+
+
+@media(min-width: 0px) and (max-width: 991px){ 
+
+    .sectionFooter{
+
+        padding-right: 10px;
+        padding-left: 10px;
+
+    }
+    .sectionFooter .links{
+        margin-top: 40px;
+    }
+        
+  
+}
+/* End Footer Styles ******************************************************************************/

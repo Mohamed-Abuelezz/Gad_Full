@@ -1,0 +1,355 @@
+
+/* Start image-profile Styles ******************************************************************************/
+
+.image-profile{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    background-color: red;
+    position: relative;
+}
+
+
+.image-profile img{
+    margin: auto;
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 130px;
+    height: 130px;
+    border-radius: 100px;
+    transform: translate(-50%,-50%);
+    /* or 3d alternative if you will add animations (smoother transitions) */
+    transform: translate3d(-50%,-50%,0);
+  
+}
+.sectionImageAndBio{}
+.sectionImageAndBio .bio{
+    margin: auto;
+    text-align: center;
+    width: 60%;
+margin-top: 80px;
+}
+
+
+/* end image-profile Styles ******************************************************************************/
+
+/* start Details Styles ******************************************************************************/
+.sectionDetails{
+    margin: 50px auto;
+    width: 70%;
+}
+.sectionDetails .details-container{
+    background-color: var(--primaryColor);
+    margin-bottom: 50px;
+    border-radius: 15px;
+    padding: 10px;
+    position: relative;
+    margin: auto;
+}
+.sectionDetails .details-container .nav-link{
+    color: var(--thirdColor);
+}
+.sectionDetails .details-container .active{
+    background-color: transparent;
+    color: white;
+}
+
+.sectionDetails .details-container .views-country{
+    display: flex;
+    float: right;
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+    color: white;
+    padding-top: 5px;
+    text-align: center;
+
+}
+
+[dir="rtl"] .sectionDetails .details-container .views-country{
+    display: flex;
+    position: absolute;
+    right:unset;
+    left: 0;
+    margin-left: 20px;
+    color: white;
+    padding-top: 5px;
+    text-align: center;
+}
+.sectionDetails .details-container .views-country ul{
+list-style-type: none;
+
+}
+
+.sectionDetails .details-container .profileDetails{
+    margin-top: 20px;
+}
+
+.sectionDetails .details-container .stars{
+    text-align: left;
+    margin-top: 4px;
+}
+[dir="rtl"] .sectionDetails .details-container .stars{
+    text-align: right;
+    margin-top: 4px;
+}
+.sectionDetails .details-container .stars .checked{
+    color: var(--thirdColor);
+}
+
+.sectionDetails .details-container  .specialization{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 25px;
+}
+.sectionDetails .details-container  .specialization ol{
+  list-style-position: inside;
+
+}
+/* end Details Styles ******************************************************************************/
+
+/* Start Comments Styles ******************************************************************************/
+
+@import url(//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css);
+
+.detailBox {
+    border:1px solid #bbb;
+    margin:50px auto;
+    width: 70%;
+    border-radius: 10px;
+background-color: var(--primaryColor);
+color: white;
+}
+.titleBox {
+    background-color: var(--primaryColor);
+    border-radius: 10px;
+
+    padding:10px;
+}
+.titleBox label{
+    color: white;
+    margin:0;
+    font-family: myFontsBold;
+  display:inline-block;
+}
+
+.commentBox {
+   /* padding:10px;*/
+    border-top:1px dotted #bbb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-inline{
+    display: flex;
+    justify-content: space-between;
+}
+.form-inline .btn{
+    padding: 8px;
+}
+.commentBox .form-group:first-child, .actionBox .form-group:first-child {
+    width:50%;
+}
+.commentBox .form-group:nth-child(2), .actionBox .form-group:nth-child(2) {
+}
+.actionBox .form-group * {
+    width:100%;
+}
+.taskDescription {
+    margin-top: 18px;
+}
+.commentList {
+    padding:0;
+    list-style:none;
+    max-height:200px;
+    overflow:auto;
+}
+.commentList li {
+    margin:0;
+    margin-top:10px;
+}
+.commentList li > div {
+    display:table-cell;
+}
+.commenterImage {
+    width:30px;
+    margin-right:5px;
+    height:100%;
+    float:left;
+}
+[dir="rtl"] .commenterImage {
+    width:30px;
+    margin-left:5px;
+    height:100%;
+    float:right;
+}
+.commenterImage img {
+    width:100%;
+    border-radius:50%;
+}
+.commentText p {
+    margin:0;
+}
+.sub-text {
+    color:wheat;
+    font-family:verdana;
+    font-size:11px;
+}
+.actionBox {
+    border-top:1px dotted #bbb;
+    padding:10px;
+}
+
+
+
+
+/* end Comments Styles ******************************************************************************/
+
+
+/* Begin float */
+
+body {
+    background-color: #EDEDED;
+  }
+  .circular-menu {
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+  }
+  
+  .circular-menu .floating-btn {
+    display: block;
+    width: 3.5em;
+    height: 3.5em;
+    border-radius: 50%;
+    background-color: hsl(4, 98%, 60%);
+    box-shadow: 0 2px 5px 0 hsla(0, 0%, 0%, .26);  
+    color: hsl(0, 0%, 100%);
+    text-align: center;
+    line-height: 3.9;
+    cursor: pointer;
+    outline: 0;
+  }
+  
+  .circular-menu.active .floating-btn {
+    box-shadow: inset 0 0 3px hsla(0, 0%, 0%, .3);
+  }
+  
+  .circular-menu .floating-btn:active {
+    box-shadow: 0 4px 8px 0 hsla(0, 0%, 0%, .4);
+  }
+  
+  .circular-menu .floating-btn i {
+    font-size: 1.3em;
+    transition: transform .2s;  
+  }
+  
+  .circular-menu.active .floating-btn i {
+    transform: rotate(-45deg);
+  }
+  
+  .circular-menu:after {
+    display: block;
+    content: ' ';
+    width: 3.5em;
+    height: 3.5em;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -2;
+    background-color: hsl(4, 98%, 60%);
+    transition: all .3s ease;
+  }
+  
+  .circular-menu.active:after {
+    transform: scale3d(5.5, 5.5, 1);
+    transition-timing-function: cubic-bezier(.68, 1.55, .265, 1);
+  }
+  
+  .circular-menu .items-wrapper {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .circular-menu .menu-item {
+    position: absolute;
+    top: .2em;
+    right: .2em;
+    z-index: -1;
+    display: block;
+    text-decoration: none;
+    color: hsl(0, 0%, 100%);
+    font-size: 1em;
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 3;
+    background-color: hsla(0,0%,0%,.1);
+    transition: transform .3s ease, background .2s ease;
+  }
+  
+  .circular-menu .menu-item:hover {
+    background-color: hsla(0,0%,0%,.3);
+  }
+  
+  .circular-menu.active .menu-item {
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .circular-menu.active .menu-item:nth-child(1) {
+    transform: translate3d(1em,-7em,0);
+  }
+  
+  .circular-menu.active .menu-item:nth-child(2) {
+    transform: translate3d(-3.5em,-6.3em,0);
+  }
+  
+  .circular-menu.active .menu-item:nth-child(3) {
+    transform: translate3d(-6.5em,-3.2em,0);
+  }
+  
+  .circular-menu.active .menu-item:nth-child(4) {
+    transform: translate3d(-7em,1em,0);
+  }
+  
+  /**
+   * The other theme for this menu
+   */
+  
+  .circular-menu.circular-menu-left {
+    right: auto; 
+    left: 1em;
+  }
+  
+  .circular-menu.circular-menu-left .floating-btn {
+    background-color: var(--primaryColor);
+  }
+  
+  .circular-menu.circular-menu-left:after {
+    background-color: var(--primaryColor);
+  }
+  
+  .circular-menu.circular-menu-left.active .floating-btn i {
+    transform: rotate(90deg);
+  }
+  
+  .circular-menu.circular-menu-left.active .menu-item:nth-child(1) {
+    transform: translate3d(-1em,-7em,0);
+  }
+  
+  .circular-menu.circular-menu-left.active .menu-item:nth-child(2) {
+    transform: translate3d(3.5em,-6.3em,0);
+  }
+  
+  .circular-menu.circular-menu-left.active .menu-item:nth-child(3) {
+    transform: translate3d(6.5em,-3.2em,0);
+  }
+  
+  .circular-menu.circular-menu-left.active .menu-item:nth-child(4) {
+    transform: translate3d(7em,1em,0);
+  }

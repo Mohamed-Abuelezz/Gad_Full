@@ -38,4 +38,14 @@ class Profiles extends Model
         return $this->hasMany(ProfileScientificArticles::class);
     }
 
+    public function favouritesProfile()
+    {
+        return $this->hasMany(FavouritesProfile::class);
+    }
+
+    public function commentsProfiles()
+    {
+        return $this->hasMany(CommentsProfiles::class);
+    }
+
 }

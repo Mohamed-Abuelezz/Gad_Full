@@ -1,0 +1,33 @@
+.favouriteContent{
+    height: auto;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+}
+
+.favouriteContent .card{
+overflow: hidden;
+margin: 20px;
+height: 400px;
+width: 25%;
+background-color: var(--secondryColor);
+}
+@media(min-width: 0px) and (max-width: 991px){
+
+    .favouriteContent .card{
+        overflow: hidden;
+        margin: 20px;
+        height: 550px;
+        width: 80%;
+        background-color: var(--secondryColor);
+        }
+        
+ }
+.card-body{
+    background-color:var(--primaryColor);
+    height: 0;
+}

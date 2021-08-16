@@ -28,7 +28,7 @@
                            
 
 
-  <form action="{{$isEdit == true ? URL::to('admin/add_user/edit') : URL::to('admin/add_user')}} " method="POST" enctype="multipart/form-data">
+  <form action="{{$isEdit == true ? URL::to('admin/add_user/edit') : URL::to('admin/add_user')}}" method="POST" enctype="multipart/form-data">
   @csrf
 
   <input type="hidden" name="user_id" value="{{$isEdit == true ? $user->id : null}}" />

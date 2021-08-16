@@ -176,7 +176,49 @@ Schema::create('Subscribers_Type', function (Blueprint $table) {
 
 });
 
-    }
+
+
+   /////////////////////////// Favourites Profile Table
+   Schema::create('Favourites_Profile', function (Blueprint $table) {
+      $table->id();
+    $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');;
+    $table->foreignId('profile_id')->constrained('Profiles')->onUpdate('cascade')->onDelete('cascade');;
+  
+  
+     $table->timestamps();
+  
+   });
+
+
+
+   /////////////////////////// Favourites Profile Table
+   Schema::create('Comments_Profiles', function (Blueprint $table) {
+    $table->id();
+    $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');;
+    $table->foreignId('profile_id')->constrained('Profiles')->onUpdate('cascade')->onDelete('cascade');;
+    $table->string('comment');
+
+  
+     $table->timestamps();
+  
+   });
+
+   /////////////////////////// Contact Us Table
+   Schema::create('Contact_Us', function (Blueprint $table) {
+      $table->id();
+   //   $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade')->nullable();
+      $table->string('name');
+      $table->string('email');
+      $table->string('phone');
+      $table->string('message');
+  
+    
+       $table->timestamps();
+    
+     });
+   
+
+}
   
     /**
      * Reverse the migrations.
@@ -185,7 +227,10 @@ Schema::create('Subscribers_Type', function (Blueprint $table) {
      */
     public function down()
     {
-      Schema::dropIfExists('Configs_Website_Views');
+        Schema::dropIfExists('Contact_Us');
+        Schema::dropIfExists('Comments_Profiles');
+        Schema::dropIfExists('Favourites_Profile');
+        Schema::dropIfExists('Configs_Website_Views');
         Schema::dropIfExists('Configs_Slider');
         Schema::dropIfExists('Profiles_Offers_Subscribers');
         Schema::dropIfExists('Configs_Offers');
@@ -196,7 +241,5 @@ Schema::create('Subscribers_Type', function (Blueprint $table) {
         Schema::dropIfExists('Education_Stages');
         Schema::dropIfExists('users');
         Schema::dropIfExists('Countries');
-
-        
     }
 }
