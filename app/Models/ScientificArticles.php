@@ -24,5 +24,7 @@ class ScientificArticles extends Model
         return $this->hasMany(ProfileScientificArticles::class);
     }
 
+    
+
 
 }

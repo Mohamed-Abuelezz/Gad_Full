@@ -148,6 +148,7 @@ font-family: myFontsBold;
 
 .sectionTeachers{
     margin-top: 50px;
+    font-size: 12px;
 }
 
 .sectionTeachers .search-arrange > ul{
@@ -169,12 +170,16 @@ list-style-type: none;
     box-shadow: 1px 1px 2px var(--primaryColor);
     border-radius: 5px;
     height: 100px;
-    margin: 15px auto;
     transition:  1s;
     width: 60%;
-    height: auto;
+    height: 350px;
     padding: 0;
-  }
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+margin:5px auto;
+}
   .square:hover {
     transform: scale(1.2);
     border-radius: 15px;
@@ -194,7 +199,7 @@ list-style-type: none;
   .sectionTeachers .teacher-cards .card-headerr img{
 
 width: 100%;
-height: 100%;
+height:120px;
 border-top: 1px solid black;
   }
   .sectionTeachers .teacher-cards .card-headerr p{
@@ -213,7 +218,7 @@ border-top: 1px solid black;
       padding:5px;
       display: flex;
       font-size: 5px;
-      justify-content:space-evenly;
+flex-direction: column;  
       
   }
 
@@ -235,6 +240,9 @@ list-style-type: none;
 .sectionTeachers .teacher-cards .more{
     text-align: center;
     padding: 5px;
+bottom: 0px;
+justify-self: flex-end;
+
 }
 .sectionTeachers .teacher-cards .more-btn{
     padding: 5px 20px;

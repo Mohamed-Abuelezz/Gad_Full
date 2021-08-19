@@ -19,6 +19,7 @@ use App\Models\ConfigsSlider;
 use App\Models\Countries;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
@@ -47,10 +48,10 @@ class AuthController extends Controller
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
     
-                return redirect()->intended('index');
+                return redirect()->route('home');
             }
     
-            return back()->withErrors();
+            return back()->withErrors(['message'=>'email or password are wrong']);
         }
 
 
@@ -59,9 +60,9 @@ class AuthController extends Controller
         {
             $credentials = $request->validate([
                 'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-                'name' => ['required'],
-                'email' => 'required|unique:users,email,$id',
-                'password' => ['required','min:5'],
+                'name_register' => ['required'],
+                'email_register' => 'required|unique:users,email,$id',
+                'password_register' => ['required','min:8'],
             ]);
     
             $imageName;
@@ -83,18 +84,20 @@ class AuthController extends Controller
 
 
                 $user = new User;
-                $user->name = $request->name;
-                $user->email = $request->email;
-                $user->image =   $imageName  ;
+                $user->name = $request->name_register;
+                $user->email = $request->email_register;
+                $user->image =   $imageName;
            //     $user->email_verified_at =  Carbon::now();
-                $user->password = Hash::make($request->password);
+                $user->password = Hash::make($request->password_register);
                 $user->country_id = $request->countries[0];
     
                 $user->save();
     
-            
+                event(new Registered($user));
+
+                Auth::attempt(['email' => request('email_register'), 'password' => request('password_register')]);
     
-            return  redirect()->route('index');
+                return redirect()->route('home');
 
         }
         

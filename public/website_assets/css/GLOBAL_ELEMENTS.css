@@ -22,9 +22,9 @@
   .sectionNavBar .logo{
   height: 50px;
   border-radius: 50px;
-  background-color: white;
   float: right;
   margin-top: 2px;
+  background-color: white;
   }
   
   [dir="rtl"] .sectionNavBar .logo{

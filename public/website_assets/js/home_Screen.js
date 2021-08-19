@@ -1,32 +1,3 @@
-
-
-
-/* taps Section */////////////////////////////////////////////////////////////
-
-var tabEl = document.querySelector('a[data-bs-toggle="tab"]')
-tabEl.addEventListener('shown.bs.tab', function (event) {
-  event.target // newly activated tab
-  event.relatedTarget // previous active tab
-
-  event.target.classList.toggle('activeSelect');
-  event.relatedTarget.classList.toggle('activeSelect');
-  console.log('s1')
-  $("#orderBy").css("display","none");
-
-})
-
-tabEl.addEventListener('hidden.bs.tab', function (event) {
-    event.target // newly activated tab
-    event.relatedTarget // previous active tab
-  
-    event.target.classList.toggle('activeSelect');
-    event.relatedTarget.classList.toggle('activeSelect');
-    console.log('s2')
-    $("#orderBy").css("display","block");
-
-  })
-
-
   /// Teachers Section /////////////////////////////////////////////////////////////
 // Initialize and add the map
 function initMap() {
@@ -121,3 +92,36 @@ function initMap() {
 
 
 }
+
+
+
+/* taps Section */////////////////////////////////////////////////////////////
+
+var tabEl = document.querySelector('a[data-bs-toggle="tab"]')
+tabEl.addEventListener('shown.bs.tab', function (event) {
+  event.target // newly activated tab
+  event.relatedTarget // previous active tab
+
+  event.target.classList.toggle('activeSelect');
+  event.relatedTarget.classList.toggle('activeSelect');
+  console.log('s1')
+  $("#orderBy").css("display","none");
+
+})
+
+tabEl.addEventListener('hidden.bs.tab', function (event) {
+    event.target // newly activated tab
+    event.relatedTarget // previous active tab
+  
+    event.target.classList.toggle('activeSelect');
+    event.relatedTarget.classList.toggle('activeSelect');
+    console.log('s2')
+    $("#orderBy").css("display","block");
+
+  })
+
+
+
+
+
+// Requstesd Section

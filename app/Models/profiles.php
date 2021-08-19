@@ -35,9 +35,18 @@ class Profiles extends Model
     
     public function profileScientificArticles()
     {
-        return $this->hasMany(ProfileScientificArticles::class);
+        return $this->hasMany(ProfileScientificArticles::class ,'profile_id');
     }
 
+    public function profileEducationStages()
+    {
+        return $this->hasMany(ProfileEducationStages::class ,'profile_id');
+    }
+
+
+    
+
+    
     public function favouritesProfile()
     {
         return $this->hasMany(FavouritesProfile::class);
@@ -46,6 +55,15 @@ class Profiles extends Model
     public function commentsProfiles()
     {
         return $this->hasMany(CommentsProfiles::class);
+    }  
+    
+    public function profileRates()
+    {
+        return $this->hasMany(ProfileRates::class,'profile_id');
     }
+
+
+
+
 
 }

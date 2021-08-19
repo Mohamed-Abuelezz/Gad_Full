@@ -20,14 +20,14 @@ class EducationsStages extends Model
     }
 
 
-    public function profileScientificArticles()
-    {
-        return $this->hasMany(ProfileScientificArticles::class);
-    }
-
     public function scientificArticles()
     {
         return $this->hasMany(ScientificArticles::class);
+    }
+
+    public function profileEducationStages()
+    {
+        return $this->hasMany(ProfileEducationStages::class);
     }
 
 }

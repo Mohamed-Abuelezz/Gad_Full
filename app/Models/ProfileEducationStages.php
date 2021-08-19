@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProfileScientificArticles extends Model
+class ProfileEducationStages extends Model
 {
     use HasFactory;
 
-    protected $table = 'profile_scientific_articles';
+    protected $table = 'Profile_education_stages';
 
 
 
@@ -18,11 +18,12 @@ class ProfileScientificArticles extends Model
         return $this->belongsTo(Profiles::class , 'profile_id');
     }
 
-
-    public function scientificArticles()
+    public function educationsStages()
     {
-        return $this->belongsTo(ScientificArticles::class,'Scientific_Articles_id');
+        return $this->belongsTo(EducationsStages::class,'Education_Stages_id');
     }
+
+
 
 
 }

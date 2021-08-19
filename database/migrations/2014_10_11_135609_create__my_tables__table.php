@@ -102,11 +102,10 @@ Schema::create('Subscribers_Type', function (Blueprint $table) {
 
 
 
-   /////////////////////////// Profile Scientific Articles Stages Table
+   /////////////////////////// Profile Scientific Articles  Table
    Schema::create('Profile_Scientific_Articles', function (Blueprint $table) {
     $table->id();
     $table->foreignId('profile_id')->constrained('Profiles')->onUpdate('cascade')->onDelete('cascade');;
-    $table->foreignId('Education_Stages_id')->constrained('Education_Stages')->onUpdate('cascade')->onDelete('cascade');;
     $table->foreignId('Scientific_Articles_id')->constrained('Scientific_Articles')->onUpdate('cascade')->onDelete('cascade');;
 
 
@@ -216,7 +215,41 @@ Schema::create('Subscribers_Type', function (Blueprint $table) {
        $table->timestamps();
     
      });
+
+
+        /////////////////////////// Profile Rates Table
+   Schema::create('Profile_Rates', function (Blueprint $table) {
+      
+      $table->id();
+      $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');;
+      $table->foreignId('profile_id')->constrained('Profiles')->onUpdate('cascade')->onDelete('cascade');;
+      $table->integer('rate');
+  
+     $table->timestamps();
+  
+  });
+  
    
+
+   /////////////////////////// Profile education Stages Table
+   Schema::create('Profile_education_stages', function (Blueprint $table) {
+      
+      $table->id();
+      $table->foreignId('profile_id')->constrained('Profiles')->onUpdate('cascade')->onDelete('cascade');;
+      $table->foreignId('Education_Stages_id')->constrained('Education_Stages')->onUpdate('cascade')->onDelete('cascade');;
+  
+  
+     $table->timestamps();
+  
+  });
+
+
+
+
+
+
+
+
 
 }
   
@@ -227,6 +260,8 @@ Schema::create('Subscribers_Type', function (Blueprint $table) {
      */
     public function down()
     {
+        Schema::dropIfExists('Profile_education_stages');
+        Schema::dropIfExists('Profile_Rates');
         Schema::dropIfExists('Contact_Us');
         Schema::dropIfExists('Comments_Profiles');
         Schema::dropIfExists('Favourites_Profile');

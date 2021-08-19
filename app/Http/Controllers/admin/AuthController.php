@@ -43,7 +43,7 @@ public function showLogin(Request $request) {
             // $admin = new Admin;
 
             // $admin->name = 'mohamed AbuElEzz';
-            // $admin->email = 'm.abuelezz62@gmail.com';
+            // $admin->email = 'm.abuelezz97@gmail.com';
             // $admin->password = Hash::make('adamezz1997');
             // $admin->save();
 

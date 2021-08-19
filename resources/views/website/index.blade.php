@@ -22,7 +22,7 @@
     <title>GAD</title>
   </head>
 
-  <body dir="{{Config::get('app.locale') == 'ar' ?   'rtl'   :  "ltr" }}" lang="{{Config::get('app.locale') == 'ar' ?   'ar'   :  "en" }}" class="body">
+  <body dir= "ltr"  lang="{{Config::get('app.locale') == 'ar' ?   'ar'   :  "en" }}" class="body">
     <div class="page">
 
 <!-- Start NavBar Section --------------------------------------->
