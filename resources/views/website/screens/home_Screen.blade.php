@@ -5,11 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta data-for-external-file="@json(['profiles' => '{{$profiles}}'])">
+
+
     <!-- Packages CSS -->
     <link href="{{ asset('website_assets/packages/bootstrap-5.0.1-dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{asset('website_assets/packages/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css') }}" rel="stylesheet">
     <link href="{{asset('website_assets/packages/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css') }} rel="stylesheet">
     <link href="{{asset('website_assets/packages/fontawesome-free-5.15.3-web/css/all.min.css') }}" rel="stylesheet">
+    <link href="{{asset('website_assets/packages/jQuery-autoComplete-master/jquery.auto-complete.css') }}" rel="stylesheet">
 
 
     <!-- My CSS -->
@@ -171,7 +175,7 @@
 
         
             </li>
-            <li><input class="input-textfield s7" type="text" placeholder="Search By Names...">
+            <li><input class="input-textfield s7" type="text" id="search" placeholder="Search By Names...">
             </li>
         </ul>
     </div>
@@ -186,7 +190,7 @@
     <div class="container-fluid">
         <div class="row justify-content-around">
 
-            @foreach ($profiles as $profile)
+            @foreach ($profilesOffersSubscribers as $profilesOffersSubscriber)
                        
 
             <div class="col-lg-4 col-12">
@@ -195,12 +199,12 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-6">
-                                    <img src="{{asset('storage/users_images/'.$profile->user->image) }}"/>
+                                    <img src="{{asset('storage/users_images/'.$profilesOffersSubscriber->profiles->user->image) }}"/>
                                 </div>
                              
                                 <div class="col-6">
-                                    <p class="s6">{{$profile->display_name}}</p>
-                                    <span class="s6">{{$profile->subscribersType->title_en}}</span>
+                                    <p class="s6">{{$profilesOffersSubscriber->profiles->display_name}}</p>
+                                    <span class="s6">{{$profilesOffersSubscriber->profiles->subscribersType->title_en}}</span>
 
                                     <div class="stars">
 
@@ -211,7 +215,7 @@
 
                         @for ($i = 0; $i < 5; $i++)
 
-                       @if ($i < $profile->profileRates->avg('rate'))
+                       @if ($i < $profilesOffersSubscriber->profiles->profileRates->avg('rate'))
 
                         <span class="fas fa-star checked"></span>
 
@@ -222,7 +226,7 @@
                        @endif
 
                           @endfor
-                                     {{count($profile->profileRates)}}
+                                     {{count($profilesOffersSubscriber->profiles->profileRates)}}
                                         
                                     </div>
                                    
@@ -250,13 +254,13 @@
                                         </li>
                                       </ul>
                                       <div class="tab-content" id="myTabContent" style="padding: 15px;text-align: center">
-                                        <div class="tab-pane fade show active" id="home_{{$loop->index}}" role="tabpanel" aria-labelledby="home-tab_{{$loop->index}}">{{substr($profile->person_bio, 0, 175) . '...'}}</div>
+                                        <div class="tab-pane fade show active" id="home_{{$loop->index}}" role="tabpanel" aria-labelledby="home-tab_{{$loop->index}}">{{substr($profilesOffersSubscriber->profiles->person_bio, 0, 175) . '...'}}</div>
                                         <div class="tab-pane fade" id="profile_{{$loop->index}}" role="tabpanel" aria-labelledby="profile-tab_{{$loop->index}}">
                                       
                                             <div class="container">
 
                                                 <div class="row">
-                                                    @foreach ($profile->profileEducationStages as $profileEducationStage)
+                                                    @foreach ($profilesOffersSubscriber->profiles->profileEducationStages as $profileEducationStage)
 
                                                     @if ($loop->index < 4)
                                             
@@ -286,7 +290,7 @@
                                             <div class="container">
 
                                                 <div class="row">
-                                            @foreach ($profile->profileScientificArticles as $scientificArticle)
+                                            @foreach ($profilesOffersSubscriber->profiles->profileScientificArticles as $scientificArticle)
 
                                             @if ($loop->index < 6)
                                             
@@ -321,7 +325,7 @@
                                 <ul>
                                     <li>Scientific Articles</li>
                                     <ol>
-            @foreach ($profile->profileScientificArticles as $scientificArticle)
+            @foreach ($profilesOffersSubscriber->profiles->profileScientificArticles as $scientificArticle)
 
             @if ($loop->index < 4)
 
@@ -340,7 +344,7 @@
                                 <ul>
                                     <li>Educational Stages</li>
                                     <ol>
-                                        @foreach ($profile->profileEducationStages as $profileEducationStage)
+                                        @foreach ($profilesOffersSubscriber->profiles->profileEducationStages as $profileEducationStage)
 
                                         @if ($loop->index < 4)
                             
@@ -390,7 +394,7 @@
 
         <nav aria-label="Page navigation example"style="width: 150px;;margin: auto;" >
     
-            {{ $profiles->links() }}
+            {{ $profilesOffersSubscribers->links() }}
 
 
           </nav>
@@ -472,13 +476,55 @@
     <script src="{{asset('website_assets/packages/bootstrap-5.0.1-dist/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{asset('website_assets/packages/jquery/jquery.js') }}"></script>
     <script src="{{asset('website_assets/packages/OwlCarousel2-2.3.4/dist/owl.carousel.min.js') }}"></script>
+    <script src="{{asset('website_assets/packages/jQuery-autoComplete-master/jquery.auto-complete.min.js') }}"></script>
     <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhwUPb_bGJzGj0Wnj89dcnU5NZQhGx9jY&callback=initMap&libraries=&v=weekly"
     async
   ></script>
 
 
+
+
+
+
+
     <!-- my js -->
+<script>
+
+var profiles = 
+   [
+    @foreach ($profilesOffersSubscribers_all as $profilesOffersSubscriber)
+    
+   // json_encode($profilesOffersSubscriber)
+{!! json_encode($profilesOffersSubscriber->profiles) !!},
+    @endforeach
+    ];
+
+var profiles_images =[
+    @foreach ($profilesOffersSubscribers_all as $profilesOffersSubscriber)
+
+    "{{asset('storage/users_images/'.$profilesOffersSubscriber->profiles->user->image)}}" , 
+
+    @endforeach
+
+] 
+
+var profiles_avg = 
+   [
+    @foreach ($profilesOffersSubscribers_all as $profilesOffersSubscriber)
+    
+{!! $profilesOffersSubscriber->profiles->profileRates->avg('rate') !!},
+    @endforeach
+    ];
+
+
+console.log(profiles_avg);
+
+</script>
+
+
+
+
     <script src="{{asset('website_assets/js/GLOBAL_Configs.js') }}"></script>
     <script src="{{asset('website_assets/js/GLOBAL_ELEMENTS.js') }}"></script>
     <script src="{{asset('website_assets/js/Custome_Components.js') }}"></script>

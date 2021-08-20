@@ -1,46 +1,69 @@
-  /// Teachers Section /////////////////////////////////////////////////////////////
+ 
+ // Requstesd Section
+ $(".dropdown-menu li a").click(function(){
+ // $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+  $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+  console.log($(this).text())
+});
+
+
+ 
+ 
+ 
+ /// Teachers Section /////////////////////////////////////////////////////////////
+
+ //search
+
+ $('#search').autoComplete({
+
+  minChars: 1,
+  source: function(term, suggest){
+    term = term.toLowerCase();
+  var suggestions = [];
+
+  profiles.forEach(function(profile,i){
+
+
+
+    if (~(profile['display_name']).toLowerCase().indexOf(term)) suggestions.push({'profile':profile,'image':profiles_images[i]});
+    suggest(suggestions);
+  });
+
+   
+},
+renderItem: function (item, search){
+
+    return '<div class="autocomplete-suggestion" data-idprofile="'+item['profile']['id']+'" style="padding:8px;"><img src="'+item['image']+' "width=20 height=20 style="margin-right:8px;"> '+item['profile']['display_name']+'</div>';
+},
+onSelect: function(e, term, item){
+  console.log(item.data('idprofile'))
+   // alert(item.data('idProfile'));
+}
+
+ });
+
+
+
+
+
+
 // Initialize and add the map
 function initMap() {
   // The location of Uluru
   const uluru = { lat: 30.033333, lng: 31.233334 };
 
   
-  const listLocations = [
-{lat: 25.549999,lng: 31.700001,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 36.128611,lng: 	31.242222,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 30.033333,lng: 31.233334,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 26.559999,lng: 31.500001,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 30.158611,lng: 	31.252222,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 30.533333,lng: 31.533334,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 25.549999,lng: 31.700001,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 37.128611,lng: 	31.242222,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 38.033333,lng: 31.233334,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 29.559999,lng: 31.500001,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 40.158611,lng: 	31.252222,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 50.533333,lng: 31.533334,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 55.549999,lng: 31.700001,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 66.128611,lng: 	31.242222,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 50.033333,lng: 31.233334,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 22.559999,lng: 31.500001,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 10.158611,lng: 	31.252222,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 40.533333,lng: 31.533334,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 45.549999,lng: 31.700001,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 56.128611,lng: 	31.242222,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 80.033333,lng: 31.233334,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 76.559999,lng: 31.500001,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 10.158611,lng: 	31.252222,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 30.533333,lng: 31.533334,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 87.549999,lng: 31.700001,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 77.128611,lng: 	31.242222,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 99.033333,lng: 31.233334,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 55.559999,lng: 31.500001,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 11.158611,lng: 	31.252222,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 22.533333,lng: 31.533334,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 66.549999,lng: 31.700001,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
-{lat: 87.128611,lng: 	31.242222,img:'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=626&ext=jpg'},
+  const listLocations = [];
 
-];
+  profiles.forEach(function(item) {
+// console.log(item['display_name']);
+    listLocations.push(
+{lat: item['lat'],lng:item['lng'],name:item['display_name'],},
 
+    );
+
+
+});
 
   // The map, centered at Uluru
   const map = new google.maps.Map(document.getElementById("map"), {
@@ -67,20 +90,26 @@ function initMap() {
 
 
   google.maps.event.addListener(marker, 'click', (function(marker, i) {
+
+var rates = '';
+
+for($o = 0; $o < 5; $o++){
+  if ($o < profiles_avg[i]){
+    rates += '<span class="fas fa-star checked"></span>'
+  }else{
+    rates += '<span class="fas fa-star"></span>'
+  }
+
+}
     var infoContent=`<div class="mapInfoClick" style="margin-left:30px">
-    <img src="https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.jpg" alt="">
-    <p>${listLocations[i]['lat'].toString()}</p>
+    <img src="${profiles_images[i]}" alt="">
+    <p>${listLocations[i]['name'].toString()}</p>
     <div class="stars">
-        <span class="fas fa-star checked"></span>
-        <span class="fas fa-star checked"></span>
-        <span class="fas fa-star checked"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        
+       ${rates}
     </div>
     <a class="btn" href="#">More</a>
   </div>
-  
+
   `;
     return function() {
       infowindow.setContent(infoContent);
@@ -124,4 +153,5 @@ tabEl.addEventListener('hidden.bs.tab', function (event) {
 
 
 
-// Requstesd Section
+
+
