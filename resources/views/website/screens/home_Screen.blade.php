@@ -50,15 +50,15 @@
         <ul>
             <li class="title s4"><p>Advanced Search</p> </li>
             <li>
-                <div class="dropdown myDropDown">
+                <div class="dropdown myDropDown country-drop">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                      Country
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <ul class="dropdown-menu country-ul" aria-labelledby="dropdownMenuButton1">
 
                         @foreach ($countries as $countrie)
                        
-                        <li><a class="dropdown-item" href="#">{{$countrie->name_en}}</a></li>
+                        <li><a class="dropdown-item" href="#" data-id="{{$countrie->id}}" >{{$countrie->name_en}}</a></li>
 
                           @endforeach
 
@@ -68,14 +68,14 @@
                   
             </li>  
             <li>
-                <div class="dropdown myDropDown">
+                <div class="dropdown myDropDown profileKind-drop">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                       Profile Kind 
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <ul class="dropdown-menu profile-ul" aria-labelledby="dropdownMenuButton1">
                         @foreach ($subscribersType as $subscriberType)
                        
-                        <li><a class="dropdown-item" href="#">{{$subscriberType->title_en}}</a></li>
+                        <li><a class="dropdown-item" href="#" data-id="{{$subscriberType->id}}" >{{$subscriberType->title_en}}</a></li>
 
                           @endforeach
 
@@ -84,31 +84,31 @@
                   
             </li>  
              <li>
-                <div class="dropdown myDropDown">
+                <div class="dropdown myDropDown Educationstages-drop">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                       Education Stages 
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <ul class="dropdown-menu stages_ul" aria-labelledby="dropdownMenuButton1">
 
                         @foreach ($educationsStages as $educationStage)
                        
-                        <li><a class="dropdown-item" href="#">{{$educationStage->title_en}}</a></li>
+                        <li><a class="dropdown-item" href="#" data-id="{{$educationStage->id}}" >{{$educationStage->title_en}}</a></li>
 
                           @endforeach
 
                     </ul>
-                  </div>
+                </div>
                   
             </li>
             <li>
-                <div class="dropdown myDropDown">
+                <div class="dropdown myDropDown   scientificArticle-drop">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                         Scientific Article
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <ul class="dropdown-menu artical_ul" aria-labelledby="dropdownMenuButton1">
                        @foreach ($scientificArticles as $scientificArticle)
                        
-                        <li><a class="dropdown-item" href="#">{{$scientificArticle->title_en}}</a></li>
+                        <li><a class="dropdown-item" href="#" data-id="{{$scientificArticle->id}}" >{{$scientificArticle->title_en}}  [{{$scientificArticle->educationsStages->title_en}}] </a></li>
 
                           @endforeach
                     </ul>
@@ -189,6 +189,26 @@
 
     <div class="container-fluid">
         <div class="row justify-content-around">
+
+   
+@if ($profilesOffersSubscribers->isEmpty())
+    
+<div class="conentEmpety" style="height: 100vh;position:relative;">
+
+    <div style=
+    "position:absolute;
+    left:50%;
+    font-size: 20px;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);"
+    >List Is Empety 😭</div>
+
+</div>
+
+
+@else
+    
+
 
             @foreach ($profilesOffersSubscribers as $profilesOffersSubscriber)
                        
@@ -321,46 +341,6 @@
 
 
 
-<!-- 
-                                <ul>
-                                    <li>Scientific Articles</li>
-                                    <ol>
-            @foreach ($profilesOffersSubscriber->profiles->profileScientificArticles as $scientificArticle)
-
-            @if ($loop->index < 4)
-
-            <li>{{$scientificArticle->scientificArticles->title_en}}</li>
-
-            @else
-
-            @break
-            @endif  
-
-              @endforeach
-                                        
-                                    </ol>
-                                    
-                                </ul>
-                                <ul>
-                                    <li>Educational Stages</li>
-                                    <ol>
-                                        @foreach ($profilesOffersSubscriber->profiles->profileEducationStages as $profileEducationStage)
-
-                                        @if ($loop->index < 4)
-                            
-                                        <li>{{$profileEducationStage->educationsStages->title_en}}</li>
-                            
-                                        @else
-                            
-                                        @break
-                                        @endif  
-                            
-                                          @endforeach
-                                    </ol>
-                                    
-                                </ul>
-
-                            -->
                                 </div>
 
                     <div class="more">
@@ -376,7 +356,8 @@
               @endforeach
 
 
-           
+              @endif
+
 
 
                 </div>
@@ -490,6 +471,7 @@
 
     <!-- my js -->
 <script>
+ var domain =   "{!! url('/')  !!}";
 
 var profiles = 
    [

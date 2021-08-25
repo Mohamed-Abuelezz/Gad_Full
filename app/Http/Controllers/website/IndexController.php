@@ -24,9 +24,18 @@ class IndexController extends Controller
 
 public function showIndex(Request $request) {
 
-    App::setLocale('ar');
+  //  App::setLocale('ar');
+
+    $configsWebsitViews = new ConfigsWebsitViews;
+
+    $configsWebsitViews->save();
+
+
 
     $configsSlider  =  ConfigsSlider::all();;
+
+
+
 
   //  dd($configsSlider);
 return view('website.index', ['configsSlider'=>$configsSlider]);

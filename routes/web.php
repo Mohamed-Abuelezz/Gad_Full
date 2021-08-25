@@ -106,6 +106,8 @@ Route::post('/reset-password', function (Request $request) {
 Route::group(['middleware' => 'verified'], function () {
 
     Route::get('/home',[HomeController::class, 'showHome'] )->name('home');
+    Route::get('/home/dropFilters',[HomeController::class, 'getDropsSearch'] );
+    Route::get('/home/searchFilters',[HomeController::class, 'getSearchFilter'] );
 
 
 

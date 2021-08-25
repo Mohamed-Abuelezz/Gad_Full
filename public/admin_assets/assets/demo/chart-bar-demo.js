@@ -1,6 +1,6 @@
 
      $.ajax({
-      url: "http://myprojects.com:8000/admin",
+      url: domain+"/admin",
       type: "get",
       data:{"getCharts":'myBarChart'},
       success: function (response) {

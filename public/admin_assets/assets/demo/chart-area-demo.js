@@ -1,7 +1,5 @@
-
-
- $.ajax({
-  url: "http://myprojects.com:8000/admin",
+$.ajax({
+  url: domain+"/admin",
   type: "get",
   data:{"getCharts":'myAreaChart'},
   success: function (response) {
@@ -30,7 +28,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverRadius: 5,
       pointHoverBackgroundColor: "rgba(2,117,216,1)",
       pointHitRadius: 50,
-      pointBorderWidth: 2,
+      pointBorderWidth: 1,
       data: response['dataChartDaysViews'],
     }],
   },

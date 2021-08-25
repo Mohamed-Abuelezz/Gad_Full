@@ -1,14 +1,156 @@
  
  // Requstesd Section
- $(".dropdown-menu li a").click(function(){
- // $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
-  $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
-  console.log($(this).text())
+ $country_id='';
+ $profileKind_id=''; 
+ $educationStages_id=''; 
+ $scientificArticle_id=''; 
+ 
+ /*
+ Changes Divs
+ */
+ function changesDrops($isCountry,$isStage,$classDiv ,$classChangeTitle,$classChangeDiv,$responseKey,$searchParam) {
+
+
+  $( '.'+$classDiv+" li a").click(function(){
+  
+  
+    $.ajax({
+      url: domain+"/home/dropFilters",
+      type: "get",
+      data: { [$searchParam] : $(this).attr("data-id") } ,
+      success: function (response) {
+  console.log(response);
+  
+  jQuery($classChangeDiv+' ul').html('');
+  
+  var content= ` 
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+${$classChangeTitle}
+  </button>
+  
+  <ul class="dropdown-menu ${$isStage  ? 'artical_ul' : 'stages_ul'}" aria-labelledby="dropdownMenuButton1">
+  
+  ${response[$responseKey]}
+  
+  </ul>
+  
+  `;
+
+
+  
+  $($classChangeDiv).html(content);
+
+  
+  if($isCountry){
+
+    var content= ` 
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Scientific Article
+    </button>
+    
+    <ul class="dropdown-menu artical_ul" aria-labelledby="dropdownMenuButton1">
+    
+    ${response['scientificArticles']}
+    
+    </ul>
+    
+    `;
+  
+    $('.scientificArticle-drop').html(content);
+    //doRequest();
+
+
+//////////////////////////////////////////////////////
+
+$(".profile-ul li a").parents(".dropdown").find('.btn').html('Profile type');
+
+
+  }
+
+  changesDrops(false,true,'stages_ul' , 'Scientific Article' ,'.scientificArticle-drop','scientificArticles','educationstages_id');
+
+  
+  reClickEvent();
+  doRequest();
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+         console.log(textStatus, errorThrown);
+      }
+  });
+  
+  
+  });
+  
+
+ }
+ doRequest();
+
+ changesDrops(true,false,'country-ul' ,'Education Stages' ,'.Educationstages-drop','educationsStages','country_id');
+ changesDrops(false,true,'stages_ul' , 'Scientific Article' ,'.scientificArticle-drop','scientificArticles','educationstages_id');
+
+
+/*
+Send Requests
+*/
+
+function doRequest(){
+
+  
+  $(".country-ul li a").click(function(){
+
+    $country_id =  $(this).attr("data-id")
+    $profileKind_id=''; 
+    $educationStages_id=''; 
+    $scientificArticle_id=''; 
+
+    sendFilterRequest($country_id,$profileKind_id,$educationStages_id,$scientificArticle_id); 
+
+  });
+
+  $(".profile-ul li a").click(function(){
+
+    $profileKind_id =  $(this).attr("data-id")
+
+
+    sendFilterRequest($country_id,$profileKind_id,$educationStages_id,$scientificArticle_id);  
+  });
+
+  $(".stages_ul li a").click(function(){
+
+    $educationStages_id =  $(this).attr("data-id");
+   $scientificArticle_id=''; 
+
+
+    sendFilterRequest($country_id,$profileKind_id,$educationStages_id,$scientificArticle_id);  
+  });
+
+  $(".artical_ul li a").click(function(){
+    $scientificArticle_id =  $(this).attr("data-id")
+    sendFilterRequest($country_id,$profileKind_id,$educationStages_id,$scientificArticle_id);  
+  });
+
+
+}
+
+ 
+function sendFilterRequest($country_id,$profileKind_id,$educationStages_id,$scientificArticle_id){
+  $.ajax({
+    url: domain+"/home/searchFilters",
+    type: "get",
+    data: {'country_id':$country_id,'profileKind_id':$profileKind_id,'educationStages_id':$educationStages_id,'scientificArticle_id':$scientificArticle_id} ,
+    success: function (response) {
+
+    console.log(response);
+
+
+},
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(JSON.stringify(jqXHR));
+       console.log(textStatus, errorThrown);
+    }
 });
 
-
- 
- 
+}
  
  /// Teachers Section /////////////////////////////////////////////////////////////
 
