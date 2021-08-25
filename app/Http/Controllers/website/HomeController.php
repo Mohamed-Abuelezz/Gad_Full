@@ -175,8 +175,8 @@ if($request->input('country_id') != null){
     }
 
     $profilesOffersSubscribers  = $profilesOffersSubscribers->paginate(9);
-
-    return $profilesOffersSubscribers;
+  
+     return $profilesOffersSubscribers;
 
     $ids = [];
 
