@@ -5,6 +5,7 @@
  $educationStages_id=''; 
  $scientificArticle_id=''; 
  
+ var isFilter = false
  /*
  Changes Divs
  */
@@ -25,7 +26,7 @@
   
   var content= ` 
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-${$classChangeTitle}
+${  $classChangeTitle}
   </button>
   
   <ul class="dropdown-menu ${$isStage  ? 'artical_ul' : 'stages_ul'}" aria-labelledby="dropdownMenuButton1">
@@ -45,7 +46,7 @@ ${$classChangeTitle}
 
     var content= ` 
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Scientific Article
+   ${lang == 'ar'? 'المواد العلمية' : 'Scientific Article'}
     </button>
     
     <ul class="dropdown-menu artical_ul" aria-labelledby="dropdownMenuButton1">
@@ -62,12 +63,12 @@ ${$classChangeTitle}
 
 //////////////////////////////////////////////////////
 
-$(".profile-ul li a").parents(".dropdown").find('.btn').html('Profile type');
+$(".profile-ul li a").parents(".dropdown").find('.btn').html(lang == 'ar' ? 'نوع الصفحة الشخصية' :'Profile type');
 
 
   }
 
-  changesDrops(false,true,'stages_ul' , 'Scientific Article' ,'.scientificArticle-drop','scientificArticles','educationstages_id');
+  changesDrops(false,true,'stages_ul' , lang == 'ar'? 'المواد العلمية' : 'Scientific Article' ,'.scientificArticle-drop','scientificArticles','educationstages_id');
 
   
   reClickEvent();
@@ -85,8 +86,8 @@ $(".profile-ul li a").parents(".dropdown").find('.btn').html('Profile type');
  }
  doRequest();
 
- changesDrops(true,false,'country-ul' ,'Education Stages' ,'.Educationstages-drop','educationsStages','country_id');
- changesDrops(false,true,'stages_ul' , 'Scientific Article' ,'.scientificArticle-drop','scientificArticles','educationstages_id');
+ changesDrops(true,false,'country-ul' , lang == 'ar' ?   'المراحل التعليمية' : 'Education Stages' ,'.Educationstages-drop','educationsStages','country_id');
+ changesDrops(false,true,'stages_ul' , lang == 'ar' ? 'المواد العلمية'  : 'Scientific Article' ,'.scientificArticle-drop','scientificArticles','educationstages_id');
 
 
 /*
@@ -137,12 +138,29 @@ function sendFilterRequest($country_id,$profileKind_id,$educationStages_id,$scie
   $.ajax({
     url: domain+"/home/searchFilters",
     type: "get",
+    content:'html',
     data: {'country_id':$country_id,'profileKind_id':$profileKind_id,'educationStages_id':$educationStages_id,'scientificArticle_id':$scientificArticle_id} ,
     success: function (response) {
 
+      $('.teacher-cards').html('');
+
+      $('.teacher-cards').html(response['html']);
+
     console.log(response);
 
+    profiles = response['map'];
 
+     profiles_avg = response['map_avg'];
+
+
+    $.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyBhwUPb_bGJzGj0Wnj89dcnU5NZQhGx9jY&callback=initMap&libraries=&v=weekly", function(data, textStatus, jqxhr) {
+    console.log(data); //data returned
+    console.log(textStatus); //success
+    console.log(jqxhr.status); //200
+    console.log('Load was performed.');
+    });
+
+    isFilter = true;
 },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log(JSON.stringify(jqXHR));
@@ -151,6 +169,8 @@ function sendFilterRequest($country_id,$profileKind_id,$educationStages_id,$scie
 });
 
 }
+
+
  
  /// Teachers Section /////////////////////////////////////////////////////////////
 

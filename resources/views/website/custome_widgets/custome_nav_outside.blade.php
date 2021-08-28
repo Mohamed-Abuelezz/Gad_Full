@@ -9,8 +9,8 @@
                 <div class="menus">
                     <ul>
                 
-                        <li><a href="#" class="s6"> عربي <i class="fas fa-globe-americas"></i> </a></li>
-                        <li><a href="{{URL::to('/')}}" class="s6">Home</a></li>
+                        <li><a href="{{ Config::get('app.locale') == 'ar' ?  URL::to('language/en') :  URL::to('language/ar')}}" class="s6">{{Config::get('app.locale') == 'ar' ?   'English'   :  "عربي" }} <i class="fas fa-globe-americas"></i> </a></li>
+                        <li><a href="{{URL::to('/')}}" class="s6">{{Config::get('app.locale') == 'ar' ?   'الرئيسية'   :  "Home" }}</a></li>
                         <li><a href="{{URL::to('login')}}" class="s6">{{ __('website_screens/index.signInOrRegister') }}</a></li>
                     </ul>
                 </div>
@@ -52,9 +52,9 @@
             <div class="menu-branding"></div>
             <ul class="menu-nav">
                 <ul>
-                    <li><a href="{{URL::to('/')}}" class="s4">Home</a></li>
+                    <li><a href="{{URL::to('/')}}" class="s4">{{Config::get('app.locale') == 'ar' ?   'الرئيسية'   :  "Home" }}</a></li>
                     <li><a href="{{URL::to('login')}}" class="s4">{{ __('website_screens/index.signInOrRegister') }}</a></li>
-                    <li><a href="#" class="s4"> عربي <i class="fas fa-globe-americas"></i> </a></li>
+                    <li><a href="{{ Config::get('app.locale') == 'ar' ?  URL::to('language/en') :  URL::to('language/ar')}}" class="s4"> {{Config::get('app.locale') == 'ar' ?   'English'   :  "عربي" }}  <i class="fas fa-globe-americas"></i> </a></li>
     
                 </ul>
             </ul>

@@ -32,24 +32,39 @@ class HomeController extends Controller
 
 
     public function showHome(Request $request) {
+      
+//App::setLocale('en');
 
 
 
+      $user_id= Auth::id();
 
+
+
+      $isHaveProfile = false;
+
+       $profile =  Profiles::where('user_id', '=' ,$user_id)->get()->first();
+
+            if ($profile != null) {
+                $isHaveProfile = true;
+            }
+ 
 
         $countries = Countries::all();
         $subscribersType = SubscribersType::all();
         $educationsStages = EducationsStages::all();
         $scientificArticles = ScientificArticles::all();
-        $profilesOffersSubscribers =  ProfilesOffersSubscribers::where('finished_at', '>=', Carbon::now())->paginate(9);
+        $profilesOffersSubscribers =  ProfilesOffersSubscribers::where('finished_at', '>=', Carbon::now())->paginate(1);
         $profilesOffersSubscribers_all =  ProfilesOffersSubscribers::where('finished_at', '>=', Carbon::now())->get();
         $profileRates = ProfileRates::all();
 
+        
 
-       // dd($profiles);
 
         return view('website.screens.home_Screen', 
-         ['countries' => $countries ,
+         [
+        'isHaveProfile' => $isHaveProfile,
+        'countries' => $countries ,
          'subscribersType' => $subscribersType ,
          'subscribersType' => $subscribersType, 
          'educationsStages' => $educationsStages , 
@@ -57,7 +72,7 @@ class HomeController extends Controller
          'profilesOffersSubscribers' => $profilesOffersSubscribers,
          'profilesOffersSubscribers_all' => $profilesOffersSubscribers_all,
          'profileRates' => $profileRates
-    ]);
+        ]);
             
         
         }
@@ -76,14 +91,21 @@ public function getDropsSearch(Request $request) {
 
             foreach($educationsStages as $educationsStage){ 
 
-            $html_1 .=  '<li><a class="dropdown-item" href="#" data-id="'.$educationsStage->id.'">'.$educationsStage->title_en.'</a></li>';
+            $html_1 .=  App::currentLocale() == 'ar' ?
+            '<li><a class="dropdown-item" href="#" data-id="'.$educationsStage->id.'">'.$educationsStage->title_ar.'</a></li>'
+:
+            '<li><a class="dropdown-item" href="#" data-id="'.$educationsStage->id.'">'.$educationsStage->title_en.'</a></li>';
             
             }
 
             foreach($scientificArticles as $scientificArticle){
 
                 if($scientificArticle->educationsStages->country_id == $request->country_id){
-                    $html_2 .= '<li><a class="dropdown-item" href="#" data-id="'.$scientificArticle->id.'">'.$scientificArticle->title_en.'['.$scientificArticle->educationsStages->title_en.']'.'</a></li>';
+                    $html_2 .= App::currentLocale() == 'ar' ?    
+                    '<li><a class="dropdown-item" href="#" data-id="'.$scientificArticle->id.'">'.$scientificArticle->title_ar.'['.$scientificArticle->educationsStages->title_ar.']'.'</a></li>'
+                    
+                    :
+                    '<li><a class="dropdown-item" href="#" data-id="'.$scientificArticle->id.'">'.$scientificArticle->title_en.'['.$scientificArticle->educationsStages->title_en.']'.'</a></li>';
 
                 }
 
@@ -109,9 +131,13 @@ public function getDropsSearch(Request $request) {
             foreach($scientificArticles as $scientificArticle){ 
                 // Code Here
 
-            $html_2 .=  '<li><a class="dropdown-item" href="#" data-id="'.$scientificArticle->id.'">'.$scientificArticle->title_en.'['.$scientificArticle->educationsStages->title_en.']'.'</a></li>';
-                }
-                //   dd($html);
+            $html_2 .= App::currentLocale() == 'ar' ?
+            '<li><a class="dropdown-item" href="#" data-id="'.$scientificArticle->id.'">'.$scientificArticle->title_ar.'['.$scientificArticle->educationsStages->title_ar.']'.'</a></li>'
+            
+           : '<li><a class="dropdown-item" href="#" data-id="'.$scientificArticle->id.'">'.$scientificArticle->title_en.'['.$scientificArticle->educationsStages->title_en.']'.'</a></li>';
+         
+        
+        }
 
                 return  response()->json([
                     'scientificArticles' => $html_2,
@@ -176,28 +202,42 @@ if($request->input('country_id') != null){
 
     $profilesOffersSubscribers  = $profilesOffersSubscribers->paginate(9);
   
-     return $profilesOffersSubscribers;
+  //   return $profilesOffersSubscribers;
 
     $ids = [];
 
     foreach($profilesOffersSubscribers as $item){
-
-        array_push($ids, $item->id);
+//$items = (String)$item->id;
+        array_push($ids, $item->profile_id);
 
     }
+//return $ids;
 
-return $ids;
-  $profilesOffersSubscribers  =   ProfilesOffersSubscribers::whereIn('id', '=',$ids)->get();
+  $profilesOffersSubscribers  =   ProfilesOffersSubscribers::whereIn('profile_id', $ids)->get();
+  $profiles = Profiles::whereIn('id', $ids)->get();
+  $profiles_avg = [];
+  
+   foreach ($profilesOffersSubscribers as $profilesOffersSubscriber){
+   
+   array_push($profiles_avg,  $profilesOffersSubscriber->profiles->profileRates->avg('rate'));
+   
+   }
+  
 
-  return $profilesOffersSubscribers;
+  
+  
+ // ProfileRates::whereIn('profile_id', $ids)->get();
 
 
-     $returnHTML = view('website.custome_views.home_teachecards', ['profilesOffersSubscribers' => $profilesOffersSubscribers]);
-//return  '$html';
-   // return $returnHTML;
+  $returnHTML = view('website.custome_views.home_teachecards', ['profilesOffersSubscribers' => $profilesOffersSubscribers])->render();
+
+  return response()->json([
+    'html' => $returnHTML,
+    'map' => $profiles,
+    'map_avg' => $profiles_avg
+]);
 
 }
-
 
 
 

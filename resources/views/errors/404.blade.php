@@ -19,10 +19,10 @@
                             <div class="col-lg-6">
                                 <div class="text-center mt-4">
                                     <img class="mb-4 img-error" src="{{ asset('admin_assets/assets/img/error-404-monochrome.svg') }}" />
-                                    <p class="lead">This requested URL was not found on this server.</p>
-                                    <a href="{{URL::to('admin/')}}">
+                                    <p class="lead">{{Config::get('app.locale') == 'ar' ?  'هذه الصفحة غير متواجده' : 'This page not found .'  }}</p>
+                                    <a href="{{URL::to('/')}}">
                                         <i class="fas fa-arrow-left me-1"></i>
-                                        Return to Dashboard
+                                     {{Config::get('app.locale') == 'ar'   ?  'العودة' : 'Back' }} 
                                     </a>
                                 </div>
                             </div>

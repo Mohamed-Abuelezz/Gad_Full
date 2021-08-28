@@ -100,6 +100,14 @@ class AuthController extends Controller
                 return redirect()->route('home');
 
         }
+
+
+
+
+        public function logout(){
+            Auth::guard('web')->logout();
+            return redirect()->route('index');
+        }
         
 
 

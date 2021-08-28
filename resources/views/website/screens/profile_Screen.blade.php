@@ -6,23 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Packages CSS -->
-    <link href="../packages/bootstrap-5.0.1-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../packages/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="../packages/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css" rel="stylesheet">
-    <link href="../packages/fontawesome-free-5.15.3-web/css/all.min.css" rel="stylesheet">
+    <link href="{{ asset('website_assets/packages/bootstrap-5.0.1-dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{asset('website_assets/packages/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{asset('website_assets/packages/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css') }}" rel="stylesheet">
+    <link href="{{asset('website_assets/packages/fontawesome-free-5.15.3-web/css/all.min.css') }}" rel="stylesheet">
 
 
     <!-- My CSS -->
-    <link href="../css/GLOBAL_Configs.css" rel="stylesheet">
-    <link href="../css/GLOBAL_ELEMENTS.css" rel="stylesheet">
-    <link href="../css/Custome_Components.css" rel="stylesheet">
-    <link href="../css/profile_Screen.css" rel="stylesheet">
+    <link href="{{asset('website_assets/css/GLOBAL_Configs.css') }}" rel="stylesheet">
+    <link href="{{asset('website_assets/css/GLOBAL_ELEMENTS.css') }}" rel="stylesheet">
+    <link href="{{asset('website_assets/css/Custome_Components.css') }}" rel="stylesheet">
+    <link href="{{asset('website_assets/css/profile_Screen.css') }}" rel="stylesheet">
 
 
     <title>GAD</title>
   </head>
 
-  <body dir="rtl" lang="en" class="body">
+  <body dir="{{ App::isLocale('en') ?  'ltr':'rtl' }}" lang="{{Config::get('app.locale') == 'ar' ?   'ar'   :  "en" }}" class="body">
       
 
 <div class="page">
@@ -33,113 +33,33 @@
       </div>
       
 <!-- Start NavBar Section --------------------------------------->
-<div class="sectionNavBar wrapContent" >
-
-<div class="container-fluid">
-    <div class="row justify-content-between">
-        
-        <div class="col rightsidemenu">
-            <div class="menus">
-                <ul>
-                    <li style="padding: 0;">
-
-                        <a type="button" class="s6 position-relative avatar"  data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" >
-                            <img style="width: 40px;height: 40px;border-radius: 50px;" src="https://cdn2.iconfinder.com/data/icons/flatfaces-everyday-people-square/128/beard_male_man_face_avatar-512.png" /> <span class="position-absolute bottom-0 end-0  translate-bottom badge rounded-pill " style="background-color:  var(--secondryColor);">
-                       
-                          <i class="fas fa-caret-down"></i> 
-                          </span>               
-                        
-                        </a>
-                    
-                        <div id="customPopover" style="display: none;">
-
-                            <ul>
-<li><a href="#" >My Profile</a></li>
-<li><a href="./editProfile_screen.html">Edit Profile</a></li>
-
-<hr style="border-top: 3px dotted white;"/>
-
-<li><a href="#">My Account</a></li>
-<li><a href="../screens/login-screen.html">SignOut</a></li>
-
-                            </ul>
 
 
-                        </div>
-                        
-    
-                    
-                    </li>
-                    
-                    <li>|</li>
-                    
-                    <li><a href="#" class="s6"> Home </a></li>
-                    <li><a href="" class="s6"> Contact Us </a></li>
-                    <li><a href="#" class="s6">Terms And Conditions</a></li>
-            
-                </ul>
-            </div>
-            
-                    </div>
-                 
-                    <div class="col rightsidemenumobile">
-                
-                        <div class="mobile-meun">
-                    
-                            <div class="menu-button">
-                              <div class="menu-button-line"></div>
-                              <div class="menu-button-line"></div>
-                              <div class="menu-button-line"></div>
-                            </div>
-                          
-                      </div>
-                    
-                    
-                    
-                    </div>
-        <div class="col leftside" >
-            <img class="logo" src="../assets/icons/logo.png"/>
-        </div>
-      
-        
-    </div>
-  
-</div>
+@if (Auth::guest())
+
+@include('website.custome_widgets.custome_nav_outside')
+
+@else
+
+@include('website.custome_widgets.custome_nav_Inside')
+
+@endif
 
 
-
-
-</div>
-
-  <div class="menu" > <!--Mobile Menus -->
-        <ul class="menu-nav">
-            <ul>
-                <li><a href="#" class="s4">Home </a></li>
-                <li><a href="#" class="s4">Contact Us</a></li>
-                <li><a href="#" class="s4">Terms And Condtions</a></li>
-                
-                <li><a href="./editProfile_screen.html" class="s4">Profile</a></li>
-                <li><a href="#" class="s4">Edit Profile</a></li>
-
-                <li><a href="#" class="s4">My Account</a></li>
-                <li><a href="../screens/login-screen.html" class="s4">SignOut</a></li>
-
-            </ul>
-        </ul>
-</div>
 
 <!-- End NavBar Section --------------------------------------->
 
 <!-- Start Image-Profile Section --------------------------------------->
 <div class="sectionImageAndBio">
-    <div class="image-profile" style="background-image: url('https://images.unsplash.com/photo-1543946207-39bd91e70ca7?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZnVsbCUyMGhkJTIwd2FsbHBhcGVyfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80');">
+    <div class="image-profile" style="background-image:url('{{asset('storage/CoverProfiles/'.$profile->cover_image) }}')">
 
 
-        <img src="https://img.freepik.com/free-photo/indoor-shot-beautiful-happy-african-american-woman-smiling-cheerfully-keeping-her-arms-folded-relaxing-indoors-after-morning-lectures-university_273609-1270.jpg?size=626&ext=jpg&ga=GA1.2.2042565431.1627257600" alt="image person" >
+        <img src="{{asset('storage/users_images/'.$profile->user->image) }}" alt="image person" >
         
         </div>
 <div class="bio wrapContent s5">
-    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, 🤫
+
+{{$profile->person_bio}}
 </div>        
 </div>
 
@@ -156,16 +76,16 @@
                     <div class="col">
 
                         <div class="nav nav-tabs " id="nav-tab" role="tablist">
-                            <button class="nav-link s7 active" id="nav-profileDetails-tab" data-bs-toggle="tab" data-bs-target="#nav-profileDetails" type="button" role="tab" aria-controls="nav-profileDetails" aria-selected="true">Profile Details</button>
-                            <button class="nav-link s7" id="nav-moreDetails-tab" data-bs-toggle="tab" data-bs-target="#nav-moreDetails" type="button" role="tab" aria-controls="nav-moreDetails" aria-selected="false">More Details</button>
-                            <button class="nav-link s7" id="nav-specialization-tab" data-bs-toggle="tab" data-bs-target="#nav-specialization" type="button" role="tab" aria-controls="nav-specialization" aria-selected="false">Specialization</button>
+                            <button class="nav-link s7 active" id="nav-profileDetails-tab" data-bs-toggle="tab" data-bs-target="#nav-profileDetails" type="button" role="tab" aria-controls="nav-profileDetails" aria-selected="true">{{Config::get('app.locale') == 'ar' ? 'البيانات' : 'Profile Details' }}</button>
+                            <button class="nav-link s7" id="nav-moreDetails-tab" data-bs-toggle="tab" data-bs-target="#nav-moreDetails" type="button" role="tab" aria-controls="nav-moreDetails" aria-selected="false">{{Config::get('app.locale') == 'ar' ? 'تفاصيل اكثر' : 'More Details' }}</button>
+                            <button class="nav-link s7" id="nav-specialization-tab" data-bs-toggle="tab" data-bs-target="#nav-specialization" type="button" role="tab" aria-controls="nav-specialization" aria-selected="false">{{Config::get('app.locale') == 'ar' ?  'التخصصات' : 'Specialization' }}</button>
                           </div>
                     </div>
                     <div class="col">
                         <div class="views-country s7">
                             <ul>
                                 <li><i class="fas fa-heart" style="color: white;"></i></li>
-                                <li>2568</li>
+                                <li> {{$countFavouritesProfile}}</li>
                             </ul>
                             <ul>
                                 <li><i class="fas fa-eye" style="color: white;"></i></li>
@@ -173,7 +93,7 @@
                             </ul>
                             <ul>
                                 <li><i class="fas fa-flag" style="color: white;"></i></li>
-                                <li>Egypt</li>
+                                <li>{{Config::get('app.locale') == 'ar' ?  $profile->user->countries->name_ar : $profile->user->countries->name_en }}</li>
                             </ul>
                             
                         </div>
@@ -477,16 +397,16 @@
 
 
     <!-- packages js -->
-    <script src="../packages/bootstrap-5.0.1-dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../packages/jquery/jquery.js"></script>
-    <script src="../packages/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
+    <script src="{{asset('website_assets/packages/bootstrap-5.0.1-dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{asset('website_assets/packages/jquery/jquery.js') }}"></script>
+    <script src="{{asset('website_assets/packages/OwlCarousel2-2.3.4/dist/owl.carousel.min.js') }}"></script>
 
 
 
     <!-- my js -->
-    <script src="../js/GLOBAL_Configs.js"></script>
-    <script src="../js/GLOBAL_ELEMENTS.js"></script>
-    <script src="../js/profile_Screen.js"></script>
+    <script src="{{asset('website_assets/js/GLOBAL_Configs.js') }}"></script>
+    <script src="{{asset('website_assets/js/GLOBAL_ELEMENTS.js') }}"></script>
+    <script src="{{asset('website_assets/js/profile_Screen.js') }}"></script>
 
 
   </body>

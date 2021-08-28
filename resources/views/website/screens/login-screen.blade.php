@@ -23,7 +23,9 @@
 
 <body >
     
-   
+  <div class="page">
+
+  
   @include('website.custome_widgets.custome_nav_outside')
 
 <br>
@@ -31,16 +33,18 @@
 
     <div class="form-wrap">
       <div class="tabs">
-        <h3 class="signup-tab"><a class="active" href="#signup-tab-content">Sign Up</a></h3>
-        <h3 class="login-tab"><a href="#login-tab-content">Login</a></h3>
+        <h3 class="signup-tab" style="font-size: 20px"><a class="active" href="#signup-tab-content">{{Config::get('app.locale') == 'ar' ?  'حساب جديد' : 'Sign Up'}}</a></h3>
+        <h3 class="login-tab" style="font-size: 20px"><a href="#login-tab-content">{{Config::get('app.locale') == 'ar' ? 'تسجيل دخول' : 'Login'}}</a></h3>
       </div><!--.tabs-->
   
       <div class="tabs-content">
         <div id="signup-tab-content" class="active">
           <form class="signup-form" action="{{URL::to('/register')}}" method="post" enctype="multipart/form-data">
             @csrf
-            <div id="profile-container">
+            <div id="profile-container" style="position: relative">
               <image id="profileImage" src="{{asset('storage/users_images/defaultImage.png') }}" />
+              <i class="fa fa-camera" aria-hidden="true" style="position: absolute;right:10px;top:80px;"></i>
+
            </div>
            
            <br>
@@ -48,12 +52,12 @@
            @error('image')
            <div class="alert alert-danger">{{ $message }}</div>
        @enderror
-            <input type="email" class="input" id="user_email" name="email_register" autocomplete="off" placeholder="email">
+            <input type="email" class="input" id="user_email" name="email_register" autocomplete="off" placeholder="{{Config::get('app.locale') == 'ar' ?  'البريد الاليكتروني'  :  'Email address'}}">
             @error('email_register')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
-            <input type="text" class="input" id="user_name" name="name_register" autocomplete="off" placeholder="name">
+            <input type="text" class="input" id="user_name" name="name_register" autocomplete="off" placeholder="{{Config::get('app.locale') == 'ar' ?  'الاسم'  :  'Name'}}">
             @error('name_register')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
@@ -70,17 +74,17 @@
 
 
 <br>
-            <input type="password" class="input" id="user_pass" name="password_register" autocomplete="off" placeholder="Password">
+            <input type="password" class="input" id="user_pass" name="password_register" autocomplete="off" placeholder="{{Config::get('app.locale') == 'ar' ?  'الرقم السري'  :  'Password'}}">
             @error('password_register')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
           
           
-            <input type="submit" class="button" value="Sign Up" style="background-color: var(--primaryColor)">
+            <input type="submit" class="button" value="{{Config::get('app.locale') == 'ar' ?  'التسجيل'  :  'Sign Up'}}" style="background-color: var(--primaryColor)">
           </form><!--.login-form-->
           <div class="help-text">
-            <p>By signing up, you agree to our</p>
-            <p><a href="#">Terms of service</a></p>
+            <p>{{Config::get('app.locale') == 'ar' ?  'بالتسجيل ، فإنك توافق على'  :  'By signing up, you agree to our'}}</p>
+            <p><a href="#">{{Config::get('app.locale') == 'ar' ?  'شروط الخدمة'  :  'Terms of service'}}</a></p>
           </div><!--.help-text-->
         </div><!--.signup-tab-content-->
   
@@ -91,15 +95,15 @@
         <div id="login-tab-content">
           <form class="login-form" action="{{URL::to('/login')}}" method="post">
 @csrf
-            <input type="text" class="input" id="user_login" name='email' autocomplete="off" placeholder="Email or Username">
-            <input type="password" class="input" id="user_pass" name='password' autocomplete="off" placeholder="Password">
+            <input type="text" class="input" id="user_login" name='email' autocomplete="off" placeholder="{{Config::get('app.locale') == 'ar' ?  'البريد الاليكتروني'  :  'Email'}}">
+            <input type="password" class="input" id="user_pass" name='password' autocomplete="off" placeholder="{{Config::get('app.locale') == 'ar' ?  'الرقم السري'  :  'Password'}}">
        <!--     <input type="checkbox" class="checkbox" id="remember_me">
             <label for="remember_me">Remember me</label> -->
   
-            <input type="submit" class="button" value="Login" style="background-color: var(--primaryColor)"> 
+            <input type="submit" class="button" value="{{Config::get('app.locale') == 'ar' ?  'الدخول'  :  'Login'}}" style="background-color: var(--primaryColor)"> 
           </form><!--.login-form-->
           <div class="help-text">
-            <p><a href="{{URL::to('/forgot-password')}}">Forget your password?</a></p>
+            <p><a href="{{URL::to('/forgot-password')}}">{{Config::get('app.locale') == 'ar' ?  'نسيت كلمة المرور؟'  :  'Forget your password?'}}</a></p>
           </div><!--.help-text-->
         </div><!--.login-tab-content-->
 
@@ -118,7 +122,7 @@
       <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" id="myToast" >
           <div class="toast-header">
             <strong class="me-auto"></strong>
-            <small class="text-muted">1 second</small>
+            <small class="text-muted">{{Config::get('app.locale') == 'ar' ?  '1 ثانيه'  :  '1 second'}}</small>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
           <div class="toast-body" style="color: red">
@@ -136,7 +140,7 @@
   @endif
 
 
-
+</div>
 
 
     <!-- packages js -->

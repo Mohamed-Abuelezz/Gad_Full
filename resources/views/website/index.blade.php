@@ -22,68 +22,13 @@
     <title>GAD</title>
   </head>
 
-  <body dir= "ltr"  lang="{{Config::get('app.locale') == 'ar' ?   'ar'   :  "en" }}" class="body">
+  <body dir= "{{ App::isLocale('en') ?  'ltr':'rtl' }}"  lang="{{Config::get('app.locale') == 'ar' ?   'ar'   :  "en" }}" class="body">
     <div class="page">
 
 <!-- Start NavBar Section --------------------------------------->
 
-<div class="sectionNavBar wrapContent" >
+@include('website.custome_widgets.custome_nav_outside')
 
-<div class="container-fluid">
-    <div class="row justify-content-between">
-        
-        <div class="col rightsidemenu">
-            <div class="menus">
-                <ul>
-            
-                    <li><a href="#" class="s6"> عربي <i class="fas fa-globe-americas"></i> </a></li>
-                    <li><a href="{{URL::to('login')}}" class="s6">{{ __('website_screens/index.signInOrRegister') }}
-                    </a></li>
-            
-                </ul>
-            </div>
-            
-                    </div>
-                 
-                    <div class="col rightsidemenumobile">
-                
-                        <div class="mobile-meun">
-                    
-                            <div class="menu-button">
-                              <div class="menu-button-line"></div>
-                              <div class="menu-button-line"></div>
-                              <div class="menu-button-line"></div>
-                            </div>
-                          
-                      </div>
-                    
-                    
-                    
-                    </div>
-        <div class="col leftside" >
-            <img class="logo" src="{{ asset('website_assets/assets/icons/logo.png') }}"/>
-        </div>
-      
-        
-    </div>
-  
-</div>
-
-
-
-
-</div>
-
-  <div class="menu"> <!--Mobile Menus -->
-        <div class="menu-branding"></div>
-        <ul class="menu-nav">
-            <ul>
-                <li><a href="./screens/login-screen.html" class="s4">{{ __('website_screens/index.signInOrRegister') }}</a></li>
-                <li><a href="#" class="s4">{{Config::get('app.locale') == 'ar' ?   "English"  : "عربي"}} <i class="fas fa-globe-americas"></i> </a></li>
-
-            </ul>
-        </ul>
-</div>
 
 <!-- End NavBar Section --------------------------------------->
 
@@ -243,38 +188,7 @@
 
 <!-- Start Footer Section --------------------------------------->
 
-<div class="sectionFooter">
-
-    <div class="container-fluid wrapContent">
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <div class="title s5">Payments Methods</div>
-                <ul>
-                    <li><img src="{{ asset('website_assets/assets/icons/master-card-icon-13.jpg') }}"/></li>
-                </ul>
-                <br>
-                <br>
-                <div class="title">Socials</div>
-                <ul>
-                    <li><img src="{{ asset('website_assets/assets/icons/fc0061da43b239899945b1e886faa80a.jpg') }}"/></li>
-                </ul>
-            </div>
-            <div class="col-12 col-md-6">
-                <div class="links">
-<ul>
-    <li><a href="#">Support Us</a></li>
-    <li><a href="#">Contact Us</a></li>
-    <li><a href="#">About Us</a></li>
-    <li><a href="#">Terms And Conditions</a></li>
-</ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-</div>
+@include('website.custome_widgets.footer')
 
 <!-- End Footer Section --------------------------------------->
     </div>

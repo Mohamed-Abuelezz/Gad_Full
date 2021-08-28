@@ -5,11 +5,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\website\IndexController;
 use App\Http\Controllers\website\HomeController;
 use App\Http\Controllers\website\AuthController;
+use App\Http\Controllers\website\ProfileController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,15 +29,36 @@ use Illuminate\Support\Str;
  
 Route::get('/',[IndexController::class, 'showIndex'] )->name('index'); 
 
+Route::get('/language/{locale?}', function ($locale) {
+
+    if (!in_array($locale, ['en', 'ar'])) {
+       
+    return  redirect()->back();
+
+    }
+
+    App::setLocale($locale);
+
+    session()->put('locale', $locale);
+
+    return redirect()->back();
+
+
+    
+});
+
+
+
+
 /*
 
 All Auth Routes
 
 */
-
+Route::post('/register',[AuthController::class, 'register'] );
 Route::get('/login',[AuthController::class, 'showLogin'] )->name('login');
 Route::post('/login',[AuthController::class, 'authenticate']);
-Route::post('/register',[AuthController::class, 'register'] );
+Route::get('/logout',[AuthController::class, 'logout']);
 
 //Verify Password Routes
 
@@ -101,6 +124,9 @@ Route::post('/reset-password', function (Request $request) {
 
 
 
+Route::get('/profile/{profile_id}',[ProfileController::class, 'showProfile'] )->name('profile');
+
+
 
 
 Route::group(['middleware' => 'verified'], function () {
@@ -108,10 +134,7 @@ Route::group(['middleware' => 'verified'], function () {
     Route::get('/home',[HomeController::class, 'showHome'] )->name('home');
     Route::get('/home/dropFilters',[HomeController::class, 'getDropsSearch'] );
     Route::get('/home/searchFilters',[HomeController::class, 'getSearchFilter'] );
-
-
-
-
+    Route::get('/home/orderFilters',[HomeController::class, 'getOrderFilter'] );
 
 });
 

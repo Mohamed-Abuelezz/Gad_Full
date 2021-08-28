@@ -19,13 +19,20 @@
                             <div id="customPopover" style="display: none;">
     
                                 <ul>
-    <li><a href="#" >My Profile</a></li>
-    <li><a href="./editProfile_screen.html">Edit Profile</a></li>
+                                    @if ($isHaveProfile == true)
+                                    <li><a href="#" >{{ __('website_screens/homescreen.show_profile') }}</a></li>
+                                    <li><a href="./editProfile_screen.html">{{ __('website_screens/homescreen.edit_profile') }}</a></li>
+                                
+                                    @else
+
+                                    <li><a href="#" >{{ __('website_screens/homescreen.create_profile') }}</a></li>
+
+                                    @endif
     
     <hr style="border-top: 3px dotted white;"/>
     
-    <li><a href="#">My Account</a></li>
-    <li><a href="../screens/login-screen.html">SignOut</a></li>
+    <li><a href="#">{{ __('website_screens/homescreen.my_account') }}</a></li>
+    <li><a href="{{URL::to('/logout')}}">{{ __('website_screens/homescreen.sign_out') }}</a></li>
     
                                 </ul>
     
@@ -38,10 +45,10 @@
                         
                         <li>|</li>
                         
-                        <li><a href="#" class="s6"> Home </a></li>
-                        <li><a href="" class="s6"> Contact Us </a></li>
-                        <li><a href="#" class="s6">Terms And Conditions</a></li>
-                
+                        <li><a href="#" class="s6">{{ __('website_screens/homescreen.home') }}</a></li>
+                        <li><a href="" class="s6">{{ __('website_screens/homescreen.contact_us') }} </a></li>
+                        <li><a href="#" class="s6">{{ __('website_screens/homescreen.terms_and_conditions') }}</a></li>
+                         <li><a href="{{ Config::get('app.locale') == 'ar' ?  URL::to('language/en') :  URL::to('language/ar')}}" class="s6">{{Config::get('app.locale') == 'ar' ?   'English'   :  "عربي" }} <i class="fas fa-globe-americas"></i> </a></li>
                     </ul>
                 </div>
                 
@@ -79,15 +86,22 @@
       <div class="menu" > <!--Mobile Menus -->
             <ul class="menu-nav">
                 <ul>
-                    <li><a href="#" class="s4">Home </a></li>
-                    <li><a href="#" class="s4">Contact Us</a></li>
-                    <li><a href="#" class="s4">Terms And Condtions</a></li>
+                    <li><a href="#" class="s4">{{ __('website_screens/homescreen.home') }} </a></li>
+                    <li><a href="#" class="s4">{{ __('website_screens/homescreen.contact_us') }}</a></li>
+                    <li><a href="#" class="s4">{{ __('website_screens/homescreen.terms_and_conditions') }}</a></li>
                     <hr style="border-top: 3px dotted white;"/>
-                    <li><a href="" class="s4">Profile</a></li>
-                    <li><a href="./profile_Screen.html" class="s4">Edit Profile</a></li>
-    
-                    <li><a href="#" class="s4">My Account</a></li>
-                    <li><a href="../screens/login-screen.html" class="s4">SignOut</a></li>
+
+                    @if ($isHaveProfile == true)
+                    <li><a href="" class="s4">{{ __('website_screens/homescreen.show_profile') }}</a></li>
+                    <li><a href="./profile_Screen.html" class="s4">{{ __('website_screens/homescreen.edit_profile') }}</a></li>
+                    @else
+
+                    <li><a href="" class="s4">{{ __('website_screens/homescreen.create_profile') }}</a></li>
+
+                    @endif
+
+                    <li><a href="#" class="s4">{{ __('website_screens/homescreen.my_account') }}</a></li>
+                    <li><a href="../screens/login-screen.html" class="s4">{{ __('website_screens/homescreen.sign_out') }}</a></li>
     
                 </ul>
             </ul>

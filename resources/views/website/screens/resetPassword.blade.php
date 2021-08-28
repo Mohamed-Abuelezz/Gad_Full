@@ -22,63 +22,8 @@
     
 <!-- Start NavBar Section --------------------------------------->
 
-<div class="sectionNavBar wrapContent" >
+@include('website.custome_widgets.custome_nav_outside')
 
-    <div class="container-fluid">
-        <div class="row justify-content-between">
-            
-            <div class="col rightsidemenu">
-                <div class="menus">
-                    <ul>
-                
-                        <li><a href="#" class="s6"> عربي <i class="fas fa-globe-americas"></i> </a></li>
-                        <li><a href="../index.html" class="s6">Home</a></li>
-                
-                    </ul>
-                </div>
-                
-                        </div>
-                     
-                        <div class="col rightsidemenumobile">
-                    
-                            <div class="mobile-meun">
-                        
-                                <div class="menu-button">
-                                  <div class="menu-button-line"></div>
-                                  <div class="menu-button-line"></div>
-                                  <div class="menu-button-line"></div>
-                                </div>
-                              
-                          </div>
-                        
-                        
-                        
-                        </div>
-            <div class="col leftside" >
-                <img class="logo" src="{{ asset('website_assets/assets/icons/logo.png') }}"/>
-            </div>
-          
-            
-        </div>
-      
-    </div>
-    
-    
-    
-    
-    </div>
-    
-      <div class="menu"> <!--Mobile Menus -->
-            <div class="menu-branding"></div>
-            <ul class="menu-nav">
-                <ul>
-                    <li><a href="./screens/login-screen.html" class="s4">SignIn/SignUp</a></li>
-                    <li><a href="#" class="s4"> عربي <i class="fas fa-globe-americas"></i> </a></li>
-    
-                </ul>
-            </ul>
-    </div>
-    
 <!-- End NavBar Section --------------------------------------->    
 
 
@@ -96,29 +41,29 @@
 
 
         <div class="mb-3" style="width: 400px; margin: auto">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+          <label for="exampleInputEmail1" class="form-label">{{Config::get('app.locale') == 'ar' ?  'البريد الاليكتروني'  :  'Email Address'}}</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="{{Config::get('app.locale') == 'ar' ?  'البريد الاليكتروني'  :  'Email'}}">
           @error('email')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
         </div>
         <div class="mb-3" style="width: 400px; margin: auto">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <label for="exampleInputPassword1" class="form-label">{{Config::get('app.locale') == 'ar' ?  'الرقم السري'  :  'Password'}}</label>
             <input type="password" class="form-control" id="exampleInputPassword1" name="password">
             @error('password')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
           </div>
           <div class="mb-3" style="width: 400px; margin: auto">
-            <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+            <label for="exampleInputPassword1" class="form-label">{{Config::get('app.locale') == 'ar' ?  'تأكيد الرقم السري'  :  'Confirm Password'}}</label>
             <input type="password" class="form-control" id="exampleInputPassword1" name="password_confirmation">
             @error('password_confirmation')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
           </div>
         
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">{{Config::get('app.locale') == 'ar' ?  'تأكيد'  :  'Submit'}}</button>
       </form>
       
 
@@ -156,12 +101,12 @@
     <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="myToast" >
         <div class="toast-header">
           <strong class="me-auto"></strong>
-          <small class="text-muted">1 second</small>
+          <small class="text-muted">{{Config::get('app.locale') == 'ar' ?  '1 ثانيه'  :  '1 second'}}</small>
           <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body" style="color: green">
 
-            تم ارسال رسالة التاكيد مره اخري
+          {{Config::get('app.locale') == 'ar' ?  'تم الارسال يرجي متابعة البريد الاليكتروني الخاص بك للتأكيد'  :  'Sent, please follow your email to confirm'}}
 
         </div>
     
@@ -180,44 +125,6 @@
 
 
 <script>
-//     $(document).ready(function () {
-//         $("#btnSend").click(function () {
-//             $.ajax({
-//                 url: "{{URL::to('/email/verification-notification')}}",
-//                 type: 'POST',
-//                 data: { "_token": "{{ csrf_token() }}",},
-//                 success: function (result) {
-
-//                   $("#myToast").addClass("show");
-
-               
-//                 },
-//                 error: function (request, status, error) {
-//         console.log("There was an error: ", request.responseText);
-//     }
-//             });
-//         });
-//     });
-
-
-
-
-//     var toastElList = [].slice.call(document.querySelectorAll('.toast'));
-// var toastList = toastElList.map(function (toastEl) {
-//   return new bootstrap.Toast(toastEl, {
-//     animation : true,
-//     autohide : true,
-//     delay : 6000,
-//   })
-// });
-
-
-
-
-
-
-
-
 
 
 

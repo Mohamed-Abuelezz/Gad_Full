@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -26,19 +27,22 @@ public function showIndex(Request $request) {
 
   //  App::setLocale('ar');
 
+if(Auth::id() != null){
+
+  return redirect()->route('home');
+
+}
+
     $configsWebsitViews = new ConfigsWebsitViews;
 
     $configsWebsitViews->save();
 
 
 
-    $configsSlider  =  ConfigsSlider::all();;
+    $configsSlider  =  ConfigsSlider::all();
 
 
-
-
-  //  dd($configsSlider);
-return view('website.index', ['configsSlider'=>$configsSlider]);
+   return view('website.index', ['configsSlider'=>$configsSlider]);
     
 
 }

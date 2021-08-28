@@ -92,8 +92,8 @@ Schema::create('Subscribers_Type', function (Blueprint $table) {
     $table->double('lat');
     $table->double('lng');
     $table->string('mobile_number');
-    $table->string('person_bio');
-    $table->string('education_bio');
+    $table->longText('person_bio');
+    $table->longText('education_bio');
 
    $table->timestamps();
 

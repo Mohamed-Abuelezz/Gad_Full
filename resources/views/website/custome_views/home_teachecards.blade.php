@@ -14,7 +14,7 @@
   font-size: 20px;
   transform: translateX(-50%);
   -webkit-transform: translateX(-50%);"
-  >List Is Empety 😭</div>
+  >{{ __('website_screens/homescreen.noData') }}  😭</div>
 
 </div>
 
@@ -37,7 +37,7 @@
                            
                               <div class="col-6">
                                   <p class="s6">{{$profilesOffersSubscriber->profiles->display_name}}</p>
-                                  <span class="s6">{{$profilesOffersSubscriber->profiles->subscribersType->title_en}}</span>
+                                  <span class="s6">{{Config::get('app.locale') == 'ar' ?  $profilesOffersSubscriber->profiles->subscribersType->title_ar  : $profilesOffersSubscriber->profiles->subscribersType->title_en}}</span>
 
                                   <div class="stars">
 
@@ -77,13 +77,13 @@
 
                                   <ul class="nav nav-tabs" id="myTab" role="tablist" style="display: flex;justify-content: space-between">
                                       <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="home-tab_{{$loop->index}}" data-bs-toggle="tab" data-bs-target="#home_{{$loop->index}}" type="button" role="tab" aria-controls="home_{{$loop->index}}" aria-selected="true">Biography</button>
+                                        <button class="nav-link active" id="home-tab_{{$loop->index}}" data-bs-toggle="tab" data-bs-target="#home_{{$loop->index}}" type="button" role="tab" aria-controls="home_{{$loop->index}}" aria-selected="true">{{ __('website_screens/homescreen.biography') }}</button>
                                       </li>
                                       <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="profile-tab_{{$loop->index}}" data-bs-toggle="tab" data-bs-target="#profile_{{$loop->index}}" type="button" role="tab" aria-controls="profile_{{$loop->index}}" aria-selected="false"> Stages</button>
+                                        <button class="nav-link" id="profile-tab_{{$loop->index}}" data-bs-toggle="tab" data-bs-target="#profile_{{$loop->index}}" type="button" role="tab" aria-controls="profile_{{$loop->index}}" aria-selected="false"> {{ __('website_screens/homescreen.stages') }}</button>
                                       </li>
                                       <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="contact-tab_{{$loop->index}}" data-bs-toggle="tab" data-bs-target="#contact_{{$loop->index}}" type="button" role="tab" aria-controls="contact_{{$loop->index}}" aria-selected="false"> Articles</button>
+                                        <button class="nav-link" id="contact-tab_{{$loop->index}}" data-bs-toggle="tab" data-bs-target="#contact_{{$loop->index}}" type="button" role="tab" aria-controls="contact_{{$loop->index}}" aria-selected="false">{{ __('website_screens/homescreen.articles') }}</button>
                                       </li>
                                     </ul>
                                     <div class="tab-content" id="myTabContent" style="padding: 15px;text-align: center">
@@ -99,7 +99,7 @@
                                           
                                                   <div class="col-6" style="padding: 4px;font-size: 10px;font-weight: bold">
 
-                                                      {{$profileEducationStage->educationsStages->title_en}}
+                                                    {{Config::get('app.locale') == 'ar' ?  $profileEducationStage->educationsStages->title_ar  : $profileEducationStage->educationsStages->title_en}}
 
                                            
 
@@ -129,7 +129,7 @@
                                           
                                                   <div class="col-6" style="padding: 4px;font-size: 10px;font-weight: bold">
 
-                                                      {{$scientificArticle->scientificArticles->title_en}} 
+                                                    {{Config::get('app.locale') == 'ar' ? $scientificArticle->scientificArticles->title_ar  :  $scientificArticle->scientificArticles->title_en}} 
 
                                            
 
@@ -157,7 +157,7 @@
                               </div>
 
                   <div class="more">
-                      <a href="./profile_Screen.html" class="btn more-btn" >More</a>
+                      <a href="./profile_Screen.html" class="btn more-btn" >{{Config::get('app.locale') == 'ar' ?  'المزيد' :"More"}}</a>
                   </div>
                                   </div>
 
@@ -174,3 +174,4 @@
 
 
               </div>
+

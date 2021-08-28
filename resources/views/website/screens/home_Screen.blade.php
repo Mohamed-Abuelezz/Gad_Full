@@ -26,7 +26,7 @@
     <title>GAD</title>
   </head>
 
-  <body dir="ltr" lang="en" class="body">
+  <body dir="{{ App::isLocale('en') ?  'ltr':'rtl' }}" lang="{{Config::get('app.locale') == 'ar' ?   'ar'   :  "en" }}" class="body">
       
 
 <div class="page">
@@ -48,17 +48,17 @@
 
     <div class="sectionSearchBar">
         <ul>
-            <li class="title s4"><p>Advanced Search</p> </li>
+            <li class="title s4"><p>{{ __('website_screens/homescreen.advanced_search') }}</p> </li>
             <li>
                 <div class="dropdown myDropDown country-drop">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                     Country
+                        {{ __('website_screens/homescreen.country_search') }}
                     </button>
                     <ul class="dropdown-menu country-ul" aria-labelledby="dropdownMenuButton1">
 
                         @foreach ($countries as $countrie)
                        
-                        <li><a class="dropdown-item" href="#" data-id="{{$countrie->id}}" >{{$countrie->name_en}}</a></li>
+                        <li><a class="dropdown-item" href="#" data-id="{{$countrie->id}}" >{{ Config::get('app.locale') == 'ar' ?    $countrie->name_ar   :  $countrie->name_en}}</a></li>
 
                           @endforeach
 
@@ -70,12 +70,12 @@
             <li>
                 <div class="dropdown myDropDown profileKind-drop">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                      Profile Kind 
+                        {{ __('website_screens/homescreen.kindprofile_search') }}  
                     </button>
                     <ul class="dropdown-menu profile-ul" aria-labelledby="dropdownMenuButton1">
                         @foreach ($subscribersType as $subscriberType)
                        
-                        <li><a class="dropdown-item" href="#" data-id="{{$subscriberType->id}}" >{{$subscriberType->title_en}}</a></li>
+                        <li><a class="dropdown-item" href="#" data-id="{{$subscriberType->id}}" >{{Config::get('app.locale') == 'ar' ? $subscriberType->title_ar :  $subscriberType->title_en}}</a></li>
 
                           @endforeach
 
@@ -86,13 +86,13 @@
              <li>
                 <div class="dropdown myDropDown Educationstages-drop">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                      Education Stages 
+                    {{ __('website_screens/homescreen.edustages_search') }}  
                     </button>
                     <ul class="dropdown-menu stages_ul" aria-labelledby="dropdownMenuButton1">
 
                         @foreach ($educationsStages as $educationStage)
                        
-                        <li><a class="dropdown-item" href="#" data-id="{{$educationStage->id}}" >{{$educationStage->title_en}}</a></li>
+                        <li><a class="dropdown-item" href="#" data-id="{{$educationStage->id}}" >{{ Config::get('app.locale') == 'ar' ?   $educationStage->title_ar  :  $educationStage->title_en}}</a></li>
 
                           @endforeach
 
@@ -103,12 +103,12 @@
             <li>
                 <div class="dropdown myDropDown   scientificArticle-drop">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        Scientific Article
+           {{ __('website_screens/homescreen.articals_search') }}  
                     </button>
                     <ul class="dropdown-menu artical_ul" aria-labelledby="dropdownMenuButton1">
                        @foreach ($scientificArticles as $scientificArticle)
                        
-                        <li><a class="dropdown-item" href="#" data-id="{{$scientificArticle->id}}" >{{$scientificArticle->title_en}}  [{{$scientificArticle->educationsStages->title_en}}] </a></li>
+                        <li><a class="dropdown-item" href="#" data-id="{{$scientificArticle->id}}" >{{Config::get('app.locale') == 'ar' ?   $scientificArticle->title_ar  :  $scientificArticle->title_en}}  [{{ Config::get('app.locale') == 'ar' ?  $scientificArticle->educationsStages->title_ar  : $scientificArticle->educationsStages->title_en}}] </a></li>
 
                           @endforeach
                     </ul>
@@ -132,11 +132,11 @@
 
     <ul class="nav mb-3" id="pills-tab" role="tablist">
         <li class="" role="presentation">
-            <a href="#" class="activeSelect active"  id="pills-map-tab" data-bs-toggle="tab" data-bs-target="#pills-map" type="button" role="tab" aria-controls="pills-map" aria-selected="true"><i class="fas fa-map-marked-alt"></i>  Map  </a>
+            <a href="#" class="activeSelect active"  id="pills-map-tab" data-bs-toggle="tab" data-bs-target="#pills-map" type="button" role="tab" aria-controls="pills-map" aria-selected="true"><i class="fas fa-map-marked-alt"></i> {{ __('website_screens/homescreen.map') }} </a>
         </li>
         <li><i class="fas fa-atom" style="color: white;padding: 10px;"></i></li>
         <li class="" role="presentation">
-            <a href="#" id="pills-cards-tab" data-bs-toggle="tab" data-bs-target="#pills-cards" type="button" role="tab" aria-controls="pills-cards" aria-selected="false"><i class="fas fa-address-card"></i>  Cards  </a>
+            <a href="#" id="pills-cards-tab" data-bs-toggle="tab" data-bs-target="#pills-cards" type="button" role="tab" aria-controls="pills-cards" aria-selected="false"><i class="fas fa-address-card"></i>  {{ __('website_screens/homescreen.cards') }}  </a>
         </li>
       </ul>
 
@@ -159,26 +159,7 @@
 
 
 <div class="sectionTeachers ">
-    <div class="search-arrange wrapContent" >
-        <ul>
-            <li>
-                <div class="dropdown myDropDown " id="orderBy">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        Order-By <i class="fas fa-sort"></i>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                      <li><a class="dropdown-item" href="#">Teacher</a></li>
-                      <li><a class="dropdown-item" href="#">Center</a></li>
-                      <li><a class="dropdown-item" href="#">Courses</a></li>
-                    </ul>
-                  </div>
-
-        
-            </li>
-            <li><input class="input-textfield s7" type="text" id="search" placeholder="Search By Names...">
-            </li>
-        </ul>
-    </div>
+  
 
     <div class="tab-content"  id="pills-tabContent">
     <div class="teacher-cards tab-pane fade" id="pills-cards" role="tabpanel" aria-labelledby="pills-cards-tab">
@@ -201,7 +182,7 @@
     font-size: 20px;
     transform: translateX(-50%);
     -webkit-transform: translateX(-50%);"
-    >List Is Empety 😭</div>
+    >{{ __('website_screens/homescreen.noData') }}  😭</div>
 
 </div>
 
@@ -224,7 +205,7 @@
                              
                                 <div class="col-6">
                                     <p class="s6">{{$profilesOffersSubscriber->profiles->display_name}}</p>
-                                    <span class="s6">{{$profilesOffersSubscriber->profiles->subscribersType->title_en}}</span>
+                                    <span class="s6">{{Config::get('app.locale') == 'ar' ?  $profilesOffersSubscriber->profiles->subscribersType->title_ar  : $profilesOffersSubscriber->profiles->subscribersType->title_en}}</span>
 
                                     <div class="stars">
 
@@ -264,13 +245,13 @@
 
                                     <ul class="nav nav-tabs" id="myTab" role="tablist" style="display: flex;justify-content: space-between">
                                         <li class="nav-item" role="presentation">
-                                          <button class="nav-link active" id="home-tab_{{$loop->index}}" data-bs-toggle="tab" data-bs-target="#home_{{$loop->index}}" type="button" role="tab" aria-controls="home_{{$loop->index}}" aria-selected="true">Biography</button>
+                                          <button class="nav-link active" id="home-tab_{{$loop->index}}" data-bs-toggle="tab" data-bs-target="#home_{{$loop->index}}" type="button" role="tab" aria-controls="home_{{$loop->index}}" aria-selected="true">{{ __('website_screens/homescreen.biography') }}</button>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                          <button class="nav-link" id="profile-tab_{{$loop->index}}" data-bs-toggle="tab" data-bs-target="#profile_{{$loop->index}}" type="button" role="tab" aria-controls="profile_{{$loop->index}}" aria-selected="false"> Stages</button>
+                                          <button class="nav-link" id="profile-tab_{{$loop->index}}" data-bs-toggle="tab" data-bs-target="#profile_{{$loop->index}}" type="button" role="tab" aria-controls="profile_{{$loop->index}}" aria-selected="false">{{ __('website_screens/homescreen.stages') }}</button>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                          <button class="nav-link" id="contact-tab_{{$loop->index}}" data-bs-toggle="tab" data-bs-target="#contact_{{$loop->index}}" type="button" role="tab" aria-controls="contact_{{$loop->index}}" aria-selected="false"> Articles</button>
+                                          <button class="nav-link" id="contact-tab_{{$loop->index}}" data-bs-toggle="tab" data-bs-target="#contact_{{$loop->index}}" type="button" role="tab" aria-controls="contact_{{$loop->index}}" aria-selected="false">{{ __('website_screens/homescreen.articles') }}</button>
                                         </li>
                                       </ul>
                                       <div class="tab-content" id="myTabContent" style="padding: 15px;text-align: center">
@@ -286,7 +267,7 @@
                                             
                                                     <div class="col-6" style="padding: 4px;font-size: 10px;font-weight: bold">
 
-                                                        {{$profileEducationStage->educationsStages->title_en}}
+                                                        {{Config::get('app.locale') == 'ar' ?  $profileEducationStage->educationsStages->title_ar  : $profileEducationStage->educationsStages->title_en}}
 
                                              
 
@@ -316,7 +297,7 @@
                                             
                                                     <div class="col-6" style="padding: 4px;font-size: 10px;font-weight: bold">
 
-                                                        {{$scientificArticle->scientificArticles->title_en}} 
+                                                        {{Config::get('app.locale') == 'ar' ? $scientificArticle->scientificArticles->title_ar  :  $scientificArticle->scientificArticles->title_en}} 
 
                                              
 
@@ -344,7 +325,7 @@
                                 </div>
 
                     <div class="more">
-                        <a href="./profile_Screen.html" class="btn more-btn" >More</a>
+                        <a href="{{URL::to('profile/'.$profilesOffersSubscriber->profiles->id)}}" class="btn more-btn" >{{Config::get('app.locale') == 'ar' ?  'المزيد' :"More"}}</a>
                     </div>
                                     </div>
 
@@ -362,6 +343,12 @@
 
                 </div>
 
+                <nav aria-label="Page navigation example"style="width: 150px;margin: auto;" >
+    
+                    {{ $profilesOffersSubscribers->links() }}
+        
+        
+                  </nav>
                   
             </div>  
             
@@ -373,12 +360,7 @@
 
 
 
-        <nav aria-label="Page navigation example"style="width: 150px;;margin: auto;" >
-    
-            {{ $profilesOffersSubscribers->links() }}
 
-
-          </nav>
     
     </div>
 
@@ -405,44 +387,7 @@
 
 <!-- Start Footer Section --------------------------------------->
 
-<div class="sectionFooter">
-
-    <div class="container-fluid wrapContent">
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <div class="title s5">Payments Methods</div>
-                <ul>
-                    <li><img src="https://www.csregypt.com/wp-content/uploads/2021/04/mastercard-1.png"/></li>
-                    <li><img src="https://www.csregypt.com/wp-content/uploads/2021/04/mastercard-1.png"/></li>
-                    <li><img src="https://www.csregypt.com/wp-content/uploads/2021/04/mastercard-1.png"/></li>
-                    <li><img src="https://www.csregypt.com/wp-content/uploads/2021/04/mastercard-1.png"/></li>
-                </ul>
-                <br>
-                <br>
-                <div class="title">Socials</div>
-                <ul>
-                    <li><img src="../assets/icons/fc0061da43b239899945b1e886faa80a.jpg"/></li>
-                    <li><img src="../assets/icons/fc0061da43b239899945b1e886faa80a.jpg"/></li>
-                    <li><img src="../assets/icons/fc0061da43b239899945b1e886faa80a.jpg"/></li>
-                    <li><img src="../assets/icons/fc0061da43b239899945b1e886faa80a.jpg"/></li>
-                </ul>
-            </div>
-            <div class="col-12 col-md-6">
-                <div class="links">
-<ul>
-    <li><a href="#">Support Us</a></li>
-    <li><a href="#">Contact Us</a></li>
-    <li><a href="#">About Us</a></li>
-    <li><a href="#">Terms And Conditions</a></li>
-</ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-</div>
+@include('website.custome_widgets.footer')
 
 <!-- End Footer Section --------------------------------------->
 
@@ -458,8 +403,7 @@
     <script src="{{asset('website_assets/packages/jquery/jquery.js') }}"></script>
     <script src="{{asset('website_assets/packages/OwlCarousel2-2.3.4/dist/owl.carousel.min.js') }}"></script>
     <script src="{{asset('website_assets/packages/jQuery-autoComplete-master/jquery.auto-complete.min.js') }}"></script>
-    <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhwUPb_bGJzGj0Wnj89dcnU5NZQhGx9jY&callback=initMap&libraries=&v=weekly"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhwUPb_bGJzGj0Wnj89dcnU5NZQhGx9jY&callback=initMap&libraries=&v=weekly"
     async
   ></script>
 
@@ -472,6 +416,9 @@
     <!-- my js -->
 <script>
  var domain =   "{!! url('/')  !!}";
+var lang = "{!! App::currentLocale()  !!}";
+
+console.log('current Language is >>> '+lang);
 
 var profiles = 
    [

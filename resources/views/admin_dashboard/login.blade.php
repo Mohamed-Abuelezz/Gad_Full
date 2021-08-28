@@ -35,11 +35,11 @@
 
                                             <div class="form-floating mb-3">
                                                 <input class="form-control" id="inputEmail" type="text" placeholder="name@example.com" name="email"/>
-                                                <label for="inputEmail">Email address</label>
+                                                <label for="inputEmail">{{Config::get('app.locale') == 'ar' ?  'البريد الاليكتروني'  :  'Email address'}}</label>
                                             </div>
                                             <div class="form-floating mb-3">
                                                 <input class="form-control" id="inputPassword" type="password" placeholder="Password" name="password"/>
-                                                <label for="inputPassword">Password</label>
+                                                <label for="inputPassword">{{Config::get('app.locale') == 'ar' ?  'الرقم السري'  :  'Password'}}</label>
                                             </div>
 <br>
 
@@ -50,7 +50,7 @@
     @endif
 
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <input class="btn btn-primary" type="submit" value="Login"/>
+                                                <input class="btn btn-primary" type="submit" value="{{Config::get('app.locale') == 'ar' ?   'تسجيل الدخول'  :  'Login'}}"/>
                                             </div>
                                         </form>
                                     </div>
