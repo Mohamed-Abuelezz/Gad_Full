@@ -190,12 +190,12 @@ Schema::create('Subscribers_Type', function (Blueprint $table) {
 
 
 
-   /////////////////////////// Favourites Profile Table
+   /////////////////////////// Comments Profile Table
    Schema::create('Comments_Profiles', function (Blueprint $table) {
     $table->id();
     $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');;
     $table->foreignId('profile_id')->constrained('Profiles')->onUpdate('cascade')->onDelete('cascade');;
-    $table->string('comment');
+    $table->longText('comment');
 
   
      $table->timestamps();
@@ -246,7 +246,16 @@ Schema::create('Subscribers_Type', function (Blueprint $table) {
 
 
 
-
+        /////////////////////////// Profile Views Table
+        Schema::create('Profile_Views', function (Blueprint $table) {
+      
+         $table->id();
+         $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');;
+         $table->foreignId('profile_id')->constrained('Profiles')->onUpdate('cascade')->onDelete('cascade');;
+     
+        $table->timestamps();
+     
+     });
 
 
 
@@ -260,6 +269,7 @@ Schema::create('Subscribers_Type', function (Blueprint $table) {
      */
     public function down()
     {
+      Schema::dropIfExists('Profile_Views');
         Schema::dropIfExists('Profile_education_stages');
         Schema::dropIfExists('Profile_Rates');
         Schema::dropIfExists('Contact_Us');

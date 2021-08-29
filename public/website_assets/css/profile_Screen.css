@@ -58,9 +58,7 @@ margin-top: 80px;
 
 .sectionDetails .details-container .views-country{
     display: flex;
-    float: right;
-    position: absolute;
-    right: 0;
+    justify-content: space-evenly;
     margin-right: 20px;
     color: white;
     padding-top: 5px;
@@ -69,8 +67,6 @@ margin-top: 80px;
 }
 
 [dir="rtl"] .sectionDetails .details-container .views-country{
-    display: flex;
-    position: absolute;
     right:unset;
     left: 0;
     margin-left: 20px;
@@ -353,3 +349,28 @@ body {
   .circular-menu.circular-menu-left.active .menu-item:nth-child(4) {
     transform: translate3d(7em,1em,0);
   }
+
+
+
+
+
+
+ .rating .rate-base-layer
+  {
+      color: white;
+  }
+
+
+  .rating .rate-select-layer
+  {
+    color:  var(--thirdColor);
+  }
+
+  .rating .rate-hover-layer
+  {
+      color:  var(--thirdColor);
+      opacity: .5;
+  }
+
+
+

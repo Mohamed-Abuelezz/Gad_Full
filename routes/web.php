@@ -136,5 +136,8 @@ Route::group(['middleware' => 'verified'], function () {
     Route::get('/home/searchFilters',[HomeController::class, 'getSearchFilter'] );
     Route::get('/home/orderFilters',[HomeController::class, 'getOrderFilter'] );
 
+    Route::post('/profile/addRate',[ProfileController::class, 'addRate'] );
+    Route::post('/profile/addComment',[ProfileController::class, 'addComment'] );
+
 });
 

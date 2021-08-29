@@ -54,7 +54,7 @@ class Profiles extends Model
 
     public function commentsProfiles()
     {
-        return $this->hasMany(CommentsProfiles::class);
+        return $this->hasMany(CommentsProfiles::class,'profile_id');
     }  
     
     public function profileRates()
@@ -63,7 +63,10 @@ class Profiles extends Model
     }
 
 
-
+    public function profileViews()
+    {
+        return $this->hasMany(ProfileViews::class,'profile_id');
+    }
 
 
 }

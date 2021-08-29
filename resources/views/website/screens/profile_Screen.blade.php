@@ -4,6 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Packages CSS -->
     <link href="{{ asset('website_assets/packages/bootstrap-5.0.1-dist/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -51,15 +52,15 @@
 
 <!-- Start Image-Profile Section --------------------------------------->
 <div class="sectionImageAndBio">
-    <div class="image-profile" style="background-image:url('{{asset('storage/CoverProfiles/'.$profile->cover_image) }}')">
+    <div class="image-profile" style="background-image:url('{{asset('storage/CoverProfiles/'.$profilesOffersSubscribers->profiles->cover_image) }}')">
 
 
-        <img src="{{asset('storage/users_images/'.$profile->user->image) }}" alt="image person" >
+        <img src="{{asset('storage/users_images/'.$profilesOffersSubscribers->profiles->user->image) }}" alt="image person" >
         
         </div>
 <div class="bio wrapContent s5">
 
-{{$profile->person_bio}}
+{{$profilesOffersSubscribers->profiles->person_bio}}
 </div>        
 </div>
 
@@ -73,15 +74,16 @@
         <nav>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-12 col-md-6">
 
                         <div class="nav nav-tabs " id="nav-tab" role="tablist">
                             <button class="nav-link s7 active" id="nav-profileDetails-tab" data-bs-toggle="tab" data-bs-target="#nav-profileDetails" type="button" role="tab" aria-controls="nav-profileDetails" aria-selected="true">{{Config::get('app.locale') == 'ar' ? 'البيانات' : 'Profile Details' }}</button>
                             <button class="nav-link s7" id="nav-moreDetails-tab" data-bs-toggle="tab" data-bs-target="#nav-moreDetails" type="button" role="tab" aria-controls="nav-moreDetails" aria-selected="false">{{Config::get('app.locale') == 'ar' ? 'تفاصيل اكثر' : 'More Details' }}</button>
                             <button class="nav-link s7" id="nav-specialization-tab" data-bs-toggle="tab" data-bs-target="#nav-specialization" type="button" role="tab" aria-controls="nav-specialization" aria-selected="false">{{Config::get('app.locale') == 'ar' ?  'التخصصات' : 'Specialization' }}</button>
+                            <button class="nav-link s7" id="nav-location-tab" data-bs-toggle="tab" data-bs-target="#nav-location" type="button" role="tab" aria-controls="nav-location" aria-selected="false">{{Config::get('app.locale') == 'ar' ?  'الموقع' : 'Location' }}</button>
                           </div>
                     </div>
-                    <div class="col">
+                    <div class="col-12 col-md-6 mt-3 mt-md-0" >
                         <div class="views-country s7">
                             <ul>
                                 <li><i class="fas fa-heart" style="color: white;"></i></li>
@@ -89,11 +91,11 @@
                             </ul>
                             <ul>
                                 <li><i class="fas fa-eye" style="color: white;"></i></li>
-                                <li>2568</li>
+                                <li>{{$countViewsProfile}}</li>
                             </ul>
                             <ul>
                                 <li><i class="fas fa-flag" style="color: white;"></i></li>
-                                <li>{{Config::get('app.locale') == 'ar' ?  $profile->user->countries->name_ar : $profile->user->countries->name_en }}</li>
+                                <li>{{Config::get('app.locale') == 'ar' ?  $profilesOffersSubscribers->profiles->user->countries->name_ar : $profilesOffersSubscribers->profiles->user->countries->name_en }}</li>
                             </ul>
                             
                         </div>
@@ -111,12 +113,25 @@
                         <div class="row">
 
                             <div class="col-12 col-md-6">
+@if (Config::get('app.locale') == 'ar')
+<p class="s5"> <i class="fas fa-signature" style="color: white;"> </i> &emsp; {{$profilesOffersSubscribers->profiles->display_name}} </p>                 
+<p class="s5"><i class="fas fa-briefcase" style="color: white;"> </i> &emsp;   {{$profilesOffersSubscribers->profiles->subscribersType->title_ar}} </p>                 
+<p class="s5"><i class="fas fa-map-marked-alt" style="color: white;">  </i>&emsp;  {{$profilesOffersSubscribers->profiles->address}} </p>                 
+<p class="s5"><i class="fas fa-mobile-alt" style="color: white;"> </i> &emsp;   {{$profilesOffersSubscribers->profiles->mobile_number}}</p>                 
+<p class="s5"><i class="fas fa-at" style="color: white;"> </i>&emsp;   {{$profilesOffersSubscribers->profiles->user->email}}</p>                 
 
-               <p class="s5"><i class="fas fa-signature" style="color: white;"> &emsp;  Sherif Abu El-Ezz</i></p>                 
-               <p class="s5"><i class="fas fa-briefcase" style="color: white;">  &emsp;   Teacher</i></p>                 
-               <p class="s5"><i class="fas fa-map-marked-alt" style="color: white;">  &emsp;  19 Dubai Sharka</i></p>                 
-               <p class="s5"><i class="fas fa-mobile-alt" style="color: white;">  &emsp;  01063898262</i></p>                 
-               <p class="s5"><i class="fas fa-at" style="color: white;">  &emsp;  medo@example.com</i></p>                 
+@else
+    
+<p class="s5"><i class="fas fa-signature" style="color: white;"> &emsp;  {{$profilesOffersSubscribers->profiles->display_name}}</i></p>                 
+<p class="s5"><i class="fas fa-briefcase" style="color: white;">  &emsp;   {{$profilesOffersSubscribers->profiles->subscribersType->title_en}}</i></p>                 
+<p class="s5"><i class="fas fa-map-marked-alt" style="color: white;">  &emsp; {{$profilesOffersSubscribers->profiles->address}}</i></p>                 
+<p class="s5"><i class="fas fa-mobile-alt" style="color: white;">  &emsp;  {{$profilesOffersSubscribers->profiles->mobile_number}}</i></p>                 
+<p class="s5"><i class="fas fa-at" style="color: white;">  &emsp;  {{$profilesOffersSubscribers->profiles->user->email}}</i></p>                 
+
+
+
+@endif
+
 
                             </div>
 
@@ -124,50 +139,108 @@
                                 <div class="ratingBox">
     
                                     <div class="stars s6">
-                                        <span class="fas fa-star checked"></span>
-                                        <span class="fas fa-star checked"></span>
-                                        <span class="fas fa-star checked"></span>
-                                        <span class="fas fa-star checked"></span>
-                                        <span class="fas fa-star checked"></span>  &emsp;
-                                        12.5665
+
+                                        @for ($i = 0; $i < 5; $i++)
+
+                                        @if ($i < $RatesProfile['fiveStar_rates_avg'])
+                 
+                                         <span class="fas fa-star checked"></span>
+                 
+                                         @else
+                 
+                                         <span class="fas fa-star"></span>
+                 
+                                        @endif
+                 
+                                           @endfor
+                 
+                                      &emsp;
+                                        {{ $RatesProfile['fiveStar_rates_count']}}
                                     </div>
 
                                     <div class="stars s6">
-                                        <span class="fas fa-star checked"></span>
-                                        <span class="fas fa-star checked"></span>
-                                        <span class="fas fa-star checked"></span>
-                                        <span class="fas fa-star checked"></span>
-                                        <span class="fas fa-star"></span>  &emsp;
-                                        12.5665
+                                        @for ($i = 0; $i < 5; $i++)
+
+                                        @if ($i < $RatesProfile['fourStar_rates_avg'])
+                 
+                                         <span class="fas fa-star checked"></span>
+                 
+                                         @else
+                 
+                                         <span class="fas fa-star"></span>
+                 
+                                        @endif
+                 
+                                           @endfor
+                 
+                                      &emsp;
+                                        {{ $RatesProfile['fourStar_rates_count']}}
                                     </div>
                                     <div class="stars s6">
-                                        <span class="fas fa-star checked"></span>
-                                        <span class="fas fa-star checked"></span>
-                                        <span class="fas fa-star checked"></span>
-                                        <span class="fas fa-star"></span>
-                                        <span class="fas fa-star"></span>  &emsp;
-                                        12.5665
+                                        @for ($i = 0; $i < 5; $i++)
+
+                                        @if ($i < $RatesProfile['threeStar_rates_avg'])
+                 
+                                         <span class="fas fa-star checked"></span>
+                 
+                                         @else
+                 
+                                         <span class="fas fa-star"></span>
+                 
+                                        @endif
+                 
+                                           @endfor
+                 
+                                      &emsp;
+                                        {{ $RatesProfile['threeStar_rates_count']}}
                                     </div>
                                     <div class="stars s6">
-                                        <span class="fas fa-star checked"></span>
-                                        <span class="fas fa-star checked"></span>
-                                        <span class="fas fa-star "></span>
-                                        <span class="fas fa-star"></span>
-                                        <span class="fas fa-star"></span>  &emsp;
-                                        12.5665
+                                        @for ($i = 0; $i < 5; $i++)
+
+                                        @if ($i < $RatesProfile['twoStar_rates_avg'])
+                 
+                                         <span class="fas fa-star checked"></span>
+                 
+                                         @else
+                 
+                                         <span class="fas fa-star"></span>
+                 
+                                        @endif
+                 
+                                           @endfor
+                 
+                                      &emsp;
+                                        {{ $RatesProfile['twoStar_rates_count']}}
                                     </div>
                                     <div class="stars s6">
-                                        <span class="fas fa-star checked"></span>
-                                        <span class="fas fa-star "></span>
-                                        <span class="fas fa-star "></span>
-                                        <span class="fas fa-star"></span>
-                                        <span class="fas fa-star"></span>  &emsp;
-                                        12.5665
+                                        @for ($i = 0; $i < 5; $i++)
+
+                                        @if ($i < $RatesProfile['oneStar_rates_avg'])
+                 
+                                         <span class="fas fa-star checked"></span>
+                 
+                                         @else
+                 
+                                         <span class="fas fa-star"></span>
+                 
+                                        @endif
+                 
+                                           @endfor
+                 
+                                      &emsp;
+                                        {{ $RatesProfile['oneStar_rates_count']}}
                                     </div>
 <br>
 <br>
                                     <div class="total-rates">
-                                  Average Rate Is :      3.4  <span class="fas fa-star "style="color: var(--thirdColor);"></span>
+                                        @if (Config::get('app.locale') == 'ar')
+                                            
+                                        متوسط التقييمات : {{ $RatesProfile['totalStarsRates_avg']}} <span class="fas fa-star "style="color: var(--thirdColor);"></span>
+
+                                        @else
+                                              Average Rate  :      {{ $RatesProfile['totalStarsRates_avg']}}  <span class="fas fa-star "style="color: var(--thirdColor);"></span>
+
+                                        @endif
                                     </div>
 
 
@@ -184,8 +257,8 @@
 
 
                   
-                    <div class="moreDetails" style="padding: 50px;">
-                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+                    <div class="moreDetails" style="text-align: center;padding: 10px">
+{{$profilesOffersSubscribers->profiles->education_bio}}
                     </div>
                                         
 
@@ -200,21 +273,35 @@
 
                 <div class="specialization">
                     <section>
-                        <h1 class="s5" style="font-family: myFontsBold;"> <i class="fas fa-school" style="color: white;"></i> Educational Stages</h1>
+                        <h1 class="s5" style="font-family: myFontsBold;"> <i class="fas fa-school" style="color: white;"></i>  {{Config::get('app.locale') == 'ar' ? 'المراحل التعليمية' : 'Educational Stages'}}</h1>
                     
                         <ol>
-                            <li>Primary</li>
-                            <li>Secondry</li>
-                            <li>collage</li>
+                            @foreach ($profilesOffersSubscribers->profiles->profileEducationStages as $profileEducationStage)
+                           
+                            <li>                  
+                                 {{Config::get('app.locale') == 'ar' ?  $profileEducationStage->educationsStages->title_ar  : $profileEducationStage->educationsStages->title_en}}
+                            </li>
+
+                            @endforeach
                         </ol>
                     </section>
                     <section>
-                        <h1 class="s5" style="font-family: myFontsBold;"> <i class="fas fa-user-graduate" style="color: white;"></i> Specialized materials</h1>
+                        <h1 class="s5" style="font-family: myFontsBold;"> <i class="fas fa-user-graduate" style="color: white;"></i>  {{Config::get('app.locale') == 'ar' ? 'المواد العلمية' : 'Specialized materials'}}</h1>
                     
                         <ol>
-                            <li>Arabic </li>
-                            <li>Frensh</li>
-                            <li>English</li>
+
+                            @foreach ($profilesOffersSubscribers->profiles->profileScientificArticles as $scientificArticle)
+
+                            <li>   
+                                  {{Config::get('app.locale') == 'ar' ? $scientificArticle->scientificArticles->title_ar  :  $scientificArticle->scientificArticles->title_en}} [{{Config::get('app.locale') == 'ar' ? $scientificArticle->scientificArticles->educationsStages->title_ar  :  $scientificArticle->scientificArticles->educationsStages->title_en}}]
+                            </li>
+
+                            
+
+                            @endforeach
+
+
+
                         </ol>
                     </section>
                                         
@@ -226,6 +313,25 @@
 
 
             </div>
+
+
+
+            <div class="tab-pane fade" id="nav-location" role="tabpanel" aria-labelledby="nav-location-tab">
+
+                <div class="wrapContent" id="map" style="width: 100% ; height:200px;margin:5px">
+
+                    
+
+                </div>
+    
+    
+    
+    
+        </div>
+
+
+
+
           </div>
     
     </div>
@@ -244,49 +350,32 @@
 
     <div class="detailBox ">
         <div class="titleBox">
-          <label class="s4">Comments</label>
+          <label class="s4"> {{Config::get('app.locale') == 'ar' ? 'التعليقات' : 'Comments' }}</label>
         </div>
         <div class="commentBox">
             
-            <p class="taskDescription s5">Rate Profile :-</p>
-            <div class="stars s5">
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star "></span>
-                <span class="fas fa-star "></span>
-                <span class="fas fa-star"></span>
-                <span class="fas fa-star"></span>  &emsp;
-            
-            </div>
-        </div>
+                <div class="rating" data-rate-value='5' style="font-size: 30px" ></div>
+                    </div>
         <div class="actionBox">
             <ul class="commentList">
-                <li>
-                    <div class="commenterImage">
-                      <img src="http://lorempixel.com/50/50/people/6" />
-                    </div>
-                    <div class="commentText">
-                        <p class="">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
+
+@foreach ($profilesOffersSubscribers->profiles->commentsProfiles as $comment)
     
-                    </div>
-                </li>
-                <li>
-                    <div class="commenterImage">
-                      <img src="http://lorempixel.com/50/50/people/7" />
-                    </div>
-                    <div class="commentText">
-                        <p class="">Hello this is a test comment and this comment is particularly very long and it goes on and on and on.</p> <span class="date sub-text">on March 5th, 2014</span>
-    
-                    </div>
-                </li>
-                <li>
-                    <div class="commenterImage">
-                      <img src="http://lorempixel.com/50/50/people/9" />
-                    </div>
-                    <div class="commentText">
-                        <p class="">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
-    
-                    </div>
-                </li>
+<li>
+    <div class="commenterImage">
+      <img src=" {{asset('storage/users_images/'.$comment->user->image) }}" />
+    </div>
+    <div class="commentText">
+        <p class="">{{$comment->comment}}</p> <span class="date sub-text">{{ Carbon\Carbon::parse($comment->created_at)->diffForHumans()}}</span>
+
+    </div>
+</li>
+
+
+
+@endforeach
+
+
             </ul>
             <form class="form-inline" role="form">
                 <div class="form-group">
@@ -319,44 +408,8 @@
 
 <!-- Start Footer Section --------------------------------------->
 
-<div class="sectionFooter">
+@include('website.custome_widgets.footer')
 
-    <div class="container-fluid wrapContent">
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <div class="title s5">Payments Methods</div>
-                <ul>
-                    <li><img src="../assets/icons/master-card-icon-13.jpg"/></li>
-                    <li><img src="../assets/icons/master-card-icon-13.jpg"/></li>
-                    <li><img src="../assets/icons/master-card-icon-13.jpg"/></li>
-                    <li><img src="../assets/icons/master-card-icon-13.jpg"/></li>
-                </ul>
-                <br>
-                <br>
-                <div class="title">Socials</div>
-                <ul>
-                    <li><img src="../assets/icons/fc0061da43b239899945b1e886faa80a.jpg"/></li>
-                    <li><img src="../assets/icons/fc0061da43b239899945b1e886faa80a.jpg"/></li>
-                    <li><img src="../assets/icons/fc0061da43b239899945b1e886faa80a.jpg"/></li>
-                    <li><img src="../assets/icons/fc0061da43b239899945b1e886faa80a.jpg"/></li>
-                </ul>
-            </div>
-            <div class="col-12 col-md-6">
-                <div class="links">
-<ul>
-    <li><a href="#">Support Us</a></li>
-    <li><a href="#">Contact Us</a></li>
-    <li><a href="#">About Us</a></li>
-    <li><a href="#">Terms And Conditions</a></li>
-</ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-</div>
 
 <!-- End Footer Section --------------------------------------->
 
@@ -393,20 +446,54 @@
 
 </div>
 
+<div class="myToast" style="position: fixed;bottom:20px;right:20px">
 
+    <div class="toast" id='myToastEl' role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <strong class="me-auto">{{Config::get('app.locale') == 'ar' ? 'تم بنجاح': 'Success'}}</strong>
+          <small>1 s</small>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            {{Config::get('app.locale') == 'ar' ? 'تم ارسال التقييم الخاص بك بنجاح': 'Your rate has been sent successfully'}}
+         
+        </div>
+      </div>
+
+      
+</div>
 
 
     <!-- packages js -->
     <script src="{{asset('website_assets/packages/bootstrap-5.0.1-dist/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{asset('website_assets/packages/jquery/jquery.js') }}"></script>
     <script src="{{asset('website_assets/packages/OwlCarousel2-2.3.4/dist/owl.carousel.min.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhwUPb_bGJzGj0Wnj89dcnU5NZQhGx9jY&callback=initMap&libraries=&v=weekly"
+    async
+  ></script>
 
+  <script src="{{asset('website_assets/packages/auxiliary-rater-80dd707/rater.min.js') }}"></script>
 
 
     <!-- my js -->
+    <script>
+        
+        var domain =   "{!! url('/')  !!}";
+        var user_id = {!! Auth::id() != null ? Auth::id() : 1000000000000 !!};
+
+        var profiles = {!! $profilesOffersSubscribers->profiles !!};
+
+        console.log(profiles);
+
+
+        </script>
+
+
     <script src="{{asset('website_assets/js/GLOBAL_Configs.js') }}"></script>
     <script src="{{asset('website_assets/js/GLOBAL_ELEMENTS.js') }}"></script>
     <script src="{{asset('website_assets/js/profile_Screen.js') }}"></script>
+
+
 
 
   </body>

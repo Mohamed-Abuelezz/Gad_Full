@@ -71,7 +71,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(ProfileRates::class);
     }
 
+    public function profileViews()
+    {
+        return $this->hasMany(ProfileViews::class);
+    }
 
-
-
+    
 }
