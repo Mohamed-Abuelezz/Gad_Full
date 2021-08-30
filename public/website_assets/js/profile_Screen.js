@@ -1,3 +1,8 @@
+var locale = document.getElementsByTagName("html")[0].getAttribute("lang");
+
+
+
+
 $('.float').click(function() {
     $(this).toggleClass('open');
   });
@@ -106,19 +111,96 @@ var toastList = toastElList.map(function (toastEl) {
   })
 })
 
-var myToastEl = document.getElementById('myToastEl')
-var myToast = bootstrap.Toast.getInstance(myToastEl) // Returns a Bootstrap toast instance
+var myToastEl_success = document.getElementById('myToastEl_success')
+var myToast_success = bootstrap.Toast.getInstance(myToastEl_success) // Returns a Bootstrap toast instance
 
-$(".rating").on("updateSuccess", function(ev, data){
+var myToastEl_error = document.getElementById('myToastEl_error')
+var myToast_error = bootstrap.Toast.getInstance(myToastEl_error) // Returns a Bootstrap toast instance
+
+
+$(" .rating").on("updateSuccess", function(ev, data){
   console.log("This is a custom success event");
   console.log(data);
-  myToast.show()
+  if(locale == 'ar'){
+    $('.myToast_success .toast-body').text("تم ارسال تقييمك بنجاح");
+
+  }else{
+    $('.myToast_success .toast-body').text("Your rate has been sent successfully");
+
+  }
+  myToast_success.show()
 
 });
 
 $(".rating").on("updateError", function(ev, jxhr, msg, err){
   console.log("This is a custom error event");
-  console.log(jxhr)
+  console.log(jxhr);
+  myToast_error.show()
+
 });
 
+
+document.getElementById("shareProfile").addEventListener("click", function() {
+  copyToClipboard();
+  if(locale == 'ar'){
+    $('.myToast_success .toast-body').text("تم نسخ الرابط الخاص بالصفحة الشخصية يمكنك الان مشاركته");
+
+  }else{
+    $('.myToast_success .toast-body').text("The link to the personal page has been copied. You can now share it");
+
+  }
+
+  myToast_success.show()
+
+});
+
+
+function copyToClipboard() {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val(profile_url).select();
+  document.execCommand("copy");
+  $temp.remove();
+}
+
+
+
+document.getElementById("favouriteProfile").addEventListener("click", function() {
+
+
+  $.ajax({ 
+    type: 'POST', 
+    url: domain+'/profile/addFavourite',
+    data: { 
+  '_token':$('meta[name="csrf-token"]').attr('content'),
+  'user_id':  user_id,
+  'profile_id': profiles['id'],
+    }, 
+   // dataType: 'json',
+    success: function (data) { 
+      console.log(data);
+     
+      if(locale == 'ar'){
+
+        $('.myToast_success .toast-body').text(". تم اضافة الصفحة  للمفضله ويمكنك الرجوع لها في اي وقت");
+    
+      }else{
+        $('.myToast_success .toast-body').text("The page has been added to your favourites, and you can return to it at any time .");
+    
+      }
+
+      myToast_success.show()
+
+    
+    }
+});
+
+
+});
+
+document.getElementById("whatsupProfile").addEventListener("click", function() {
+  
+  window.open('https://api.whatsapp.com/send?text=Hello Mr.'+profiles['display_name']+'&phone='+profiles['mobile_number'], '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
+
+});
 

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ config('app.locale') }}">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -28,10 +28,15 @@
 
 <div class="page">
 
-    <div class="alert alert-danger  alert-dismissible fade show" role="alert">
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
+@if (Auth::id() == $profilesOffersSubscribers->profiles->user->id)
+<div class="alert alert-info" role="alert">
+    <strong>{{Config::get('app.locale') == 'ar' ?   ' : يتبقي علي نهاية الاشتراك'   :  "It remains until the end of the subscription : " }}</strong> <p id="demo"></p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+  </div>
+@endif
+
+
       
 <!-- Start NavBar Section --------------------------------------->
 
@@ -142,7 +147,7 @@
 
                                         @for ($i = 0; $i < 5; $i++)
 
-                                        @if ($i < $RatesProfile['fiveStar_rates_avg'])
+                                        @if ($i < 5)
                  
                                          <span class="fas fa-star checked"></span>
                  
@@ -161,7 +166,7 @@
                                     <div class="stars s6">
                                         @for ($i = 0; $i < 5; $i++)
 
-                                        @if ($i < $RatesProfile['fourStar_rates_avg'])
+                                        @if ( $i < 4 )
                  
                                          <span class="fas fa-star checked"></span>
                  
@@ -179,7 +184,7 @@
                                     <div class="stars s6">
                                         @for ($i = 0; $i < 5; $i++)
 
-                                        @if ($i < $RatesProfile['threeStar_rates_avg'])
+                                        @if ( $i < 3)
                  
                                          <span class="fas fa-star checked"></span>
                  
@@ -197,7 +202,7 @@
                                     <div class="stars s6">
                                         @for ($i = 0; $i < 5; $i++)
 
-                                        @if ($i < $RatesProfile['twoStar_rates_avg'])
+                                        @if ( $i < 2)
                  
                                          <span class="fas fa-star checked"></span>
                  
@@ -215,7 +220,7 @@
                                     <div class="stars s6">
                                         @for ($i = 0; $i < 5; $i++)
 
-                                        @if ($i < $RatesProfile['oneStar_rates_avg'])
+                                        @if ( $i < 1)
                  
                                          <span class="fas fa-star checked"></span>
                  
@@ -359,14 +364,15 @@
         <div class="actionBox">
             <ul class="commentList">
 
-@foreach ($profilesOffersSubscribers->profiles->commentsProfiles as $comment)
+@foreach ($profilesOffersSubscribers->profiles->commentsProfiles->reverse() as $comment)
     
 <li>
     <div class="commenterImage">
       <img src=" {{asset('storage/users_images/'.$comment->user->image) }}" />
     </div>
     <div class="commentText">
-        <p class="">{{$comment->comment}}</p> <span class="date sub-text">{{ Carbon\Carbon::parse($comment->created_at)->diffForHumans()}}</span>
+        <p style="color: var(--secondryColor);font-weight:bold">{{$comment->user->name}}</p>
+        <p class="">{{$comment->comment}}</p> <span class="date sub-text">{{ Carbon\Carbon::parse($comment->created_at)->diffForHumans()}}</span> 
 
     </div>
 </li>
@@ -377,12 +383,16 @@
 
 
             </ul>
-            <form class="form-inline" role="form">
+            <form class="form-inline" role="form" action="{{URL::to('/profile/addComment')}}" method="post">
+            @csrf
+            <input class="form-control" type="hidden" placeholder="Your comments" name='user_id' value="{{ Auth::id() }}" style="width: 0"/>
+            <input class="form-control" type="hidden" placeholder="Your comments" name='profile_id' style="width: 0" value="{{$profilesOffersSubscribers->profiles->id}}"/>
+
                 <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Your comments" />
+                    <input class="form-control" type="text" placeholder="Your comments" name='comment'/>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-default s5">Add Comment</button>
+                    <button class="btn btn-default s5"  type="submit">Add Comment</button>
                 </div>
             </form>
         </div>
@@ -425,11 +435,13 @@
     <a class="floating-btn" onclick="document.getElementById('circularMenu1').classList.toggle('active');">
       <i class="fa fa-bars"></i>
     </a>
-  
+
+    <input type="hidden" id="copyTarget" value="{{Request::url()}}">
+
     <menu class="items-wrapper">
-      <a href="#" class="menu-item fas fa-share-alt"></a>
-      <a href="#" class="menu-item fas fa-heart"></a>
-      <a href="#" class="menu-item fab fa-whatsapp"></a>
+      <a href="#" class="menu-item fas fa-share-alt" id="shareProfile" ></a>
+      <a href="#" class="menu-item fas fa-heart" id="favouriteProfile"></a>
+      <a href="#" class="menu-item fab fa-whatsapp" id="whatsupProfile"></a>
       <a href="#" class="menu-item fas fa-envelope-open-text"></a>
 
     </menu>
@@ -446,16 +458,49 @@
 
 </div>
 
-<div class="myToast" style="position: fixed;bottom:20px;right:20px">
+<div class="myToast_success" style="position: fixed;bottom:20px;right:20px">
 
-    <div class="toast" id='myToastEl' role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast" id='myToastEl_success' role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
           <strong class="me-auto">{{Config::get('app.locale') == 'ar' ? 'تم بنجاح': 'Success'}}</strong>
           <small>1 s</small>
           <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
-        <div class="toast-body">
+        <div class="toast-body" style="color: green" id="toast_body">
             {{Config::get('app.locale') == 'ar' ? 'تم ارسال التقييم الخاص بك بنجاح': 'Your rate has been sent successfully'}}
+         
+        </div>
+      </div>
+
+      
+</div>
+<div class="myToast_error" style="position: fixed;bottom:20px;right:20px">
+
+    <div class="toast" id='myToastEl_error' role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <strong class="me-auto">{{Config::get('app.locale') == 'ar' ? 'تم بنجاح': 'Success'}}</strong>
+          <small>1 s</small>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" style="color: red">
+            {{Config::get('app.locale') == 'ar' ? 'يرجي تسجيل الدخول اولا !': 'You have to login first !'}}
+         
+        </div>
+      </div>
+
+      
+</div>
+
+<div class="myToast_time" style="position: fixed;bottom:20px;right:20px">
+
+    <div class="toast" id='myToastEl_error' role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <strong class="me-auto">{{Config::get('app.locale') == 'ar' ? 'تم بنجاح': 'Success'}}</strong>
+          <small>1 s</small>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" style="color: red">
+            {{Config::get('app.locale') == 'ar' ? 'يرجي تسجيل الدخول اولا !': 'You have to login first !'}}
          
         </div>
       </div>
@@ -477,16 +522,57 @@
 
     <!-- my js -->
     <script>
-        
+        var profile_url = "{!! Request::url() !!}";
         var domain =   "{!! url('/')  !!}";
         var user_id = {!! Auth::id() != null ? Auth::id() : 1000000000000 !!};
 
         var profiles = {!! $profilesOffersSubscribers->profiles !!};
 
+        console.log(user_id);
+
         console.log(profiles);
 
 
         </script>
+
+
+
+
+<script>
+    // Set the date we're counting down to
+    var countDownDate = new Date("{!! $profilesOffersSubscribers->finished_at !!}").getTime();
+    
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+    
+      // Get today's date and time
+      var now = new Date().getTime();
+        
+      // Find the distance between now and the count down date
+      var distance = countDownDate - now;
+        
+      // Time calculations for days, hours, minutes and seconds
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+      // Output the result in an element with id="demo"
+      document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+      + minutes + "m " + seconds + "s ";
+        
+      // If the count down is over, write some text 
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("demo").innerHTML = "EXPIRED : Please renew your subscription until it becomes available to everyone again";
+      }
+    }, 1000);
+    </script>
+    
+
+
+
+
 
 
     <script src="{{asset('website_assets/js/GLOBAL_Configs.js') }}"></script>

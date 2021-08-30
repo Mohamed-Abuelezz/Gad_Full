@@ -19,6 +19,7 @@ use App\Models\ConfigsSlider;
 use App\Models\FavouritesProfile;
 use App\Models\ProfileViews;
 use App\Models\ProfileRates;
+use App\Models\CommentsProfiles;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
@@ -71,15 +72,9 @@ $oneStar_rates =  ProfileRates::where('profile_id', $profile_id)->where('rate', 
 
 $fiveStar_rates_count= $fiveStar_rates->count();
 $fourStar_rates_count= $fourStar_rates->count();
-$threeStar_rates_count= $fiveStar_rates->count();
-$twoStar_rates_count= $threeStar_rates->count();
+$threeStar_rates_count= $threeStar_rates->count();
+$twoStar_rates_count= $twoStar_rates->count();
 $oneStar_rates_count= $oneStar_rates->count();
-
-$fiveStar_rates_avg= $fiveStar_rates->avg('rate');
-$fourStar_rates_avg= $fourStar_rates->avg('rate');
-$threeStar_rates_avg= $fiveStar_rates->avg('rate');
-$twoStar_rates_avg= $threeStar_rates->avg('rate');
-$oneStar_rates_avg= $oneStar_rates->avg('rate');
 
 
 $RatesProfile = array(
@@ -92,11 +87,6 @@ $RatesProfile = array(
     'twoStar_rates_count'  => $twoStar_rates_count,
     'oneStar_rates_count'  => $oneStar_rates_count,
 
-    'fiveStar_rates_avg' => $fiveStar_rates_avg,
-    'fourStar_rates_avg'  => $fourStar_rates_avg,
-    'threeStar_rates_avg'  => $threeStar_rates_avg,
-    'twoStar_rates_avg'  => $twoStar_rates_avg,
-    'oneStar_rates_avg'  => $oneStar_rates_avg,
 
 );
 
@@ -141,13 +131,31 @@ if($rate != null){
 
 
   
-public function addComment($profile_id,Request $request) {
+public function addComment(Request $request) {
+    $profileComments =  new CommentsProfiles;
+    $profileComments->user_id =  $request->user_id;
+    $profileComments->profile_id =  $request->profile_id;
+    $profileComments->comment =  $request->comment;
+    $profileComments->save();
 
-
+return redirect()->back();
 }
 
 
 
+public function addFavourite(Request $request) {
 
+    $FavouritesProfile_check =  FavouritesProfile::where('user_id', $request->user_id)->where('profile_id', $request->profile_id)->first();
+
+if( $FavouritesProfile_check == null){
+    $profileFavourite =  new FavouritesProfile;
+    $profileFavourite->user_id =  $request->user_id;
+    $profileFavourite->profile_id =  $request->profile_id;
+
+    $profileFavourite->save();
+}
+
+return true;
+}
 
 }

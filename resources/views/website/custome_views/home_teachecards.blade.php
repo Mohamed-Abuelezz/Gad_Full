@@ -87,7 +87,7 @@
                                       </li>
                                     </ul>
                                     <div class="tab-content" id="myTabContent" style="padding: 15px;text-align: center">
-                                      <div class="tab-pane fade show active" id="home_{{$loop->index}}" role="tabpanel" aria-labelledby="home-tab_{{$loop->index}}">{{substr($profilesOffersSubscriber->profiles->person_bio, 0, 175) . '...'}}</div>
+                                      <div class="tab-pane fade show active" id="home_{{$loop->index}}" role="tabpanel" aria-labelledby="home-tab_{{$loop->index}}" style="padding: 20px;  word-wrap: break-word;text-align:center">{{substr($profilesOffersSubscriber->profiles->person_bio, 0, 175) . '...'}}</div>
                                       <div class="tab-pane fade" id="profile_{{$loop->index}}" role="tabpanel" aria-labelledby="profile-tab_{{$loop->index}}">
                                     
                                           <div class="container">
@@ -157,7 +157,7 @@
                               </div>
 
                   <div class="more">
-                      <a href="./profile_Screen.html" class="btn more-btn" >{{Config::get('app.locale') == 'ar' ?  'المزيد' :"More"}}</a>
+                    <a href="{{URL::to('profile/'.$profilesOffersSubscriber->profiles->id)}}" class="btn more-btn" >{{Config::get('app.locale') == 'ar' ?  'المزيد' :"More"}}</a>
                   </div>
                                   </div>
 

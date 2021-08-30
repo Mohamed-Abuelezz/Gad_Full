@@ -129,7 +129,7 @@ Route::get('/profile/{profile_id}',[ProfileController::class, 'showProfile'] )->
 
 
 
-Route::group(['middleware' => 'verified'], function () {
+Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('/home',[HomeController::class, 'showHome'] )->name('home');
     Route::get('/home/dropFilters',[HomeController::class, 'getDropsSearch'] );
@@ -138,6 +138,7 @@ Route::group(['middleware' => 'verified'], function () {
 
     Route::post('/profile/addRate',[ProfileController::class, 'addRate'] );
     Route::post('/profile/addComment',[ProfileController::class, 'addComment'] );
+    Route::post('/profile/addFavourite',[ProfileController::class, 'addFavourite'] );
 
 });
 
