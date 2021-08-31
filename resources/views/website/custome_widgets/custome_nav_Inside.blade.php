@@ -1,3 +1,16 @@
+@php
+  $isHaveProfile = false;
+
+$profile =  \App\models\Profiles::where('user_id', '=' ,Auth::id())->get()->first();
+
+     if ($profile != null) {
+         $isHaveProfile = true;
+     }
+
+@endphp
+
+
+
 <div class="sectionNavBar wrapContent" >
 
     <div class="container-fluid">
@@ -20,12 +33,14 @@
     
                                 <ul>
                                     @if ($isHaveProfile == true)
-                                    <li><a href="#" >{{ __('website_screens/homescreen.show_profile') }}</a></li>
-                                    <li><a href="./editProfile_screen.html">{{ __('website_screens/homescreen.edit_profile') }}</a></li>
+                                    <li><a href="{{URL::to('profile/'.$profile->id)}}" >{{ __('website_screens/homescreen.show_profile') }}</a></li>
+                                    <li><a href="./editProfile_screen.html">{{ 
+                                    __('website_screens/homescreen.edit_profile')
+                                     }}</a></li>
                                 
                                     @else
 
-                                    <li><a href="#" >{{ __('website_screens/homescreen.create_profile') }}</a></li>
+                                    <li><a href="{{URL::to('addProfile')}}" >{{ __('website_screens/homescreen.create_profile') }}</a></li>
 
                                     @endif
     
@@ -45,7 +60,7 @@
                         
                         <li>|</li>
                         
-                        <li><a href="#" class="s6">{{ __('website_screens/homescreen.home') }}</a></li>
+                        <li><a href="{{URL::to('home')}}" class="s6">{{ __('website_screens/homescreen.home') }}</a></li>
                         <li><a href="" class="s6">{{ __('website_screens/homescreen.contact_us') }} </a></li>
                         <li><a href="#" class="s6">{{ __('website_screens/homescreen.terms_and_conditions') }}</a></li>
                          <li><a href="{{ Config::get('app.locale') == 'ar' ?  URL::to('language/en') :  URL::to('language/ar')}}" class="s6">{{Config::get('app.locale') == 'ar' ?   'English'   :  "عربي" }} <i class="fas fa-globe-americas"></i> </a></li>
@@ -86,14 +101,14 @@
       <div class="menu" > <!--Mobile Menus -->
             <ul class="menu-nav">
                 <ul>
-                    <li><a href="#" class="s4">{{ __('website_screens/homescreen.home') }} </a></li>
+                    <li><a href="{{URL::to('home')}}" class="s4">{{ __('website_screens/homescreen.home') }} </a></li>
                     <li><a href="#" class="s4">{{ __('website_screens/homescreen.contact_us') }}</a></li>
                     <li><a href="#" class="s4">{{ __('website_screens/homescreen.terms_and_conditions') }}</a></li>
                     <hr style="border-top: 3px dotted white;"/>
 
                     @if ($isHaveProfile == true)
-                    <li><a href="" class="s4">{{ __('website_screens/homescreen.show_profile') }}</a></li>
-                    <li><a href="./profile_Screen.html" class="s4">{{ __('website_screens/homescreen.edit_profile') }}</a></li>
+                    <li><a href="{{URL::to('profile/'.$profile->id)}}" class="s4">{{ __('website_screens/homescreen.show_profile') }}</a></li>
+                    <li><a href="" class="s4">{{ __('website_screens/homescreen.edit_profile') }}</a></li>
                     @else
 
                     <li><a href="" class="s4">{{ __('website_screens/homescreen.create_profile') }}</a></li>

@@ -392,7 +392,7 @@
                     <input class="form-control" type="text" placeholder="Your comments" name='comment'/>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-default s5"  type="submit">Add Comment</button>
+                    <button class="btn btn-default s5"  type="submit">{{Config::get('app.locale') == 'en' ?  ' Comment'  :  ' تعليق'}}</button>
                 </div>
             </form>
         </div>

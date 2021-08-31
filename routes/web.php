@@ -6,6 +6,7 @@ use App\Http\Controllers\website\IndexController;
 use App\Http\Controllers\website\HomeController;
 use App\Http\Controllers\website\AuthController;
 use App\Http\Controllers\website\ProfileController;
+use App\Http\Controllers\website\AddProfileController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
@@ -140,5 +141,14 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/profile/addComment',[ProfileController::class, 'addComment'] );
     Route::post('/profile/addFavourite',[ProfileController::class, 'addFavourite'] );
 
+
+    
+
+
+    Route::get('/addProfile',[AddProfileController::class, 'showAddProfile'] )->name('addProfile');
+    Route::post('/addProfile',[AddProfileController::class, 'addProfile'] );
+    Route::get('/getArticalsOfStage',[AddProfileController::class, 'getArticalsOfStage']);
+
+    
 });
 

@@ -5,10 +5,12 @@ $("#profileImage").click(function(e) {
 });
 
 function fasterPreview( uploader ) {
+
     if ( uploader.files && uploader.files[0] ){
           $('#profileImage').attr('src', 
              window.URL.createObjectURL(uploader.files[0]) );
     }
+
 }
 
 $("#imageUpload").change(function(){
@@ -33,6 +35,13 @@ $("#imageUpload").change(function(){
   
   
     google.maps.event.addListener(map, 'click', function(event) {
+
+            $("#input_lat").val(event.latLng.lat());
+            $("#input_lng").val(event.latLng.lng());
+
+
+
+
         removeMarkers();
 
         placeMarker(event.latLng);
@@ -64,6 +73,49 @@ gmarkers.push(marker);
     
 
   }
+
+//////////////////////////////////////////////////////////////
+
+$(".educationsStage_checkbox").click(function(e) {
+
+ 
+
+  if($(this).is(":checked")){
+
+  $.ajax({
+    url: domain+"/getArticalsOfStage",
+    type: "GET",
+    data: {"stage_id" :  $(this).attr('value')} ,
+    cache: false,
+    success: function (response) {
+
+
+    console.log(response);
+
+
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+
+       console.log(textStatus, errorThrown,jqXHR,);
+
+    }
+});
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+});
+
+
 
  
  
