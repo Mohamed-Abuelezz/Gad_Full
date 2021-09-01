@@ -86,7 +86,11 @@ margin: auto;
 
 }
 
-
+.specializedMaterials_checksBoxs{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 
 .educationalStages_checksBoxs .lables, .specializedMaterials_checksBoxs .lables{
     display: flex;

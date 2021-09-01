@@ -23,6 +23,7 @@ use App\Models\CommentsProfiles;
 use Illuminate\Support\Facades\Storage;
 use App\Models\SubscribersType;
 use App\Models\EducationsStages;
+use App\Models\ScientificArticles;
 
 class AddProfileController extends Controller
 {
@@ -86,9 +87,10 @@ public function addProfile(Request $request) {
     
 
     public function getArticalsOfStage(Request $request) {
-//dd('ok');
 
-     return 'ok';
+        $educationsStages = ScientificArticles::where('education_stage_id',$request->stage_id)->get();
+
+        return $educationsStages;
 
 
     }

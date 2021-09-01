@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ config('app.locale') }}">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -213,13 +213,13 @@
 <li>
     <div class="educationalStages_checksBoxs">
 
-        <p > Educational Stages</p>
+        <p >Educational Stages</p>
 <div class="lables">
 
 @foreach ($educationsStages as $educationsStage)
 
 <div class="form-check myCheckBox">
-  <input class="form-check-input educationsStage_checkbox" type="checkbox" name="educationsStage[]" value="{{$educationsStage->id}}" >
+  <input class="form-check-input educationsStage_checkbox" type="checkbox" data-title="{{ Config::get('app.locale') == 'ar' ?  $educationsStage->title_ar : $educationsStage->title_en }}" name="educationsStage[]" value="{{$educationsStage->id}}" >
   <label class="form-check-label" for="educationsStage">
     {{ Config::get('app.locale') == 'ar' ?  $educationsStage->title_ar : $educationsStage->title_en }}
   </label>
@@ -245,136 +245,17 @@
 
 
 <li>
-    <div class="specializedMaterials_checksBoxs checkboxs has-validation" >
+    <div class="checkboxs has-validation " id="parentArticals"  >
         <p> Specialized materials </p>
 
-       
-        <div class="lables is-invalid" aria-describedby=" validationServerUsernameFeedback" required>
-          <div class="form-check myCheckBox">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
-  
-          <div class="form-check myCheckBox">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
-  
-          <div class="form-check myCheckBox">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
-          <div class="form-check myCheckBox">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
-  
-          <div class="form-check myCheckBox">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
-  
-          <div class="form-check myCheckBox">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
-          <div class="form-check myCheckBox">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
-  
-          <div class="form-check myCheckBox">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
-  
-          <div class="form-check myCheckBox">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
-          <div class="form-check myCheckBox">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
-  
-          <div class="form-check myCheckBox">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
-  
-          <div class="form-check myCheckBox">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
-          <div class="form-check myCheckBox">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
-  
-          <div class="form-check myCheckBox">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
-  
-          <div class="form-check myCheckBox">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
+        <div class="specializedMaterials_checksBoxs artical_checkbox" id="scientificArticalDiv">
 
-          <div class="form-check myCheckBox">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
-  
-          <div class="form-check myCheckBox">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
-  
-          <div class="form-check myCheckBox">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Default checkbox
-            </label>
-          </div>
+
+
         </div>
+       
         
 
-    
 
     </div>
     
