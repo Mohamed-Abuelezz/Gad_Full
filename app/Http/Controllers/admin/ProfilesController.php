@@ -49,6 +49,7 @@ class ProfilesController extends Controller
 
      //  Add Profile 
  public function addProfile(Request $request) {
+//dd($request->all());
 
     $validated = $request->validate([
         'user_id' => 'required',
@@ -88,7 +89,7 @@ if(!$checker){
 
     $profiles->cover_image = $name;
 
-    $profiles->subscriber_type_id = $request->subscriber_type_id[0];
+    $profiles->subscriber_type_id = $request->subscriberType[0];
     $profiles->address = $request->profile_address;
     $profiles->lat = $request->profile_lat;
     $profiles->lng = $request->profile_lng;

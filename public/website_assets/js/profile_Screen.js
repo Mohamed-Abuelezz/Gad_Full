@@ -99,6 +99,9 @@ var options = {
   },
 
 }
+
+console.log(profiles['id']);
+
 if(user_id != 1000000000000){
 $(".rating").rate(options);
 }
@@ -118,7 +121,7 @@ var myToastEl_error = document.getElementById('myToastEl_error')
 var myToast_error = bootstrap.Toast.getInstance(myToastEl_error) // Returns a Bootstrap toast instance
 
 
-$(" .rating").on("updateSuccess", function(ev, data){
+$(".rating").on("updateSuccess", function(ev, data){
   console.log("This is a custom success event");
   console.log(data);
   if(locale == 'ar'){
@@ -134,8 +137,8 @@ $(" .rating").on("updateSuccess", function(ev, data){
 
 $(".rating").on("updateError", function(ev, jxhr, msg, err){
   console.log("This is a custom error event");
-  console.log(jxhr);
-  myToast_error.show()
+  console.log(ev+jxhr+msg+err);
+  //myToast_error.show()
 
 });
 

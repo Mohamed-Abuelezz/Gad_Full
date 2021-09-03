@@ -29,11 +29,18 @@ class ProfileController extends Controller
 
 public function showProfile($profile_id,Request $request) {
 
+    ProfileViews::updateOrCreate(
+        ['user_id' => Auth::id()],
+        ['user_id' => Auth::id(), 'profile_id' => $profile_id]
+    );
 
 
 $profilesOffersSubscribers = 
  ProfilesOffersSubscribers::where('finished_at', '>=', Carbon::now())->where('profile_id', '=', $profile_id)
 ->first();
+
+
+
 
 //dd($profilesOffersSubscribers->profiles);
 if($profilesOffersSubscribers == null){
@@ -90,7 +97,7 @@ $RatesProfile = array(
 
 );
 
-// dd($RatesProfile);
+//dd($RatesProfile);
 
 
 
@@ -107,36 +114,46 @@ $RatesProfile = array(
 
 
 public function addRate(Request $request) {
+$rate =  ProfileRates::where('user_id', $request->user_id)->where('profile_id', $request->profile_id)->first();
 
-$rate =  ProfileRates::where('user_id', $request->user_id)->first();
-
-$profileRates =  ProfileRates::where('user_id', $request->user_id);
 
 if($rate != null){
+
+    $profileRates =  ProfileRates::where('user_id', $request->user_id)->where('profile_id', $request->profile_id);
 
     $profileRates->update(array('rate' => $request->value));
 
 
 }else{
+
+
     $profileRates =  new ProfileRates;
-    $profileRates->user_id =  $request->user_id;
+    $profileRates->user_id =  Auth::id();
     $profileRates->profile_id =  $request->profile_id;
     $profileRates->rate =  $request->value;
 
     $profileRates->save();
 
 }
+
     return $request->all();
+
 }
 
 
   
 public function addComment(Request $request) {
-    $profileComments =  new CommentsProfiles;
-    $profileComments->user_id =  $request->user_id;
-    $profileComments->profile_id =  $request->profile_id;
-    $profileComments->comment =  $request->comment;
-    $profileComments->save();
+
+    if($request->comment != null){
+
+        $profileComments =  new CommentsProfiles;
+        $profileComments->user_id =  $request->user_id;
+        $profileComments->profile_id =  $request->profile_id;
+        $profileComments->comment =  $request->comment;
+        $profileComments->save();
+        
+    }
+   
 
 return redirect()->back();
 }

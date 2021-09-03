@@ -7,12 +7,15 @@ use App\Http\Controllers\website\HomeController;
 use App\Http\Controllers\website\AuthController;
 use App\Http\Controllers\website\ProfileController;
 use App\Http\Controllers\website\AddProfileController;
+use App\Http\Controllers\website\EditProfileController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\App;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -149,6 +152,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/addProfile',[AddProfileController::class, 'addProfile'] );
     Route::get('/getArticalsOfStage',[AddProfileController::class, 'getArticalsOfStage']);
 
+    Route::get('/editProfile',[EditProfileController::class, 'showEditProfile'] )->name('editProfile');
+    Route::post('/editProfile',[EditProfileController::class, 'editProfile'] );
     
 });
 

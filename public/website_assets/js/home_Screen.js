@@ -220,7 +220,7 @@ function initMap() {
   profiles.forEach(function(item) {
 // console.log(item['display_name']);
     listLocations.push(
-{lat: item['lat'],lng:item['lng'],name:item['display_name'],},
+{lat: item['lat'],lng:item['lng'],name:item['display_name'],id:item['id']},
 
     );
 
@@ -269,7 +269,7 @@ for($o = 0; $o < 5; $o++){
     <div class="stars">
        ${rates}
     </div>
-    <a class="btn" href="#">More</a>
+    <a class="btn" href="${domain+'/profile/'+listLocations[i]['id']}">More</a>
   </div>
 
   `;

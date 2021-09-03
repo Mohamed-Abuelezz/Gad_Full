@@ -108,8 +108,8 @@ console.log(response);
         var content = `
         <div class="lables is-invalid " aria-describedby="validationServerUsernameFeedback"  data-stageid="`+stage_id+`"  required>
           <div class="form-check myCheckBox">
-            <input class="form-check-input " name="articals[]" type="checkbox" data-isAll=${item['id'] == 1 ?  true : false } value="${item['id']}" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
+            <input class="form-check-input " name="articals[]" type="checkbox" data-isAll=${item['id'] == 1 ?  true : false } value="${item['id']}" id="scientificArtical_${item['id']}">
+            <label class="form-check-label" for="scientificArtical_${item['id']}">
             ${locale == 'ar' ?  item['title_ar'] :  item['title_en']} : [${stage_title} ]
             </label>
           </div>

@@ -34,7 +34,7 @@ $profile =  \App\models\Profiles::where('user_id', '=' ,Auth::id())->get()->firs
                                 <ul>
                                     @if ($isHaveProfile == true)
                                     <li><a href="{{URL::to('profile/'.$profile->id)}}" >{{ __('website_screens/homescreen.show_profile') }}</a></li>
-                                    <li><a href="./editProfile_screen.html">{{ 
+                                    <li><a href="{{URL::to('editProfile')}}">{{ 
                                     __('website_screens/homescreen.edit_profile')
                                      }}</a></li>
                                 
@@ -108,7 +108,7 @@ $profile =  \App\models\Profiles::where('user_id', '=' ,Auth::id())->get()->firs
 
                     @if ($isHaveProfile == true)
                     <li><a href="{{URL::to('profile/'.$profile->id)}}" class="s4">{{ __('website_screens/homescreen.show_profile') }}</a></li>
-                    <li><a href="" class="s4">{{ __('website_screens/homescreen.edit_profile') }}</a></li>
+                    <li><a href="{{URL::to('editProfile')}}" class="s4">{{ __('website_screens/homescreen.edit_profile') }}</a></li>
                     @else
 
                     <li><a href="" class="s4">{{ __('website_screens/homescreen.create_profile') }}</a></li>

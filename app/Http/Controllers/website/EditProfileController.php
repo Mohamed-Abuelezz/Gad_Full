@@ -17,6 +17,8 @@ use App\Models\ProfilesOffersSubscribers;
 use App\Models\Profiles;
 use App\Models\ConfigsSlider;
 use App\Models\FavouritesProfile;
+use App\Models\ProfileEducationStages;
+use App\Models\ProfileScientificArticles;
 use App\Models\ProfileViews;
 use App\Models\ProfileRates;
 use App\Models\CommentsProfiles;
@@ -24,33 +26,36 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\SubscribersType;
 use App\Models\EducationsStages;
 use App\Models\ScientificArticles;
-use App\Models\ProfileEducationStages;
-use App\Models\ProfileScientificArticles;
 
-class AddProfileController extends Controller
+class EditProfileController extends Controller
 {
     //
 
 
-public function showAddProfile(Request $request) {
+public function showEditProfile(Request $request) {
 
     $subscribersType = SubscribersType::all();
     $educationsStages = EducationsStages::where('country_id',Auth::user()->country_id)->get();
+    $profiles = Profiles::where('user_id',Auth::id())->first();
+    $ProfileEducationStages = ProfileEducationStages::where('profile_id',$profiles->id)->get();
+    $profileScientificArticles = ProfileScientificArticles::where('profile_id',$profiles->id)->get();
 
-//dd($educationsStages);
+//  dd($ProfileEducationStages);
 
-return view('website.screens.addProfile_Screen', [
+return view('website.screens.editProfile_Screen', [
 
     'subscribersType'=>$subscribersType,
     'educationsStages'=>$educationsStages,
-
+    'profiles'=>$profiles,
+    'ProfileEducationStages'=> $ProfileEducationStages,
+    'profileScientificArticles'=> $profileScientificArticles
 ]);
 }
 
 
 
-public function addProfile(Request $request) {
- // dd($request->all());
+public function editProfile(Request $request) {
+ //  dd($request->all());
 
 
     $validated = $request->validate([
@@ -69,12 +74,12 @@ public function addProfile(Request $request) {
 
     $imageName;
 
-    if ($request->hasFile('profile_photo') && $request->file('profile_photo')->getClientOriginalName()   != null) {
+    if ($request->hasFile('image') && $request->file('image')->getClientOriginalName()   != null) {
 
-        $imageName =Str::random(50).$request->file('profile_photo')->getClientOriginalName();
-        $guessExtension = $request->file('profile_photo')->guessExtension();
+        $imageName =Str::random(50).$request->file('image')->getClientOriginalName();
+        $guessExtension = $request->file('image')->guessExtension();
 
-        $path = $request->file('profile_photo')->storeAs('public/CoverProfiles',$imageName);
+        $path = $request->file('image')->storeAs('public/users_images',$imageName);
 
     
         }else{
@@ -84,30 +89,32 @@ public function addProfile(Request $request) {
         }
 
 
-        $profiles =new Profiles;
 
 
-        $profiles->user_id = Auth::id();
-        $profiles->display_name = $request->display_name;
+      //  $profiles =new Profiles;
+
+        Profiles::where('user_id', Auth::id())->update([
+            'display_name' => $request->display_name,
+            'person_bio' => $request->bio,
+            'education_bio' => $request->moreDetails,
+            'lng' => $request->profile_lng,
+            'lat' => $request->profile_lat,
+            'address' => $request->address,
+            'subscriber_type_id' => $request->subscriberType,
+            'cover_image' => $imageName,
+            'mobile_number' => $request->number,
+        
+        ]);
+
+
     
-        $profiles->cover_image = $imageName;
-    
-        $profiles->subscriber_type_id = $request->subscriberType;
-        $profiles->address = $request->address;
-        $profiles->lat = $request->profile_lat;
-        $profiles->lng = $request->profile_lng;
-        $profiles->mobile_number = $request->number;
-        $profiles->person_bio = $request->bio;
-        $profiles->education_bio = $request->moreDetails;
-    
-        $profiles->save();
-
-
         $profiles = Profiles::where('user_id',Auth::id())->first();
 
+        ProfileEducationStages::where('profile_id', $profiles->id)->delete();
+        ProfileScientificArticles::where('profile_id', $profiles->id)->delete();
 
         foreach($request->educationsStage as $item) {
-
+            
             $profileEducationStages = new ProfileEducationStages;
 
             $profileEducationStages->profile_id = $profiles->id;
@@ -131,7 +138,9 @@ public function addProfile(Request $request) {
 
 
 
-    return redirect()->route('profile', ['profile_id' => $profiles->id]);
+
+
+       return redirect()->route('profile', ['profile_id' => $profiles->id]);
     
     }
     
