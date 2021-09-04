@@ -8,6 +8,8 @@ use App\Http\Controllers\website\AuthController;
 use App\Http\Controllers\website\ProfileController;
 use App\Http\Controllers\website\AddProfileController;
 use App\Http\Controllers\website\EditProfileController;
+use App\Http\Controllers\website\OffersController;
+use App\Http\Controllers\website\OffersSubmitController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
@@ -155,5 +157,15 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/editProfile',[EditProfileController::class, 'showEditProfile'] )->name('editProfile');
     Route::post('/editProfile',[EditProfileController::class, 'editProfile'] );
     
+
+    Route::get('/offers',[OffersController::class, 'showOffers'] )->name('offers');
+
+    Route::get('/offersubmit/{offerId}',[OffersSubmitController::class, 'showOffersSubmit'] )->name('offersubmit');
+    Route::post('/offersubmit/{offerId}',[OffersSubmitController::class, 'offersSubmit'] );
+
+
+
+
+
 });
 

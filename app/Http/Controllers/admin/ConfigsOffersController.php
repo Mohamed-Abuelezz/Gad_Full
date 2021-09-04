@@ -46,6 +46,7 @@ class ConfigsOffersController extends Controller
 
 
     $validated = $request->validate([
+        'image'=> 'required',
         'price_ar' => 'required',
         'price_en' => 'required',
         'desc_ar' => 'required',
@@ -54,9 +55,28 @@ class ConfigsOffersController extends Controller
     ]);
 
 
+    $imageName;
+
+    if ($request->hasFile('image') && $request->file('image')->getClientOriginalName()   != null) {
+
+        $imageName =Str::random(50).$request->file('image')->getClientOriginalName();
+        $guessExtension = $request->file('image')->guessExtension();
+
+        $path = $request->file('image')->storeAs('public/offers',$imageName);
+
+    
+        }else{
+
+            $imageName = 'defaultImage.png';
+
+        }
+
+
 
     $configsOffers = new ConfigsOffers;
-
+    
+    $configsOffers->image = $imageName;
+    $configsOffers->price_ar = $request->price_ar;
     $configsOffers->price_ar = $request->price_ar;
     $configsOffers->price_en = $request->price_en;
     $configsOffers->desc_ar = $request->desc_ar;

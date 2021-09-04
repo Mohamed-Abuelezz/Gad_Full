@@ -6,6 +6,7 @@
 
 .sectionOurOffers{
     text-align: center;
+    margin: 20px;
 }
 .sectionOurOffers .item{
     background-color: var(--primaryColor);

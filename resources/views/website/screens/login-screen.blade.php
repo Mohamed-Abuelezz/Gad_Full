@@ -40,6 +40,7 @@
       <div class="tabs-content">
         <div id="signup-tab-content" class="active">
           <form class="signup-form" action="{{URL::to('/register')}}" method="post" enctype="multipart/form-data">
+      
             @csrf
             <div id="profile-container" style="position: relative">
               <image id="profileImage" src="{{asset('storage/users_images/defaultImage.png') }}" />
@@ -51,7 +52,9 @@
            <input id="imageUpload" type="file"  name="image" placeholder="Photo">
            @error('image')
            <div class="alert alert-danger">{{ $message }}</div>
-       @enderror
+           @enderror
+
+
             <input type="email" class="input" id="user_email" name="email_register" autocomplete="off" placeholder="{{Config::get('app.locale') == 'ar' ?  'البريد الاليكتروني'  :  'Email address'}}">
             @error('email_register')
             <div class="alert alert-danger">{{ $message }}</div>

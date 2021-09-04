@@ -68,7 +68,6 @@ public function addProfile(Request $request) {
 
 
     $imageName;
-
     if ($request->hasFile('profile_photo') && $request->file('profile_photo')->getClientOriginalName()   != null) {
 
         $imageName =Str::random(50).$request->file('profile_photo')->getClientOriginalName();

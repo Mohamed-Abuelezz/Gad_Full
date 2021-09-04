@@ -68,5 +68,9 @@ class Profiles extends Model
         return $this->hasMany(ProfileViews::class,'profile_id');
     }
 
+    public function offersSubmits()
+    {
+        return $this->hasMany(OffersSubmits::class);
+    }
 
 }

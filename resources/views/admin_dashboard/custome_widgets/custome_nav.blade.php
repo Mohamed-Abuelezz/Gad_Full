@@ -48,6 +48,21 @@
                     </nav>
                 </div>
                 
+
+
+
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSubscribesSubmits" aria-expanded="false" aria-controls="collapseSubscribesSubmits">
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    طلبات الاشتراك 
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseSubscribesSubmits" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="{{URL::to('admin/subscribeRequest')}}">عرض الطلبات</a>
+                    </nav>
+                </div>
+
+
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                     اعدادات الموقع 

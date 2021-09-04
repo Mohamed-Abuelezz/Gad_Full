@@ -29,15 +29,16 @@ class ProfileController extends Controller
 
 public function showProfile($profile_id,Request $request) {
 
+    $profilesOffersSubscribers = 
+    ProfilesOffersSubscribers::where('finished_at', '>=', Carbon::now())->where('profile_id', '=', $profile_id)
+   ->first();
+   
     ProfileViews::updateOrCreate(
-        ['user_id' => Auth::id()],
-        ['user_id' => Auth::id(), 'profile_id' => $profile_id]
+        ['user_ip' => request()->ip()],
+        ['profile_id' => $profile_id]
     );
 
 
-$profilesOffersSubscribers = 
- ProfilesOffersSubscribers::where('finished_at', '>=', Carbon::now())->where('profile_id', '=', $profile_id)
-->first();
 
 
 
@@ -51,7 +52,7 @@ if($profilesOffersSubscribers == null){
 
 
     
-    $user_id = Auth::id();
+    $user_id = $profilesOffersSubscribers->profiles->user->id;
     $isHaveProfile = false;
     
     if($user_id != null){

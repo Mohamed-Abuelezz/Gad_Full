@@ -9,7 +9,7 @@ class ProfileViews extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id','profile_id'];
+    protected $fillable = ['user_ip','profile_id'];
 
     protected $table = 'Profile_Views';
 

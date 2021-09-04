@@ -27,6 +27,23 @@
 <form action="{{URL::to('admin/add_configOffer')}}" method="POST" enctype="multipart/form-data">
   @csrf
 
+
+  <div class="mb-3">
+
+    <label for="formFile" class="form-label">الصورة</label>
+    <input class="form-control" name="image" type="file" id="formFile">
+    
+    @error('image')
+    <div class="alert alert-danger">{{ $message }}</div>
+    
+@enderror
+
+  </div>
+  
+
+
+
+
     <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label"> السعر باللغه العربيه </label>
     <input type="text" class="form-control @error('price_ar') is-invalid @enderror" id="exampleInputEmail1"  name="price_ar" >

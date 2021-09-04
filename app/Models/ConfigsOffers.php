@@ -21,5 +21,9 @@ class ConfigsOffers extends Model
         return $this->hasMany(ProfilesOffersSubscribers::class);
     }
 
+    public function offersSubmits()
+    {
+        return $this->hasMany(OffersSubmits::class);
+    }
 
 }

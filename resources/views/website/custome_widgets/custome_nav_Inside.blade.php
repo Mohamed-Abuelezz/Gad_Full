@@ -37,6 +37,7 @@ $profile =  \App\models\Profiles::where('user_id', '=' ,Auth::id())->get()->firs
                                     <li><a href="{{URL::to('editProfile')}}">{{ 
                                     __('website_screens/homescreen.edit_profile')
                                      }}</a></li>
+                                    <li><a href="{{URL::to('offers')}}" >{{ Config::get('app.locale') == 'ar' ? 'اشتراك / تجديد الاشتراك' : 'Subscription'  }}</a></li>
                                 
                                     @else
 
@@ -44,6 +45,8 @@ $profile =  \App\models\Profiles::where('user_id', '=' ,Auth::id())->get()->firs
 
                                     @endif
     
+
+
     <hr style="border-top: 3px dotted white;"/>
     
     <li><a href="#">{{ __('website_screens/homescreen.my_account') }}</a></li>
@@ -99,6 +102,7 @@ $profile =  \App\models\Profiles::where('user_id', '=' ,Auth::id())->get()->firs
     </div>
     
       <div class="menu" > <!--Mobile Menus -->
+        
             <ul class="menu-nav">
                 <ul>
                     <li><a href="{{URL::to('home')}}" class="s4">{{ __('website_screens/homescreen.home') }} </a></li>
@@ -109,6 +113,8 @@ $profile =  \App\models\Profiles::where('user_id', '=' ,Auth::id())->get()->firs
                     @if ($isHaveProfile == true)
                     <li><a href="{{URL::to('profile/'.$profile->id)}}" class="s4">{{ __('website_screens/homescreen.show_profile') }}</a></li>
                     <li><a href="{{URL::to('editProfile')}}" class="s4">{{ __('website_screens/homescreen.edit_profile') }}</a></li>
+                    <li><a href="{{URL::to('offers')}}" >{{ Config::get('app.locale') == 'ar' ? 'اشتراك / تجديد الاشتراك' : 'Subscription'  }}</a></li>
+                  
                     @else
 
                     <li><a href="" class="s4">{{ __('website_screens/homescreen.create_profile') }}</a></li>
@@ -120,5 +126,8 @@ $profile =  \App\models\Profiles::where('user_id', '=' ,Auth::id())->get()->firs
     
                 </ul>
             </ul>
+
+
+
     </div>
     

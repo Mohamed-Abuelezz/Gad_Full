@@ -74,12 +74,12 @@ public function editProfile(Request $request) {
 
     $imageName;
 
-    if ($request->hasFile('image') && $request->file('image')->getClientOriginalName()   != null) {
+    if ($request->hasFile('profile_photo') && $request->file('profile_photo')->getClientOriginalName()   != null) {
 
-        $imageName =Str::random(50).$request->file('image')->getClientOriginalName();
-        $guessExtension = $request->file('image')->guessExtension();
+        $imageName =Str::random(50).$request->file('profile_photo')->getClientOriginalName();
+        $guessExtension = $request->file('profile_photo')->guessExtension();
 
-        $path = $request->file('image')->storeAs('public/users_images',$imageName);
+        $path = $request->file('profile_photo')->storeAs('public/CoverProfiles',$imageName);
 
     
         }else{

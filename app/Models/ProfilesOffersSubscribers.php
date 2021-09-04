@@ -9,6 +9,12 @@ class ProfilesOffersSubscribers extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'profile_id',
+        'config_offer_id',
+        'starts_at',
+        'finished_at'
+    ];
 
     protected $table = 'profiles_offers_subscribers';
 

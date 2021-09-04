@@ -12,6 +12,7 @@ use App\Http\Controllers\admin\SubscribersTypeController;
 use App\Http\Controllers\admin\ConfigsOffersController;
 use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\ContactUsController;
+use App\Http\Controllers\admin\SubscribeRequestController;
 use App\Http\Controllers\admin\HomeSlidersController;
 
 
@@ -100,8 +101,12 @@ Route::group(['prefix' => 'admin'], function () {
   Route::get('/homeSliders/delete_homeSlider',  [HomeSlidersController::class, 'deleteHomeSlider']);
 
 
+  //Subscribes Request Routes
+  Route::get('/subscribeRequest',  [SubscribeRequestController::class, 'showSubscribeRequest'])->name('Dashboard_subscribeRequest');
+  Route::get('/subscribeRequest/approve_subscribeRequest',  [SubscribeRequestController::class, 'approveSubscribeRequest']);
+  Route::get('/subscribeRequest/delete_subscribeRequest',  [SubscribeRequestController::class, 'deleteSubscribeRequest']);
 
-
+  
     });
 
 
