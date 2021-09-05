@@ -5,20 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ContactUs extends Model
+class FreeSubscribes extends Model
 {
     use HasFactory;
 
 
-    protected $table = 'Contact_Us';
+    protected $table = 'free_subscribes';
 
     protected $fillable = [
-        'email',
-        'name',
-        'phone',
-        'message',
+        'user_id',
+        'profile_id',
     ];
-
 
 
 
@@ -27,7 +24,10 @@ class ContactUs extends Model
         return $this->belongsTo(User::class , 'user_id');
     }
 
-
+    public function profile()
+    {
+        return $this->belongsTo(Profiles::class , 'profile_id');
+    }
 
 
 }

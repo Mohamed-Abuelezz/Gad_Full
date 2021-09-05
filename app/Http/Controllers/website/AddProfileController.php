@@ -130,7 +130,7 @@ public function addProfile(Request $request) {
 
 
 
-    return redirect()->route('profile', ['profile_id' => $profiles->id]);
+    return redirect()->route('offers');
     
     }
     

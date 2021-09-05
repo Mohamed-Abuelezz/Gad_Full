@@ -17,6 +17,7 @@ use App\Models\ProfilesOffersSubscribers;
 use App\Models\Profiles;
 use App\Models\ConfigsSlider;
 use App\Models\ConfigsOffers;
+use App\Models\FreeSubscribes;
 use Illuminate\Support\Facades\Storage;
 
 class OffersController extends Controller
@@ -29,8 +30,10 @@ public function showOffers(Request $request) {
 
 $offers = ConfigsOffers::all();
 
+$isSubscribeForFree = FreeSubscribes::where('user_id', '=' ,Auth::id())->first();
 
-return view('website.screens.offers_screen', ['offers'=>$offers]);
+
+return view('website.screens.offers_screen', ['offers'=>$offers,'isSubscribeForFree'=>$isSubscribeForFree]);
     
 
 }

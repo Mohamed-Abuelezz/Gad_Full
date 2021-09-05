@@ -22,7 +22,7 @@ $profile =  \App\models\Profiles::where('user_id', '=' ,Auth::id())->get()->firs
                         <li style="padding: 0;">
     
                             <a type="button" class="s6 position-relative avatar"  data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" >
-                                <img style="width: 40px;height: 40px;border-radius: 50px;" src="https://cdn2.iconfinder.com/data/icons/flatfaces-everyday-people-square/128/beard_male_man_face_avatar-512.png" /> <span class="position-absolute bottom-0 end-0  translate-bottom badge rounded-pill " style="background-color:  var(--secondryColor);">
+                                <img style="width: 40px;height: 40px;border-radius: 50px;" src="{{asset('storage/users_images/'.Auth::user()->image) }}" /> <span class="position-absolute bottom-0 end-0  translate-bottom badge rounded-pill " style="background-color:  var(--secondryColor);">
                            
                               <i class="fas fa-caret-down"></i> 
                               </span>               
@@ -48,8 +48,9 @@ $profile =  \App\models\Profiles::where('user_id', '=' ,Auth::id())->get()->firs
 
 
     <hr style="border-top: 3px dotted white;"/>
+    <li><a  href="{{URL::to('favouriteprofiles')}}">{{ Config::get('app.locale') == 'ar' ? 'المفضلة' : 'Favourites Profiles'  }}</a></li>
     
-    <li><a href="#">{{ __('website_screens/homescreen.my_account') }}</a></li>
+    <li><a href="{{URL::to('myaccount')}}">{{ __('website_screens/homescreen.my_account') }}</a></li>
     <li><a href="{{URL::to('/logout')}}">{{ __('website_screens/homescreen.sign_out') }}</a></li>
     
                                 </ul>
@@ -64,8 +65,9 @@ $profile =  \App\models\Profiles::where('user_id', '=' ,Auth::id())->get()->firs
                         <li>|</li>
                         
                         <li><a href="{{URL::to('home')}}" class="s6">{{ __('website_screens/homescreen.home') }}</a></li>
-                        <li><a href="" class="s6">{{ __('website_screens/homescreen.contact_us') }} </a></li>
-                        <li><a href="#" class="s6">{{ __('website_screens/homescreen.terms_and_conditions') }}</a></li>
+                        <li><a href="{{URL::to('contactus')}}" class="s6">{{ __('website_screens/homescreen.contact_us') }} </a></li>
+                      
+                        <li><a href="{{URL::to('terms')}}" class="s6">{{ __('website_screens/homescreen.terms_and_conditions') }}</a></li>
                          <li><a href="{{ Config::get('app.locale') == 'ar' ?  URL::to('language/en') :  URL::to('language/ar')}}" class="s6">{{Config::get('app.locale') == 'ar' ?   'English'   :  "عربي" }} <i class="fas fa-globe-americas"></i> </a></li>
                     </ul>
                 </div>
@@ -106,7 +108,7 @@ $profile =  \App\models\Profiles::where('user_id', '=' ,Auth::id())->get()->firs
             <ul class="menu-nav">
                 <ul>
                     <li><a href="{{URL::to('home')}}" class="s4">{{ __('website_screens/homescreen.home') }} </a></li>
-                    <li><a href="#" class="s4">{{ __('website_screens/homescreen.contact_us') }}</a></li>
+                    <li><a href="{{URL::to('contactus')}}" class="s4">{{ __('website_screens/homescreen.contact_us') }}</a></li>
                     <li><a href="#" class="s4">{{ __('website_screens/homescreen.terms_and_conditions') }}</a></li>
                     <hr style="border-top: 3px dotted white;"/>
 
@@ -117,11 +119,12 @@ $profile =  \App\models\Profiles::where('user_id', '=' ,Auth::id())->get()->firs
                   
                     @else
 
-                    <li><a href="" class="s4">{{ __('website_screens/homescreen.create_profile') }}</a></li>
+                    <li><a href="{{URL::to('addProfile')}}" class="s4">{{ __('website_screens/homescreen.create_profile') }}</a></li>
 
                     @endif
+                    <li><a  href="{{URL::to('favouriteprofiles')}}" class="s4">{{ Config::get('app.locale') == 'ar' ? 'المفضلة' : 'Favourites Profiles'  }}</a></li>
 
-                    <li><a href="#" class="s4">{{ __('website_screens/homescreen.my_account') }}</a></li>
+                    <li><a  href="{{URL::to('myaccount')}}" class="s4">{{ __('website_screens/homescreen.my_account') }}</a></li>
                     <li><a href="../screens/login-screen.html" class="s4">{{ __('website_screens/homescreen.sign_out') }}</a></li>
     
                 </ul>

@@ -127,58 +127,36 @@
 
 <!-- Start OurOffers Section --------------------------------------->
 
-<div class="sectionOurOffers">
+<div class="sectionOurOffers" >
     <div class="title s2">Availble Offers</div>
 
-    <div class="owl-carousel wrapContent">
-        <div class="item active"> 
-            <div class="image"><img src="{{ asset('website_assets/assets/images/5498791.jpg') }}" alt=""></div>
-            <div class="price s4">free / 1 month</div>
-            <div class="desc s6">it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,</div>
-            <a href="#" class="btn" >buy</a>
-        </div>  
-         <div class="item active"> 
-            <div class="image"><img src="{{ asset('website_assets/assets/images/5498791.jpg') }}" alt=""></div>
-            <div class="price s4">10$ / 1 month</div>
-            <div class="desc s6">it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,</div>
-            <a href="#" class="btn" >buy</a>
-        </div>
-        <div class="item active"> 
-            <div class="image"><img src="{{ asset('website_assets/assets/images/5498791.jpg') }}" alt=""></div>
-            <div class="price s4">20$ / 1 month</div>
-            <div class="desc s6">it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,</div>
-            <a href="#" class="btn" >buy</a>
-        </div>
-        <div class="item active"> 
-            <div class="image"><img src="{{ asset('website_assets/assets/images/5498791.jpg') }}" alt=""></div>
-            <div class="price s4">30$ / 1 month</div>
-            <div class="desc s6">it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,</div>
-            <a href="#" class="btn" >buy</a>
-        </div>
-        <div class="item active"> 
-            <div class="image"><img src="{{ asset('website_assets/assets/images/5498791.jpg') }}" alt=""></div>
-            <div class="price s4">40$ / 1 month</div>
-            <div class="desc s6">it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,</div>
-            <a href="#" class="btn" >buy</a>
-        </div>
-        <div class="item active"> 
-            <div class="image"><img src="{{ asset('website_assets/assets/images/5498791.jpg') }}" alt=""></div>
-            <div class="price s4">50$ / 1 month</div>
-            <div class="desc s6">it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,</div>
-            <a href="#" class="btn" >buy</a>
-        </div>
-        <div class="item active"> 
-            <div class="image"><img src="{{ asset('website_assets/assets/images/5498791.jpg') }}" alt=""></div>
-            <div class="price s4">60$ / 1 month</div>
-            <div class="desc s6">it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,</div>
-            <a href="#" class="btn" >buy</a>
-        </div>
-        <div class="item active"> 
-            <div class="image"><img src="{{ asset('website_assets/assets/images/5498791.jpg') }}" alt=""></div>
-            <div class="price s4">70$ / 1 month</div>
-            <div class="desc s6">it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,</div>
-            <a href="#" class="btn" >buy</a>
-        </div>
+    <div class="owl-carousel wrapContent" style="margin-bottom: 15px">
+       
+
+
+        @foreach ($offers as $offer)
+
+
+
+
+<div class="item"> 
+  <div class="image"><img src="{{asset('storage/offers/'.$offer->image)}}" alt=""></div>
+  <div class="price s4">{{ Config::get('app.locale') == 'ar' ?   $offer->price_ar :  $offer->price_en }}</div>
+  <div class="desc s6">{{ Config::get('app.locale') == 'ar' ?   $offer->desc_ar :  $offer->desc_en }}</div>
+  <a href="{{URL::to('offersubmit/'.$offer->id)}}" class="btn" >{{ Config::get('app.locale') == 'ar' ?   'شراء' : 'Buy'}}</a>
+</div>  
+
+
+
+
+    
+@endforeach
+
+
+       
+        
+        
+
       </div>
       
 </div>

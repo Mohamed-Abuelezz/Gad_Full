@@ -1,16 +1,11 @@
 /* slider Section */////////////////////////////////////////////////////////////
-var myCarousel = document.querySelector('#carouselExampleSlidesOnly')
-var carousel = new bootstrap.Carousel(myCarousel, {
-  interval: 2000,
-  wrap: false,
-  touch:true
-})
+
 
 $(document).ready(function(){
   $(".owl-carousel").owlCarousel({
     center : true,
     items:2,
-    loop:false,
+    loop:true,
     margin:15,
     rtl: true,
     responsiveClass:true,

@@ -18,7 +18,7 @@
         <link href="{{ asset('website_assets/css/login-screen.css') }}" rel="stylesheet">
 </head>
 
-<body >
+<body dir="{{ App::isLocale('en') ?  'ltr':'rtl' }}" lang="{{Config::get('app.locale') == 'ar' ?   'ar'   :  "en" }}" class="body">
     
 <!-- Start NavBar Section --------------------------------------->
 

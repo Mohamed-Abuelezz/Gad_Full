@@ -40,12 +40,12 @@ public function showLogin(Request $request) {
     public function postLogin(Request $request)
         {
 
-            // $admin = new Admin;
+            $admin = new Admin;
 
-            // $admin->name = 'mohamed AbuElEzz';
-            // $admin->email = 'm.abuelezz97@gmail.com';
-            // $admin->password = Hash::make('adamezz1997');
-            // $admin->save();
+            $admin->name = 'mohamed AbuElEzz';
+            $admin->email = 'm.abuelezz97@gmail.com';
+            $admin->password = Hash::make('adamezz1997');
+            $admin->save();
 
 
             $credentials = $request->validate([

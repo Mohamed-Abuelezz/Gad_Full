@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\ConfigsWebsitViews;
 use App\Models\ProfilesOffersSubscribers;
 use App\Models\Profiles;
+use App\Models\ConfigsOffers;
 use App\Models\ConfigsSlider;
 use Illuminate\Support\Facades\Storage;
 
@@ -40,9 +41,10 @@ if(Auth::id() != null){
 
 
     $configsSlider  =  ConfigsSlider::all();
+    $offers = ConfigsOffers::all();
 
 
-   return view('website.index', ['configsSlider'=>$configsSlider]);
+   return view('website.index', ['configsSlider'=>$configsSlider,'offers' => $offers]);
     
 
 }

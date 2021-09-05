@@ -75,8 +75,8 @@ class ConfigsOffersController extends Controller
 
     $configsOffers = new ConfigsOffers;
     
+    $configsOffers->isFree = $request->isfree == null ? false :  true  ;
     $configsOffers->image = $imageName;
-    $configsOffers->price_ar = $request->price_ar;
     $configsOffers->price_ar = $request->price_ar;
     $configsOffers->price_en = $request->price_en;
     $configsOffers->desc_ar = $request->desc_ar;

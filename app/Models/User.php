@@ -75,10 +75,15 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(ProfileViews::class);
     }
+
     public function offersSubmits()
     {
         return $this->hasMany(OffersSubmits::class);
     }
 
-    
+    public function freeSubscribes()
+    {
+        return $this->hasMany(FreeSubscribes::class);
+    }
+
 }

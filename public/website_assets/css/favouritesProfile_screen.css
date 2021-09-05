@@ -1,5 +1,5 @@
 .favouriteContent{
-    height: auto;
+    height: 100vh;
     padding: 50px;
     display: flex;
     justify-content: center;
@@ -7,27 +7,61 @@
     flex-wrap: wrap;
     position: relative;
     overflow: hidden;
+
 }
 
-.favouriteContent .card{
-overflow: hidden;
-margin: 20px;
-height: 400px;
-width: 25%;
-background-color: var(--secondryColor);
-}
-@media(min-width: 0px) and (max-width: 991px){
-
-    .favouriteContent .card{
-        overflow: hidden;
-        margin: 20px;
-        height: 550px;
-        width: 80%;
-        background-color: var(--secondryColor);
-        }
-        
- }
-.card-body{
-    background-color:var(--primaryColor);
-    height: 0;
-}
+@font-face {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/raleway/v22/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaorCIPrQ.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 700;
+    src: url(https://fonts.gstatic.com/s/raleway/v22/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVs9pbCIPrQ.ttf) format('truetype');
+  }
+  .person-card {
+    font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    position: relative;
+    height: 300px;
+    width: 320px;
+    overflow: hidden;
+    border: 1px solid #2780E3;
+  }
+  .person-card .person-img {
+    width: 100%;
+    height: auto;
+  }
+  .person-card .person-info {
+    position: absolute;
+    top: 236px;
+    height: 300px;
+    width: 100%;
+    color: #fff;
+    background-color: #2780E3;
+    opacity: 0.9;
+    -ms-transition: -ms-transform 0.75s;
+    -webkit-transition: -webkit-transform 0.75s;
+    transition: transform 0.75s;
+  }
+  .person-card .person-info:hover {
+    -ms-transform: translateY(-236px);
+    -webkit-transform: translateY(-236px);
+    transform: translateY(-236px);
+  }
+  .person-card .person-info .details-title {
+    height: 44px;
+    font-size: 20px;
+    padding: 10px;
+  }
+  .person-card .person-info .details-title small {
+    font-size: 70%;
+    color: #f7f7f7;
+  }
+  .person-card .person-info .details-body {
+    padding: 10px;
+    text-align: center;
+  }
+  

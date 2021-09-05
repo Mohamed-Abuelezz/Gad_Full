@@ -19,16 +19,7 @@ var elem = `    <div class='loader-container' id="loading-screen">
     <h2>Loading</h2>
   </div>
   <div class='smoke'>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
+
   </div>
 </div>
 <div class='meteors-container'>

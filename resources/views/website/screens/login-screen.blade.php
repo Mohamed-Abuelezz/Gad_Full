@@ -21,7 +21,7 @@
         
 </head>
 
-<body >
+<body dir="{{ App::isLocale('en') ?  'ltr':'rtl' }}" lang="{{Config::get('app.locale') == 'ar' ?   'ar'   :  "en" }}" class="body">
     
   <div class="page">
 
@@ -87,7 +87,7 @@
           </form><!--.login-form-->
           <div class="help-text">
             <p>{{Config::get('app.locale') == 'ar' ?  'بالتسجيل ، فإنك توافق على'  :  'By signing up, you agree to our'}}</p>
-            <p><a href="#">{{Config::get('app.locale') == 'ar' ?  'شروط الخدمة'  :  'Terms of service'}}</a></p>
+            <p><a href="{{URL::to('terms')}}">{{Config::get('app.locale') == 'ar' ?  'شروط الخدمة'  :  'Terms of service'}}</a></p>
           </div><!--.help-text-->
         </div><!--.signup-tab-content-->
   

@@ -54,7 +54,7 @@ class HomeController extends Controller
         $subscribersType = SubscribersType::all();
         $educationsStages = EducationsStages::all();
         $scientificArticles = ScientificArticles::all();
-        $profilesOffersSubscribers =  ProfilesOffersSubscribers::where('finished_at', '>=', Carbon::now())->paginate(1);
+        $profilesOffersSubscribers =  ProfilesOffersSubscribers::where('finished_at', '>=', Carbon::now())->paginate(6);
         $profilesOffersSubscribers_all =  ProfilesOffersSubscribers::where('finished_at', '>=', Carbon::now())->get();
         $profileRates = ProfileRates::all();
 

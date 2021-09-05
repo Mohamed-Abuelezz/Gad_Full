@@ -442,7 +442,7 @@
       <a href="#" class="menu-item fas fa-share-alt" id="shareProfile" ></a>
       <a href="#" class="menu-item fas fa-heart" id="favouriteProfile"></a>
       <a href="#" class="menu-item fab fa-whatsapp" id="whatsupProfile"></a>
-      <a href="#" class="menu-item fas fa-envelope-open-text"></a>
+      <a href="{{URL::to('contactus')}}" class="menu-item fas fa-envelope-open-text"></a>
 
     </menu>
   

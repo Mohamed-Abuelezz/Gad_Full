@@ -42,7 +42,7 @@
 
         <div class="mb-3" style="width: 400px; margin: auto">
           <label for="exampleInputEmail1" class="form-label">{{Config::get('app.locale') == 'ar' ?  'البريد الاليكتروني'  :  'Email Address'}}</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="{{Config::get('app.locale') == 'ar' ?  'البريد الاليكتروني'  :  'Email'}}">
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='email'>
           @error('email')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror

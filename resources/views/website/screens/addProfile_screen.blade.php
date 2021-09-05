@@ -207,6 +207,9 @@
 
         
   </div>
+  @error('subscriberType')
+  <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
 
 </li>
 <br>
@@ -235,8 +238,9 @@
 
 </div>
        
-          
-
+@error('educationsStage')
+<div class="alert alert-danger">{{ $message }}</div>
+@enderror
 
     </div>
    
@@ -258,7 +262,11 @@
 
 
     </div>
-    
+           
+@error('articals')
+<div class="alert alert-danger">{{ $message }}</div>
+@enderror
+
 </li>
 
  

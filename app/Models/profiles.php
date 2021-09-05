@@ -73,4 +73,13 @@ class Profiles extends Model
         return $this->hasMany(OffersSubmits::class);
     }
 
+
+    public function freeSubscribes()
+    {
+        return $this->hasMany(FreeSubscribes::class);
+    }
+
+
+
+
 }

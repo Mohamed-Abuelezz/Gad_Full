@@ -18,6 +18,7 @@ use App\Models\Profiles;
 use App\Models\ConfigsSlider;
 use App\Models\ConfigsOffers;
 use App\Models\OffersSubmits;
+use App\Models\FreeSubscribes;
 use Illuminate\Support\Facades\Storage;
 
 class OffersSubmitController extends Controller
@@ -27,7 +28,34 @@ class OffersSubmitController extends Controller
 
 public function showOffersSubmit($offerId , Request $request) {
 
+$configsOffers = ConfigsOffers::where('id',$offerId)->first();
 $profile = Profiles::where('user_id',Auth::id())->first();
+
+if($configsOffers->isFree){
+
+    FreeSubscribes::updateOrCreate(
+        [ 'profile_id' => $profile->id],
+        [
+            'user_id' => Auth::id(),
+        ]
+    );
+
+
+
+    ProfilesOffersSubscribers::updateOrCreate(
+        [ 'profile_id' => $profile->id],
+        [
+            'config_offer_id' => $offerId,
+            'starts_at' => Carbon::now(),
+            'finished_at' => Carbon::now()->addDays($configsOffers->take_long),
+        ]
+    );
+
+    return redirect()->route('profile', ['profile_id' => $profile->id]);
+
+
+}
+
 
 
 return view('website.screens.submitOffer_screen', [

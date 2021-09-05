@@ -118,6 +118,7 @@ Schema::create('Subscribers_Type', function (Blueprint $table) {
    /////////////////////////// Configs Offers Table
    Schema::create('Configs_Offers', function (Blueprint $table) {
     $table->id();
+    $table->boolean('isFree');
     $table->string('price_ar');
     $table->string('price_en');
     $table->string('desc_ar');
@@ -210,7 +211,7 @@ Schema::create('Subscribers_Type', function (Blueprint $table) {
       $table->string('name');
       $table->string('email');
       $table->string('phone');
-      $table->string('message');
+      $table->longText('message');
   
     
        $table->timestamps();
@@ -273,6 +274,24 @@ Schema::create('Subscribers_Type', function (Blueprint $table) {
      });
 
 
+
+
+        /////////////////////////// Profile Views Table
+        Schema::create('free_subscribes', function (Blueprint $table) {
+      
+         $table->id();
+         $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');;
+         $table->foreignId('profile_id')->constrained('Profiles')->onUpdate('cascade')->onDelete('cascade');;
+     
+         $table->timestamps();
+     
+     });
+
+
+
+
+
+
 }
   
     /**
@@ -282,6 +301,7 @@ Schema::create('Subscribers_Type', function (Blueprint $table) {
      */
     public function down()
     {
+      Schema::dropIfExists('free_subscribes');
       Schema::dropIfExists('Subscribe_Request');
       Schema::dropIfExists('Profile_Views');
         Schema::dropIfExists('Profile_education_stages');

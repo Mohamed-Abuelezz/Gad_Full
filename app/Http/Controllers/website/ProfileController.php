@@ -40,7 +40,11 @@ public function showProfile($profile_id,Request $request) {
 
 
 
+if( $profilesOffersSubscribers == null){
+return redirect()->route('offers',)->with('needSubscribe', 
+'An activation link was send to your email address.');
 
+}
 
 
 //dd($profilesOffersSubscribers->profiles);

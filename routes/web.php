@@ -10,6 +10,9 @@ use App\Http\Controllers\website\AddProfileController;
 use App\Http\Controllers\website\EditProfileController;
 use App\Http\Controllers\website\OffersController;
 use App\Http\Controllers\website\OffersSubmitController;
+use App\Http\Controllers\website\FavouritesController;
+use App\Http\Controllers\website\MyAccountController;
+use App\Http\Controllers\website\ContactUsController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
@@ -131,7 +134,14 @@ Route::post('/reset-password', function (Request $request) {
 
 
 Route::get('/profile/{profile_id}',[ProfileController::class, 'showProfile'] )->name('profile');
+Route::get('/contactus',[ContactUsController::class, 'showContactUs'] )->name('contactus');
+Route::post('/contactus',[ContactUsController::class, 'sendContactUs'] );
 
+Route::get('/terms',function () {
+
+    return view('website.screens.termsAndConditions');
+
+})->name('contactus');
 
 
 
@@ -162,6 +172,14 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('/offersubmit/{offerId}',[OffersSubmitController::class, 'showOffersSubmit'] )->name('offersubmit');
     Route::post('/offersubmit/{offerId}',[OffersSubmitController::class, 'offersSubmit'] );
+
+
+    Route::get('/myaccount',[MyAccountController::class, 'showMyAccount'] )->name('myaccount');
+    Route::post('/myaccount',[MyAccountController::class, 'editMyAccount'] );
+
+
+    Route::get('/favouriteprofiles',[FavouritesController::class, 'showFavouriteProfiles'] )->name('myaccount');
+    Route::get('/favouriteprofiles/remove/{profileId}',[FavouritesController::class, 'removeFavouriteProfiles'] )->name('myaccount');
 
 
 

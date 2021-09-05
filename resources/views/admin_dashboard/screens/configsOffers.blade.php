@@ -43,6 +43,30 @@
 
 
 
+    <div class="educationalStages_checksBoxs">
+
+<div class="lables">
+
+
+<div class="form-check myCheckBox">
+  <input class="form-check-input" type="checkbox" name="isfree" value="true" >
+  <label class="form-check-label" >
+    مجاني
+  </label>
+</div>
+
+
+</div>
+       
+          
+
+
+    </div>
+   
+  
+
+
+
 
     <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label"> السعر باللغه العربيه </label>

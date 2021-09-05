@@ -135,12 +135,25 @@ public function editProfile(Request $request) {
     
         }
 
+        $profilesOffersSubscribers = ProfilesOffersSubscribers::where('profile_id', '=', $profiles->id)->first();
+
+
+        if($profilesOffersSubscribers == null){
+
+            return redirect()->route('offers');
+
+
+        }else{
+
+
+            return redirect()->route('profile', ['profile_id' => $profiles->id]);
+
+
+        }
 
 
 
 
-
-       return redirect()->route('profile', ['profile_id' => $profiles->id]);
     
     }
     

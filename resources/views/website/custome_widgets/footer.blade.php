@@ -21,9 +21,8 @@
             <div class="col-12 col-md-6">
                 <div class="links">
 <ul>
-    <li><a href="#">{{Config::get('app.locale') == 'ar' ? 'ادعمنا'  : 'Support Us'}}</a></li>
-    <li><a href="#">{{Config::get('app.locale') == 'ar' ? 'تواصل معنا'  : 'Contact Us'}}</a></li>
-    <li><a href="#">{{Config::get('app.locale') == 'ar' ? 'الشروط والاحكام'  : 'Terms And Conditions'}}</a></li>
+    <li><a href="{{URL::to('contactus')}}">{{ __('website_screens/homescreen.contact_us') }} </a></li>
+    <li><a href="{{URL::to('terms')}}" >{{Config::get('app.locale') == 'ar' ? 'الشروط والاحكام'  : 'Terms And Conditions'}}</a></li>
 </ul>
                 </div>
             </div>
