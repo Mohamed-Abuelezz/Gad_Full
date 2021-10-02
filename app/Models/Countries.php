@@ -10,16 +10,9 @@ class Countries extends Model
     use HasFactory;
 
 
-    protected $table = 'countries';
 
 
-
-    public function educationsStages()
-    {
-        return $this->hasMany(EducationsStages::class);
-    }
-
-    public function users()
+    public function countries()
     {
         return $this->hasMany(User::class);
     }

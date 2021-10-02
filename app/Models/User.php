@@ -6,26 +6,25 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var string[]
      */
     protected $fillable = [
         'name',
         'email',
-        'image',
         'password',
-        'email_verified_at'
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * The attributes that should be hidden for serialization.
      *
      * @var array
      */
@@ -35,7 +34,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * The attributes that should be cast to native types.
+     * The attributes that should be cast.
      *
      * @var array
      */
@@ -43,47 +42,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    
 
-    public function profiles()
-    {
-        return $this->hasMany(Profiles::class);
-    }
-    public function favouritesProfile()
-    {
-        return $this->hasMany(FavouritesProfile::class);
-    }
-    public function commentsProfiles()
-    {
-        return $this->hasMany(CommentsProfiles::class);
-    }
-    public function ContactUs()
-    {
-        return $this->hasMany(ContactUs::class);
-    }
-    public function countries()
-    {
-        return $this->belongsTo(Countries::class,'country_id');
-    }
 
-    public function profileRates()
+    public function country()
     {
-        return $this->hasMany(ProfileRates::class);
+        return $this->belongsTo(Countries::class);
     }
-
-    public function profileViews()
-    {
-        return $this->hasMany(ProfileViews::class);
-    }
-
-    public function offersSubmits()
-    {
-        return $this->hasMany(OffersSubmits::class);
-    }
-
-    public function freeSubscribes()
-    {
-        return $this->hasMany(FreeSubscribes::class);
-    }
-
 }

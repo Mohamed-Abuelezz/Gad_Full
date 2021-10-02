@@ -1,162 +1,108 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Hash;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Storage;
+use App\Http\Controllers\MyHelpersFunctios;
 
-
-
-use App\Models\ConfigsWebsitViews;
-use App\Models\ProfilesOffersSubscribers;
-use App\Models\Profiles;
-use App\Models\User;
 use App\Models\Countries;
+use App\Models\User;
 
-use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
 
-
-// Show All Users Screen
-    public function showUsers(Request $request) {
+    public function showUsers(Request $request)
+    {
 
         $users = User::all();
 
-      return view('admin_dashboard.screens.users', ['users' => $users]);
-   
+        return view('Admin.users.showUsers', ['users' => $users]);
     }
 
-     
- 
- 
- // Show Add Or Update Users Screen
-     public function showAddUser(Request $request) {
- 
+    public function showAddOrEditUser(Request $request, $userId = null)
+    {
+        $user = null;
+
+        if($userId != null ){
+        $user = User::where('id', $userId)->firstOrFail();
+        }
+
         $countries = Countries::all();
 
-
-                // Edit User
-                if ($request->has('user_id')) {  
-
-                    $user = User::findOrFail($request->input('user_id'));  
-                    
-                    
-                  return view('admin_dashboard.screens.addUser', ['user'=>$user,'countries'=> $countries ,"isEdit" => true]);
-                }        
- 
-
-
-                return view('admin_dashboard.screens.addUser', ['countries'=> $countries,"isEdit" => false]);
-
-
-     }
-
-
-
- 
-       // Insert New User
-        public function insertUser(Request $request) {
-
-            $path;
-            $name;
-            
-            $validated = $request->validate([
-                'email' => 'required|unique:users,email,$id',
-                'name' => 'required',
-                'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-                "password" =>'required',
-            ]);
-
-         if ($request->hasFile('image')) {
-
-            $name =Str::random(50).$request->file('image')->getClientOriginalName();
-            $guessExtension = $request->file('image')->guessExtension();
-
-            $path = $request->file('image')->storeAs('public/users_images',$name);
-
-        
-            }
-
-            $user = new User;
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->image =   $name  ;
-            $user->email_verified_at =  Carbon::now();
-            $user->password = Hash::make($request->password);
-            $user->country_id = $request->countries[0];
-
-            $user->save();
-
-
-    
-         return     redirect()->route('Dashboard_users');
-
-
-
-        }
-
-
-            
-       // Update  User
-        public function updateUser(Request $request) {
-
-            //     dd('ok');
-
-            $validated = $request->validate([
-                'email' => 'required',
-                'name' => 'required',
-                'image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            ]);
-
-            $name_image;
-            if ($request->hasFile('image')) {
-        
-                $name_image = $request->file('image')->getClientOriginalName();
-                $guessExtension = $request->file('image')->guessExtension();
-                $path = $request->file('image')->storeAs('public/users_images',$name_image);
-             
-            }
-
-        
-            $user = User::findOrFail($request->input('user_id'))->first();  
-            $user->name = $request->name;
-            $user->email = $request->email;
-            isset($name_image)  ?        $user->image =   $name_image  : null  ;
-            $user->country_id = $request->countries[0];
-        
-            $user->save();
-
-            return     redirect()->route('Dashboard_users');
-
-        }
-
-
-
-       // Delete  User
-        public function deleteUser(Request $request) {
-
-            $user = User::findOrFail($request->input('user_id'));  
-            $user->delete();
-
-                return     redirect()->route('Dashboard_users');
-        }
-        
-        
-
-
-
-
-
+        return view('Admin.users.addUsers', ['countries' => $countries, 'user' => $user]);
     }
 
 
 
-// Helper Functions
+    public function addorEditUser(Request $request, $userId = null)
+    {
+
+
+        if ($userId != null) {
+
+            $validated = $request->validate([
+                'name' => 'required|max:255',
+                'email' => 'required|unique:users,email,' .$userId. ',id',
+                'country' => 'required',
+            ]);
+
+            $user = User::where('id', $userId)->firstOrFail();
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->country_id = $request->input('country');
+            $user->save();
+
+            return back()->with('success','تم تعديل المستخدم بنجاح');
+        
+        } else {
+
+            $validated = $request->validate([
+                'name' => 'required|max:255',
+                'email' => 'required|unique:users',
+                'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                'country' => 'required',
+                'password' => 'required|min:6',
+            ]);
 
 
 
+            $myHelpersFunctios = new MyHelpersFunctios();
+            $image_name =  $myHelpersFunctios->saveImages($request, 'image', 'users_images', array('w' => 300, 'h' => 300));
+
+
+            $user = new User();
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->image = $image_name;
+            $user->country_id = $request->input('country');
+            $user->email_verified_at = Carbon::now()->toDateTimeString();
+            $user->password = Hash::make($request->input('password'));
+            $user->save();
+
+
+            return redirect()->back()->with('success', 'تم اضافة المستخدم بنجاح');
+        }
+    }
+
+
+
+    public function deleteUser(Request $request, $userId)
+    {
+
+        $user = User::where('id', $userId)->firstOrFail();
+
+        Storage::disk('public')->delete('images/users_images/' . $user->image); // delete file from specific disk e.g; s3, local etc
+
+        $user->delete();
+
+        return redirect()->back()->with('success', 'تم الحذف بنجاح');
+    }
+
+
+
+}
