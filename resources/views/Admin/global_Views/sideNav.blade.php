@@ -59,7 +59,7 @@
                             data-bs-parent="#sidenavAccordionPages">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="{{ url('admin/countries') }}">البلاد</a>
-                                <a class="nav-link" href="register.html">نوع البروفايل</a>
+                                <a class="nav-link" href="{{ url('admin/profileTypes') }}">نوع البروفايل</a>
                                 <a class="nav-link" href="register.html">تخصص البروفايل</a>
                                 <a class="nav-link" href="register.html">المواد العلمية</a>
                             </nav>

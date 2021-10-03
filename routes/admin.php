@@ -15,11 +15,15 @@ Route::prefix("admin")->group(function(){
    Route::get("/addorEditUser/{userId?}", [UsersController::class,'showAddOrEditUser'])->name('addOrEditUser');
    Route::post("/addorEditUser/{userId?}", [UsersController::class,'addorEditUser']);
 
+
+   // Cores
    Route::get("/countries", [WebsiteCoresControllers::class,'showCountries'])->name('countries');
    Route::post("/addCountry", [WebsiteCoresControllers::class,'addCountry']);
    Route::get("/deleteCountry/{countryId}", [WebsiteCoresControllers::class,'deleteCountry']);
 
-
+   Route::get("/profileTypes", [WebsiteCoresControllers::class,'showProfileTypes'])->name('profileTypes');
+   Route::post("/addprofileType", [WebsiteCoresControllers::class,'addprofileType']);
+   Route::get("/deleteProfileType/{profileTypeId}", [WebsiteCoresControllers::class,'deleteProfileType']);
 
 
 });
