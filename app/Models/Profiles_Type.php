@@ -12,7 +12,10 @@ class Profiles_Type extends Model
     protected $table = 'profiles_type';
 
 
-
+    public function specialties()
+    {
+        return $this->hasMany(Specialties::class);
+    }
 
 
 }

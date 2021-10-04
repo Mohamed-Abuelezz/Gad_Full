@@ -17,4 +17,11 @@ class Countries extends Model
         return $this->hasMany(User::class);
     }
 
+    public function specialties()
+    {
+        return $this->hasMany(Specialties::class);
+    }
+
+
+
 }

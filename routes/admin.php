@@ -25,5 +25,8 @@ Route::prefix("admin")->group(function(){
    Route::post("/addprofileType", [WebsiteCoresControllers::class,'addprofileType']);
    Route::get("/deleteProfileType/{profileTypeId}", [WebsiteCoresControllers::class,'deleteProfileType']);
 
+   Route::get("/specialties", [WebsiteCoresControllers::class,'showSpecialties'])->name('specialties');
+   Route::post("/addSpecialties", [WebsiteCoresControllers::class,'addSpecialties']);
+   Route::get("/deleteSpecialties/{SpecialtiesId}", [WebsiteCoresControllers::class,'deleteSpecialties']);
 
 });

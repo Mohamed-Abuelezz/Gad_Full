@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Countries;
 use App\Models\Profiles_Type;
+use App\Models\Specialties;
 
 class WebsiteCoresControllers extends Controller
 {
@@ -86,14 +87,56 @@ class WebsiteCoresControllers extends Controller
         return back()->with('success','تم الحذف بنجاح');
     }
 
+    
+
+    /* 
+    Specialties Methods
+    */
+
+    public function showSpecialties(Request $request)
+    {
+
+        $specialties = Specialties::all();
+
+        $countries = Countries::all();
+        $profiles_type = Profiles_Type::all();
+
+        return view('Admin.website cores.specialties',['specialties' => $specialties,'countries'=> $countries,'profiles_type'=> $profiles_type]);
+    }
 
 
 
+    
+    public function addSpecialties(Request $request)
+    {
 
 
+        $validated = $request->validate([
+            'name_ar' => 'required|unique:specialties',
+            'name_en' => 'required|unique:specialties',
+            'country' => 'required',
+            'profile_type' => 'required',
+        ]);
+        $specialties = new Specialties;
 
+        $specialties->name_ar =$request->input('name_ar');
+        $specialties->name_en =$request->input('name_en');
+        $specialties->country_id =$request->input('country');
+        $specialties->profiles_type_id =$request->input('profile_type');
 
+        $specialties->save();
 
+        return back()->with('success','تم الاضافة بنجاح');
+    }
+
+    public function deleteSpecialties(Request $request,$SpecialtiesId)
+    {
+        $specialties =  Specialties::find($SpecialtiesId);
+
+        $specialties->delete();
+
+        return back()->with('success','تم الحذف بنجاح');
+    }
 
 
 
