@@ -29,4 +29,11 @@ Route::prefix("admin")->group(function(){
    Route::post("/addSpecialties", [WebsiteCoresControllers::class,'addSpecialties']);
    Route::get("/deleteSpecialties/{SpecialtiesId}", [WebsiteCoresControllers::class,'deleteSpecialties']);
 
+   Route::get("/subjects", [WebsiteCoresControllers::class,'showSubjects'])->name('subjects');
+   Route::post("/addSubject", [WebsiteCoresControllers::class,'addSubject']);
+   Route::get("/deleteSubject/{SubjectId}", [WebsiteCoresControllers::class,'deleteSubject']);
+
+
+
+   
 });

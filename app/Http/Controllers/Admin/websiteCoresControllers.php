@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Countries;
 use App\Models\Profiles_Type;
 use App\Models\Specialties;
+use App\Models\Subjects;
 
 class WebsiteCoresControllers extends Controller
 {
@@ -17,7 +18,7 @@ class WebsiteCoresControllers extends Controller
     {
         $countries = Countries::all();
 
-        return view('Admin.website cores.countries',['countries' => $countries,]);
+        return view('Admin.website cores.countries', ['countries' => $countries,]);
     }
 
     public function addCountry(Request $request)
@@ -28,26 +29,26 @@ class WebsiteCoresControllers extends Controller
         ]);
         $countries = new Countries;
 
-        $countries->name_ar =$request->input('name_ar');
-        $countries->name_en =$request->input('name_en');
+        $countries->name_ar = $request->input('name_ar');
+        $countries->name_en = $request->input('name_en');
 
         $countries->save();
 
-        return back()->with('success','تم الاضافة بنجاح');
+        return back()->with('success', 'تم الاضافة بنجاح');
     }
 
 
-    public function deleteCountry(Request $request,$countryId)
+    public function deleteCountry(Request $request, $countryId)
     {
         $countries =  Countries::find($countryId);
 
         $countries->delete();
 
-        return back()->with('success','تم الحذف بنجاح');
+        return back()->with('success', 'تم الحذف بنجاح');
     }
 
 
-    
+
     /* 
     showProfileTypes Methods
     */
@@ -56,7 +57,7 @@ class WebsiteCoresControllers extends Controller
     {
         $profiles_Type = Profiles_Type::all();
 
-        return view('Admin.website cores.profileTypes',['profiles_Type' => $profiles_Type,]);
+        return view('Admin.website cores.profileTypes', ['profiles_Type' => $profiles_Type,]);
     }
 
 
@@ -69,25 +70,25 @@ class WebsiteCoresControllers extends Controller
         ]);
         $profiles_Type = new Profiles_Type;
 
-        $profiles_Type->name_ar =$request->input('name_ar');
-        $profiles_Type->name_en =$request->input('name_en');
+        $profiles_Type->name_ar = $request->input('name_ar');
+        $profiles_Type->name_en = $request->input('name_en');
 
         $profiles_Type->save();
 
-        return back()->with('success','تم الاضافة بنجاح');
+        return back()->with('success', 'تم الاضافة بنجاح');
     }
-    
 
-    public function deleteProfileType(Request $request,$profileTypeId)
+
+    public function deleteProfileType(Request $request, $profileTypeId)
     {
         $profiles_Type =  Profiles_Type::find($profileTypeId);
 
         $profiles_Type->delete();
 
-        return back()->with('success','تم الحذف بنجاح');
+        return back()->with('success', 'تم الحذف بنجاح');
     }
 
-    
+
 
     /* 
     Specialties Methods
@@ -101,12 +102,10 @@ class WebsiteCoresControllers extends Controller
         $countries = Countries::all();
         $profiles_type = Profiles_Type::all();
 
-        return view('Admin.website cores.specialties',['specialties' => $specialties,'countries'=> $countries,'profiles_type'=> $profiles_type]);
+        return view('Admin.website cores.specialties', ['specialties' => $specialties, 'countries' => $countries, 'profiles_type' => $profiles_type]);
     }
 
 
-
-    
     public function addSpecialties(Request $request)
     {
 
@@ -119,25 +118,67 @@ class WebsiteCoresControllers extends Controller
         ]);
         $specialties = new Specialties;
 
-        $specialties->name_ar =$request->input('name_ar');
-        $specialties->name_en =$request->input('name_en');
-        $specialties->country_id =$request->input('country');
-        $specialties->profiles_type_id =$request->input('profile_type');
+        $specialties->name_ar = $request->input('name_ar');
+        $specialties->name_en = $request->input('name_en');
+        $specialties->country_id = $request->input('country');
+        $specialties->profiles_type_id = $request->input('profile_type');
 
         $specialties->save();
 
-        return back()->with('success','تم الاضافة بنجاح');
+        return back()->with('success', 'تم الاضافة بنجاح');
     }
 
-    public function deleteSpecialties(Request $request,$SpecialtiesId)
+    public function deleteSpecialties(Request $request, $SpecialtiesId)
     {
         $specialties =  Specialties::find($SpecialtiesId);
 
         $specialties->delete();
 
-        return back()->with('success','تم الحذف بنجاح');
+        return back()->with('success', 'تم الحذف بنجاح');
+    }
+
+    /* 
+    Subjects Methods
+    */
+
+    public function showSubjects(Request $request)
+    {
+
+        $subjects = Subjects::all();
+
+        $specialties = Specialties::all();
+
+        return view('Admin.website cores.subjects', ['subjects' => $subjects, 'specialties' => $specialties,]);
     }
 
 
+    public function addSubject(Request $request)
+    {
+
+        $validated = $request->validate([
+            'name_ar' => 'required|unique:subjects',
+            'name_en' => 'required|unique:subjects',
+            'specialties' => 'required',
+        ]);
+        $subjects = new Subjects;
+
+        $subjects->name_ar = $request->input('name_ar');
+        $subjects->name_en = $request->input('name_en');
+        $subjects->specialties_id = $request->input('specialties');
+
+        $subjects->save();
+
+        return back()->with('success', 'تم الاضافة بنجاح');
+    }
+
+
+    public function deleteSubject(Request $request, $SubjectId)
+    {
+        $subjects =  Subjects::find($SubjectId);
+
+        $subjects->delete();
+
+        return back()->with('success', 'تم الحذف بنجاح');
+    }
 
 }

@@ -61,7 +61,7 @@
                                 <a class="nav-link" href="{{ url('admin/countries') }}">البلاد</a>
                                 <a class="nav-link" href="{{ url('admin/profileTypes') }}">نوع البروفايل</a>
                                 <a class="nav-link" href="{{ url('admin/specialties') }}">تخصص البروفايل</a>
-                                <a class="nav-link" href="register.html">المواد العلمية</a>
+                                <a class="nav-link" href="{{ url('admin/subjects') }}">المواد العلمية</a>
                             </nav>
                         </div>
 
