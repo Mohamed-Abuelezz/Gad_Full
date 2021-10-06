@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\MyHelpersFunctios;
 
 use App\Models\Countries;

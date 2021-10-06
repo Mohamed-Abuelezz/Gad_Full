@@ -67,8 +67,21 @@
 
                      <!-------------------------------------------------------------->
 
-
+                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                     data-bs-target="#pagesCollapseAuth3" aria-expanded="false"
+                     aria-controls="pagesCollapseAuth3">
+                     طلبات الاشتراك والتواصل
+                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                 </a>
+                 <div class="collapse" id="pagesCollapseAuth3" aria-labelledby="headingOne"
+                     data-bs-parent="#sidenavAccordionPages">
+                     <nav class="sb-sidenav-menu-nested nav">
+                         <a class="nav-link" href="{{ url('admin/countries') }}">طلبات الاشتراك</a>
+                         <a class="nav-link" href="{{ url('admin/contactUs') }}">تواصل معنا</a>
+                     </nav>
+                 </div>
                     </nav>
+
                 </div>
                 <div class="sb-sidenav-menu-heading">Addons</div>
                 <a class="nav-link" href="charts.html">

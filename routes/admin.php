@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\WebsiteCoresControllers;
+use App\Http\Controllers\Admin\PaymentsAndContactUsControllers;
 
 // Admin Routes
 Route::prefix("admin")->group(function(){
@@ -33,6 +34,10 @@ Route::prefix("admin")->group(function(){
    Route::post("/addSubject", [WebsiteCoresControllers::class,'addSubject']);
    Route::get("/deleteSubject/{SubjectId}", [WebsiteCoresControllers::class,'deleteSubject']);
 
+// Payments and ContactUs
+
+Route::get("/contactUs", [PaymentsAndContactUsControllers::class,'showContactUs'])->name('contactUs');
+Route::get("/deleteContactUs/{contactUsId}", [PaymentsAndContactUsControllers::class,'deleteContactUs']);
 
 
    
