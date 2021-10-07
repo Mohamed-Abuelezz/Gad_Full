@@ -8,6 +8,7 @@ use App\Models\Countries;
 use App\Models\Profiles_Type;
 use App\Models\Specialties;
 use App\Models\Subjects;
+use App\Models\Packages;
 
 class WebsiteCoresControllers extends Controller
 {
@@ -179,6 +180,43 @@ class WebsiteCoresControllers extends Controller
         $subjects->delete();
 
         return back()->with('success', 'تم الحذف بنجاح');
+    }
+
+    
+
+    /* 
+    Subjects Methods
+    */
+
+    public function showPackages(Request $request)
+    {
+
+        $packages = Packages::all();
+
+
+        return view('Admin.website cores.packages', ['packages' => $packages,]);
+    }
+
+    
+    public function addPackages(Request $request)
+    {
+
+        $validated = $request->validate([
+            'name_ar' => 'required|unique:subjects',
+            'name_en' => 'required|unique:subjects',
+            'price' => 'required|numeric|min:1|max:1000',
+            'take_long' => 'required|numeric|min:1',
+        ]);
+        $packages = new Packages;
+
+        $packages->name_ar = $request->input('name_ar');
+        $packages->name_en = $request->input('name_en');
+        $packages->price = $request->input('price');
+        $packages->take_long = $request->input('take_long');
+
+        $packages->save();
+
+        return back()->with('success', 'تم الاضافة بنجاح');
     }
 
 }

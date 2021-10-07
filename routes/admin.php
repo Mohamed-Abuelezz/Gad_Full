@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\WebsiteCoresControllers;
 use App\Http\Controllers\Admin\PaymentsAndContactUsControllers;
+use App\Http\Controllers\Admin\ReportsController;
+use App\Http\Controllers\Admin\WebsiteConfigController;
 
 // Admin Routes
 Route::prefix("admin")->group(function(){
@@ -34,10 +36,32 @@ Route::prefix("admin")->group(function(){
    Route::post("/addSubject", [WebsiteCoresControllers::class,'addSubject']);
    Route::get("/deleteSubject/{SubjectId}", [WebsiteCoresControllers::class,'deleteSubject']);
 
+   Route::get("/packages", [WebsiteCoresControllers::class,'showPackages'])->name('subjects');
+   Route::post("/addPackages", [WebsiteCoresControllers::class,'addPackages']);
+
+// Reports
+
+Route::get("/profileReports", [ReportsController::class,'showProfileReports'])->name('profileReports');
+Route::get("/deleteProfileReport/{reportId}", [ReportsController::class,'deleteProfileReport']);
+Route::get("/deleteProfile_Reporter/{profileId}", [ReportsController::class,'deleteProfile_Reporter']);
+Route::get("/deleteUser_Reporter/{profileId}", [ReportsController::class,'deleteUser_Reporter']);
+
+Route::get("/commentsReports", [ReportsController::class,'showCommentsReports'])->name('commentsReports');
+Route::get("/deleteCommentReport/{Id}", [ReportsController::class,'deleteCommentReport']);
+Route::get("/deleteComment_Reporter/{Id}", [ReportsController::class,'deleteComment_Reporter']);
+Route::get("/deleteUserOfComment_Reporter/{Id}", [ReportsController::class,'deleteUserOfComment_Reporter']);
+
+
+   
 // Payments and ContactUs
 
 Route::get("/contactUs", [PaymentsAndContactUsControllers::class,'showContactUs'])->name('contactUs');
 Route::get("/deleteContactUs/{contactUsId}", [PaymentsAndContactUsControllers::class,'deleteContactUs']);
+
+
+
+//website Configs.
+Route::get("/websiteConfigs", [WebsiteConfigController::class,'showWebsiteConfigs'])->name('websiteConfigs');
 
 
    

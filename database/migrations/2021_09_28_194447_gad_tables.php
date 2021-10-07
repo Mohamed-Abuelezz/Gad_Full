@@ -182,9 +182,6 @@ class GadTables extends Migration
         });
 
 
-
-
-
         //favourite_profiles_Table
         Schema::create('favourite_profiles', function (Blueprint $table) {
             $table->id();
@@ -217,6 +214,98 @@ class GadTables extends Migration
         });
 
 
+        //packages_Table
+        Schema::create('packages', function (Blueprint $table) {
+            $table->id();
+
+            $table->string('name_ar');
+            $table->string('name_en');
+            $table->string('price');
+            $table->string('take_long');
+
+            $table->timestamps();
+        });
+
+        //profiles_reports_Table
+        Schema::create('profiles_reports', function (Blueprint $table) {
+            $table->id();
+
+            $table->foreignId('users_id')
+                ->constrained('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreignId('profile_id')
+                ->constrained('profiles')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->timestamps();
+        });
+
+
+        //comments_reports_Table
+        Schema::create('comments_reports', function (Blueprint $table) {
+            $table->id();
+
+            $table->foreignId('profile_id')
+                ->constrained('profiles')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreignId('profiles_comments_id')
+                ->constrained('profiles_comments')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->timestamps();
+        });
+
+
+
+///////////////////////////////////////////////////////////
+
+        //websiteConfigs_Table
+        Schema::create('websiteConfigs', function (Blueprint $table) {
+            $table->id();
+            $table->string('website_name');
+            $table->string('website_logo');
+            $table->string('charset');
+            $table->string('author');
+            $table->longText('description');
+            $table->string('keywords');
+            $table->string('ourMessage_title');
+            $table->longText('ourMessage_desc');
+            $table->timestamps();
+        });
+
+        //sliders_Table
+        Schema::create('websiteConfigs_sliders', function (Blueprint $table) {
+            $table->id();
+
+            $table->string('title');
+            $table->longText('desc');
+            $table->longText('image');
+
+            $table->timestamps();
+        });
+
+        //availbalePayments_Table
+        Schema::create('websiteConfigs_availbalePayments', function (Blueprint $table) {
+            $table->id();
+
+            $table->string('title');
+            $table->string('image');
+
+            $table->timestamps();
+        });
+
+
+
+
+
+
+
 
 
 
@@ -235,6 +324,9 @@ class GadTables extends Migration
     public function down()
     {
         //
+        Schema::dropIfExists('comments_reports');
+        Schema::dropIfExists('profiles_reports');
+        Schema::dropIfExists('packages');
         Schema::dropIfExists('contact_Us');
         Schema::dropIfExists('favourite_profiles');
         Schema::dropIfExists('profiles_views');
