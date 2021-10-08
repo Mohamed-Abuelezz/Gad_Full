@@ -268,14 +268,18 @@ class GadTables extends Migration
         //websiteConfigs_Table
         Schema::create('websiteConfigs', function (Blueprint $table) {
             $table->id();
-            $table->string('website_name');
+            $table->string('website_name_ar');
+            $table->string('website_name_en');
             $table->string('website_logo');
             $table->string('charset');
             $table->string('author');
-            $table->longText('description');
+            $table->longText('description_ar');
+            $table->longText('description_en');
             $table->string('keywords');
-            $table->string('ourMessage_title');
-            $table->longText('ourMessage_desc');
+            $table->string('ourMessage_title_ar');
+            $table->string('ourMessage_title_en');
+            $table->longText('ourMessage_desc_ar');
+            $table->longText('ourMessage_desc_en');
             $table->timestamps();
         });
 
@@ -324,6 +328,9 @@ class GadTables extends Migration
     public function down()
     {
         //
+        Schema::dropIfExists('websiteConfigs_availbalePayments');
+        Schema::dropIfExists('websiteConfigs_sliders');
+        Schema::dropIfExists('websiteConfigs');
         Schema::dropIfExists('comments_reports');
         Schema::dropIfExists('profiles_reports');
         Schema::dropIfExists('packages');

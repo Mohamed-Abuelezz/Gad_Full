@@ -207,6 +207,7 @@ class WebsiteCoresControllers extends Controller
             'price' => 'required|numeric|min:1|max:1000',
             'take_long' => 'required|numeric|min:1',
         ]);
+        
         $packages = new Packages;
 
         $packages->name_ar = $request->input('name_ar');

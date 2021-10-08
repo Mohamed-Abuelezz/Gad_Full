@@ -22,11 +22,11 @@
 </head>
 
 <body class="sb-nav-fixed">
-    @include('Admin.global_Views.topNavbar') 
+    @include('Admin.global_Views.topNavbar')
 
 
     <div id="layoutSidenav">
-        @include('Admin.global_Views.sideNav') 
+        @include('Admin.global_Views.sideNav')
 
         <div id="layoutSidenav_content">
             <main>
@@ -38,85 +38,182 @@
                     </ol>
 
 
-                    <form class="row g-3" action="{{   url('admin/addCountry') }}" method="post">
+                    <form class="row g-3" action="{{ url('admin/websiteConfigs') }}" method="post"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="col-auto">
-                            <input type="text" class="form-control  {{$errors->has('name_ar') ? 'is-invalid' :  '' }}" id="inputPassword2" placeholder="الاسم بالعربي" name='name_ar' value="{{ old('name_ar')}}">
-                           
-                            @error('name_ar')
-                            <div class="invalid-feedback ">
-                             {{ $message }}
-                           </div>
-                               @enderror  
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" class="form-control  {{$errors->has('name_ar') ? 'is-invalid' :  '' }}" id="inputPassword2" placeholder="الاسم بالعربي" name='name_ar' value="{{ old('name_ar')}}">
-                           
-                            @error('name_ar')
-                            <div class="invalid-feedback ">
-                             {{ $message }}
-                           </div>
-                               @enderror  
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" class="form-control  {{$errors->has('name_ar') ? 'is-invalid' :  '' }}" id="inputPassword2" placeholder="الاسم بالعربي" name='name_ar' value="{{ old('name_ar')}}">
-                           
-                            @error('name_ar')
-                            <div class="invalid-feedback ">
-                             {{ $message }}
-                           </div>
-                               @enderror  
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" class="form-control  {{$errors->has('name_ar') ? 'is-invalid' :  '' }}" id="inputPassword2" placeholder="الاسم بالعربي" name='name_ar' value="{{ old('name_ar')}}">
-                           
-                            @error('name_ar')
-                            <div class="invalid-feedback ">
-                             {{ $message }}
-                           </div>
-                               @enderror  
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" class="form-control  {{$errors->has('name_ar') ? 'is-invalid' :  '' }}" id="inputPassword2" placeholder="الاسم بالعربي" name='name_ar' value="{{ old('name_ar')}}">
-                           
-                            @error('name_ar')
-                            <div class="invalid-feedback ">
-                             {{ $message }}
-                           </div>
-                               @enderror  
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" class="form-control  {{$errors->has('name_ar') ? 'is-invalid' :  '' }}" id="inputPassword2" placeholder="الاسم بالعربي" name='name_ar' value="{{ old('name_ar')}}">
-                           
-                            @error('name_ar')
-                            <div class="invalid-feedback ">
-                             {{ $message }}
-                           </div>
-                               @enderror  
-                        </div>
-                        
-                          <div class="col-auto">
-                            <input type="text" class="form-control  {{$errors->has('name_en') ? 'is-invalid' :  '' }}" id="inputPassword2" placeholder="الاسم بالانجليزي" name='name_en' value="{{ old('name_en')}}">
-                           
-                            @error('name_en')
-                            <div class="invalid-feedback">
-                             {{ $message }}
-                           </div>
-                               @enderror  
+                            <input type="text"
+                                class="form-control  {{ $errors->has('website_name_ar') ? 'is-invalid' : '' }}"
+                                id="inputPassword2" placeholder="الاسم الموقع بالعربي" name='website_name_ar'
+                                value="{{ old('website_name_ar') }}">
 
+                            @error('website_name_ar')
+                                <div class="invalid-feedback ">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
+
                         <div class="col-auto">
-                          <button type="submit" class="btn btn-primary mb-3">اضافة</button>
+                            <input type="text"
+                                class="form-control  {{ $errors->has('website_name_en') ? 'is-invalid' : '' }}"
+                                id="inputPassword2" placeholder="الاسم الموقع بالانجليزية" name='website_name_en'
+                                value="{{ old('website_name_en') }}">
+
+                            @error('website_name_en')
+                                <div class="invalid-feedback ">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
-                      </form>
-                             
+
+                        <div class="col-auto">
+                            <input class="form-control {{ $errors->has('website_logo') ? 'is-invalid' : '' }} "
+                                type="file" id="formFile" value="لوجو الموقع" name="website_logo">
+                            @error('website_logo')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+
+
+
+
+
+
+                        <div class="col-auto">
+                            <input type="text"
+                                class="form-control  {{ $errors->has('charset') ? 'is-invalid' : '' }}"
+                                id="inputPassword2" placeholder="charset" name='charset' value="{{ old('charset') }}">
+
+                            @error('charset')
+                                <div class="invalid-feedback ">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+
+                        <div class="col-auto">
+                            <input type="text" class="form-control  {{ $errors->has('author') ? 'is-invalid' : '' }}"
+                                id="inputPassword2" placeholder="author" name='author' value="{{ old('author') }}">
+
+                            @error('author')
+                                <div class="invalid-feedback ">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+
+                        <div class="col-auto">
+                            <input type="text"
+                                class="form-control  {{ $errors->has('description_ar') ? 'is-invalid' : '' }}"
+                                id="inputPassword2" placeholder="description_ar_meta" name='description_ar'
+                                value="{{ old('description_ar') }}">
+
+                            @error('description_ar')
+                                <div class="invalid-feedback ">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+
+                        <div class="col-auto">
+                            <input type="text"
+                                class="form-control  {{ $errors->has('description_en') ? 'is-invalid' : '' }}"
+                                id="inputPassword2" placeholder="description_en_meta" name='description_en'
+                                value="{{ old('description_en') }}">
+
+                            @error('description_en')
+                                <div class="invalid-feedback ">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="col-auto">
+                            <input type="text"
+                                class="form-control  {{ $errors->has('keywords') ? 'is-invalid' : '' }}"
+                                id="inputPassword2" placeholder="keywords" name='keywords'
+                                value="{{ old('keywords') }}">
+
+                            @error('keywords')
+                                <div class="invalid-feedback ">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="col-auto">
+                            <input type="text"
+                                class="form-control  {{ $errors->has('ourMessage_title_ar') ? 'is-invalid' : '' }}"
+                                id="inputPassword2" placeholder=" عنوان رسالتنا بالعربي" name='ourMessage_title_ar'
+                                value="{{ old('ourMessage_title_ar') }}">
+
+                            @error('ourMessage_title_ar')
+                                <div class="invalid-feedback ">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+
+                        <div class="col-auto">
+                            <input type="text"
+                                class="form-control  {{ $errors->has('ourMessage_title_en') ? 'is-invalid' : '' }}"
+                                id="inputPassword2" placeholder="عنوان رسالتنا بالانجليزية " name='ourMessage_title_en'
+                                value="{{ old('ourMessage_title_en') }}">
+                            @error('ourMessage_title_en')
+                                <div class="invalid-feedback ">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="col-auto">
+                            <input type="text"
+                                class="form-control  {{ $errors->has('ourMessage_desc_ar') ? 'is-invalid' : '' }}"
+                                id="inputPassword2" placeholder="تفاصيل رسالتنا بالعربي" name='ourMessage_desc_ar'
+                                value="{{ old('ourMessage_desc_ar') }}">
+
+                            @error('ourMessage_desc_ar')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+
+                        <div class="col-auto">
+                            <input type="text"
+                                class="form-control  {{ $errors->has('ourMessage_desc_en') ? 'is-invalid' : '' }}"
+                                id="inputPassword2" placeholder="تفاصيل رسالتنا بالانجليزية" name='ourMessage_desc_en'
+                                value="{{ old('ourMessage_desc_en') }}">
+
+                            @error('ourMessage_desc_en')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary mb-3"> تعديل \ اضافة</button>
+                        </div>
+                    </form>
+
 
 
 
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                           البلاد
+                            البلاد
                         </div>
                         <div class="card-body">
                             <table id="datatablesSimple">
@@ -131,46 +228,49 @@
                                         <th>meta_keywords</th>
                                         <th>ourMessage_title</th>
                                         <th>ourMessage_desc</th>
-                                        <th>التحكم</th>
                                     </tr>
                                 </thead>
-                           
+
                                 <tbody>
-                                  
-                                 @foreach ($websiteConfigs as $websiteConfig)
-                                 <tr>
-                                    <td>{{$websiteConfig->id}}</td>
-                                    <td>{{$websiteConfig->website_name}}</td>
-                                    <td>{{$websiteConfig->website_logo}}</td>
-                                    <td>{{$websiteConfig->charset}}</td>
-                                    <td>{{$websiteConfig->author}}</td>
-                                    <td>{{$websiteConfig->description}}</td>
-                                    <td>{{$websiteConfig->keywords}}</td>
-                                    <td>{{$websiteConfig->ourMessage_title}}</td>
-                                    <td>{{$websiteConfig->ourMessage_desc}}</td>
-                                    <td>
-                                        <a class="btn btn-primary" href="{{url('admin/deleteCountry/'.$websiteConfig->id)}}" role="button">تعديل</a>
-                                        <a class="btn btn-danger" href="{{url('admin/deleteCountry/'.$websiteConfig->id)}}" role="button">حذف</a>
-                                    </td>
-                                  
-                                </tr>
-                                 @endforeach
-                                    
+
+                                    @foreach ($websiteConfigs as $websiteConfig)
+                                        <tr>
+                                            <td>{{ $websiteConfig->id }}</td>
+                                            <td>{{ $websiteConfig->website_name_ar }}</td>
+                                            <td>
+
+                                                <a href="{{ asset('storage/images/website_images/'.$websiteConfig->website_logo) }}" target="_blank" class="preview" style="z-index: 9999" title=" Sherif Nabil Abo.elezz ">
+                                                    <img class="profile-image "
+                                                    src="{{ asset('storage/images/website_images/'.$websiteConfig->website_logo) }}" width="100%" height="100"/>
+                                                  </a>
+                                            
+                                            </td>
+                                            <td>{{ $websiteConfig->charset }}</td>
+                                            <td>{{ $websiteConfig->author }}</td>
+                                            <td>{{ $websiteConfig->description_ar }}</td>
+                                            <td>{{ $websiteConfig->keywords }}</td>
+                                            <td>{{ $websiteConfig->ourMessage_title_ar }}</td>
+                                            <td>{{ $websiteConfig->ourMessage_desc_ar }}</td>
+
+
+                                        </tr>
+                                    @endforeach
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </main>
-            @include('Admin.global_Views.footer') 
+            @include('Admin.global_Views.footer')
 
         </div>
 
-        @if(session()->has('success'))
+        @if (session()->has('success'))
 
-        @include('Admin.global_Views.toast') 
-        
-                @endif
+            @include('Admin.global_Views.toast')
+
+        @endif
 
 
     </div>
@@ -182,13 +282,15 @@
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     <script src="{{ URL::asset('admin_assets/js/datatables-simple-demo.js') }}"></script>
     <script src="{{ URL::asset('admin_assets/js/global/global.js') }}"></script>
-
-    
-<script>
+    <script src="{{ URL::asset('admin_assets/js/global/jQuery-Plugin-For-Image-Hover-Preview-With-Caption-Support-imagepreview/imagepreview.min.js') }}"></script>
 
 
+    <script>
 
-</script>
+    $('.preview').anarchytip();
+
+
+    </script>
 
 </body>
 

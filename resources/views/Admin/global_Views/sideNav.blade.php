@@ -109,12 +109,12 @@
                 <!-- ------------------------------------------------>
 
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts2">
                 <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                 اعدادات الموقع
                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
             </a>
-            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
+            <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne"
                 data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
                     <a class="nav-link" href="{{ url('admin/websiteConfigs') }}">الاعدادات الرئيسية</a>

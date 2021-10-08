@@ -62,6 +62,7 @@ Route::get("/deleteContactUs/{contactUsId}", [PaymentsAndContactUsControllers::c
 
 //website Configs.
 Route::get("/websiteConfigs", [WebsiteConfigController::class,'showWebsiteConfigs'])->name('websiteConfigs');
+Route::post("/websiteConfigs", [WebsiteConfigController::class,'addWebsiteConfigs']);
 
 
    
