@@ -44,8 +44,8 @@
                         <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordionPages">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="login.html">عرض البروفايلز</a>
-                                <a class="nav-link" href="register.html">اضافة بروفايل</a>
+                                <a class="nav-link" href="{{ url('admin/profiles') }}">عرض البروفايلز</a>
+                                <a class="nav-link" href="{{ url('admin/addorEditProfile') }}">اضافة بروفايل</a>
                             </nav>
                         </div>
                      <!-------------------------------------------------------------->
@@ -118,7 +118,8 @@
                 data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
                     <a class="nav-link" href="{{ url('admin/websiteConfigs') }}">الاعدادات الرئيسية</a>
-                    <a class="nav-link" href="{{ url('admin/addorEditUser')}}">اضافة مستخدم</a>
+                    <a class="nav-link" href="{{ url('admin/slider')}}">Slider</a>
+                    <a class="nav-link" href="{{ url('admin/availbalePayments')}}">طرق الدفع المتاحة</a>
                 </nav>
             </div>
             </div>

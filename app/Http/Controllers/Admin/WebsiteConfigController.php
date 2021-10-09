@@ -12,13 +12,14 @@ use App\Http\Controllers\MyHelpersFunctios;
 use App\Models\Countries;
 use App\Models\User;
 use App\Models\WebsiteConfigs;
-
+use App\Models\Websiteconfigs_sliders;
+use App\Models\Websiteconfigs_availbalepayments;
 
 class WebsiteConfigController extends Controller
 {
 
     /*
-     Sliders
+     WebsiteConfigs
     */
 
     public function showWebsiteConfigs(Request $request)
@@ -146,4 +147,118 @@ class WebsiteConfigController extends Controller
 
         return redirect()->back();
     }
+
+
+
+    /*
+     Slider
+    */
+
+    public function showSlider(Request $request)
+    {
+
+        $websiteconfigs_sliders = Websiteconfigs_sliders::all();
+
+        return view('Admin.website configs.slider', ['websiteconfigs_sliders' => $websiteconfigs_sliders]);
+    }
+
+    
+    public function addSlider(Request $request)
+    {
+
+        $validated = $request->validate([
+            'title_ar' => 'required|max:255',
+            'title_en' => 'required|max:255',
+            'desc_ar' => 'required',
+            'desc_en' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+
+
+        $myHelpersFunctios = new MyHelpersFunctios();
+        $image_name =  $myHelpersFunctios->saveImages($request, 'image', 'website_images', array('w' => 300, 'h' => 300));
+
+
+        $websiteconfigs_sliders = new Websiteconfigs_sliders();
+        $websiteconfigs_sliders->title_ar = $request->input('title_ar');
+        $websiteconfigs_sliders->title_en = $request->input('title_en');
+        $websiteconfigs_sliders->desc_ar = $request->input('desc_ar');
+        $websiteconfigs_sliders->desc_en = $request->input('desc_en');
+        $websiteconfigs_sliders->image = $image_name;
+
+        $websiteconfigs_sliders->save();
+
+
+        return redirect()->back()->with('success', 'تم اضافة  بنجاح');
+
+    }
+
+
+    public function deleteSlider(Request $request, $sliderId)
+    {
+
+        $websiteconfigs_sliders = Websiteconfigs_sliders::where('id', $sliderId)->firstOrFail();
+
+        Storage::disk('public')->delete('images/website_images/' . $websiteconfigs_sliders->image); // delete file from specific disk e.g; s3, local etc
+
+        $websiteconfigs_sliders->delete();
+
+        return redirect()->back()->with('success', 'تم الحذف بنجاح');
+    }
+
+
+
+    
+    /*
+     Availbale Payments
+    */
+
+    public function showAvailbalePayments(Request $request)
+    {
+
+        $websiteconfigs_availbalepayments = Websiteconfigs_availbalepayments::all();
+
+        return view('Admin.website configs.availbalePayments', ['websiteconfigs_availbalepayments' => $websiteconfigs_availbalepayments]);
+    }
+
+    
+    public function addAvailbalePayments(Request $request)
+    {
+
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+
+
+        $myHelpersFunctios = new MyHelpersFunctios();
+        $image_name =  $myHelpersFunctios->saveImages($request, 'image', 'website_images', array('w' => 300, 'h' => 300));
+
+
+        $websiteconfigs_availbalepayments = new Websiteconfigs_availbalepayments();
+        $websiteconfigs_availbalepayments->title = $request->input('title');
+        $websiteconfigs_availbalepayments->image = $image_name;
+
+        $websiteconfigs_availbalepayments->save();
+
+
+        return redirect()->back()->with('success', 'تم اضافة  بنجاح');
+
+    }
+
+
+    public function deleteAvailbalepayment(Request $request, $availbalepaymentId)
+    {
+
+        $websiteconfigs_availbalepayments = Websiteconfigs_availbalepayments::where('id', $availbalepaymentId)->firstOrFail();
+
+        Storage::disk('public')->delete('images/website_images/' . $websiteconfigs_availbalepayments->image); // delete file from specific disk e.g; s3, local etc
+
+        $websiteconfigs_availbalepayments->delete();
+
+        return redirect()->back()->with('success', 'تم الحذف بنجاح');
+    }
+
 }

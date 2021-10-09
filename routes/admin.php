@@ -7,16 +7,26 @@ use App\Http\Controllers\Admin\WebsiteCoresControllers;
 use App\Http\Controllers\Admin\PaymentsAndContactUsControllers;
 use App\Http\Controllers\Admin\ReportsController;
 use App\Http\Controllers\Admin\WebsiteConfigController;
-
+use App\Http\Controllers\Admin\ProfilesController;
 // Admin Routes
 Route::prefix("admin")->group(function(){
    
    Route::get("/", [IndexController::class,'showIndex'])->name('index');
 
+   //user
    Route::get("/users", [UsersController::class,'showUsers'])->name('users');
    Route::get("/deleteUser/{userId}", [UsersController::class,'deleteUser']);
    Route::get("/addorEditUser/{userId?}", [UsersController::class,'showAddOrEditUser'])->name('addOrEditUser');
    Route::post("/addorEditUser/{userId?}", [UsersController::class,'addorEditUser']);
+
+
+   //profiles
+   Route::get("/profiles/{profilesId?}", [ProfilesController::class,'showProfiles'])->name('profiles');
+   Route::get("/addorEditProfile/{profilesId?}", [ProfilesController::class,'showAddorEditProfile'])->name('addOrEditUser');
+   Route::post("/addorEditProfile/{profilesId?}", [ProfilesController::class,'addorEditProfile']);
+   Route::get("/deleteProfile/{profilesId}", [ProfilesController::class,'deleteProfile']);
+
+   
 
 
    // Cores
@@ -64,6 +74,13 @@ Route::get("/deleteContactUs/{contactUsId}", [PaymentsAndContactUsControllers::c
 Route::get("/websiteConfigs", [WebsiteConfigController::class,'showWebsiteConfigs'])->name('websiteConfigs');
 Route::post("/websiteConfigs", [WebsiteConfigController::class,'addWebsiteConfigs']);
 
+Route::get("/slider", [WebsiteConfigController::class,'showSlider'])->name('slider');
+Route::post("/addSlider", [WebsiteConfigController::class,'addSlider']);
+Route::get("/deleteSlider/{sliderId}", [WebsiteConfigController::class,'deleteSlider']);
 
-   
+Route::get("/availbalePayments", [WebsiteConfigController::class,'showAvailbalePayments'])->name('availbalePayments');
+Route::post("/availbalePayments", [WebsiteConfigController::class,'addAvailbalePayments']);
+Route::get("/deleteAvailbalepayment/{availbalepaymentId}", [WebsiteConfigController::class,'deleteAvailbalepayment']);
+
+
 });

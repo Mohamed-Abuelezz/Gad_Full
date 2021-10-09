@@ -90,6 +90,8 @@ class GadTables extends Migration
 
             $table->string('display_name');
 
+            $table->string('image_cover');
+
             $table->foreignId('profiles_type_id')
                 ->constrained('profiles_type')
                 ->onUpdate('cascade')
@@ -287,8 +289,10 @@ class GadTables extends Migration
         Schema::create('websiteConfigs_sliders', function (Blueprint $table) {
             $table->id();
 
-            $table->string('title');
-            $table->longText('desc');
+            $table->string('title_ar');
+            $table->string('title_en');
+            $table->longText('desc_ar');
+            $table->longText('desc_en');
             $table->longText('image');
 
             $table->timestamps();

@@ -8,7 +8,7 @@ class MyHelpersFunctios{
 
 
 
-    public  function saveImages(Request $request,$request_Input_Name,$folderName,$image_size) {
+    public  function saveImages(Request $request,$request_Input_Name,$folderName,$image_size = null) {
       
       //  dd($request->hasFile('image'));
 
@@ -18,11 +18,15 @@ class MyHelpersFunctios{
             $random =  $this->generateRandomString(10);
             $fileName   =  $random . '.' . $image->getClientOriginalExtension();
             $img = Image::make($image->getRealPath());
-            $img->resize($image_size['w'], $image_size['h'], function ($constraint) {
-                $constraint->aspectRatio();                 
-            });
+            if($image_size != null){
+                $img->resize($image_size['w'], $image_size['h'], function ($constraint) {
+                    $constraint->aspectRatio();                 
+                }); 
+
+            }
 
             $img->stream(); // <-- Key point
+
 
             Storage::disk('public')->put('images/'.$folderName.'/'.$fileName, $img, );
 
