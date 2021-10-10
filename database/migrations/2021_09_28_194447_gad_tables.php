@@ -265,7 +265,16 @@ class GadTables extends Migration
 
 
 
+
 ///////////////////////////////////////////////////////////
+                // website_views_Table
+                Schema::create('website_views', function (Blueprint $table) {
+                    $table->id();
+        
+                    $table->string('user_ipAddress');
+                
+                    $table->timestamps();
+                });
 
         //websiteConfigs_Table
         Schema::create('websiteConfigs', function (Blueprint $table) {
@@ -335,6 +344,7 @@ class GadTables extends Migration
         Schema::dropIfExists('websiteConfigs_availbalePayments');
         Schema::dropIfExists('websiteConfigs_sliders');
         Schema::dropIfExists('websiteConfigs');
+        Schema::dropIfExists('website_views');
         Schema::dropIfExists('comments_reports');
         Schema::dropIfExists('profiles_reports');
         Schema::dropIfExists('packages');
