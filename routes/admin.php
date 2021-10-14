@@ -8,9 +8,21 @@ use App\Http\Controllers\Admin\PaymentsAndContactUsControllers;
 use App\Http\Controllers\Admin\ReportsController;
 use App\Http\Controllers\Admin\WebsiteConfigController;
 use App\Http\Controllers\Admin\ProfilesController;
+use App\Http\Controllers\Admin\AuthController;
+
+
+Route::get("admin/login", [AuthController::class,'showLogin'])->name('login');
+Route::post("admin/login", [AuthController::class,'authenticate']);
+
+
+
 // Admin Routes
 Route::prefix("admin")->group(function(){
    
+
+   
+
+
    Route::get("/", [IndexController::class,'showIndex'])->name('index');
 
    //user

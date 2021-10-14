@@ -21,6 +21,7 @@ class GadTables extends Migration
             $table->timestamps();
         });
 
+        // Users_Table
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -35,6 +36,16 @@ class GadTables extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+                // Admins_Table
+                Schema::create('admins', function (Blueprint $table) {
+                    $table->id();
+                    $table->string('name');
+                    $table->string('email')->unique();
+                    $table->string('password');
+                    $table->rememberToken();
+                    $table->timestamps();
+                });
 
         // profiles_type_Table
         Schema::create('profiles_type', function (Blueprint $table) {

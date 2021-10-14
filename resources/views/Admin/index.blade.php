@@ -103,8 +103,9 @@
     <script src="{{ URL::asset('admin_assets/js/scripts.js') }}"></script>
 
 <script>    
-    var websiteViewsChart = {!! json_encode($websiteViewsChart->toArray()) !!};
-    console.log(websiteViewsChart);
+    var websiteViews_days = {!! json_encode($websiteViews_days) !!};
+    var websiteViewsChart_views = {!! json_encode($websiteViewsChart_views) !!};
+    console.log({!! json_encode($websiteViewsChart_views) !!});
 </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>

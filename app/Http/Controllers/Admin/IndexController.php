@@ -22,22 +22,38 @@ class IndexController extends Controller
         $websiteViewsChart_days=[];
         $websiteViewsChart_views=[];
 
-$websiteViewsChart = WebsiteViews::where('created_at', '>=', Carbon::now()->subDays(7)->startOfDay())
+$websiteViewsChart = WebsiteViews::where('created_at', '>=', Carbon::now()->subDays(7)->startOfDay())->orderBy('created_at', 'ASC')
 ->get();
 
-foreach ($websiteViewsChart as $key => $value) {
-    # code...
-if(! in_array( $value['created_at'] ,$websiteViewsChart_days )){
+foreach ($websiteViewsChart as  $value) {
 
-    array_push($websiteViewsChart_days, $value['created_at']);
+    if(! in_array(Carbon::parse($value->created_at)->format('l') ,$websiteViewsChart_days )){
+
+    array_push($websiteViewsChart_days, Carbon::parse($value->created_at)->format('l'));
+
+    $count = WebsiteViews::whereDate('created_at', '=', $value->created_at)->count();
+
+    array_push($websiteViewsChart_views, $count);
 
 }
 
 }
-dd($websiteViewsChart_days);
+//dd($websiteViewsChart_days);
 
-        return view('Admin.index',['user_count'=>$user_count , 'profiles_count'=>$profiles_count, 'websiteViews_count' => $websiteViews_count , 'websiteViewsChart' => $websiteViewsChart]);
-        //
+        return view('Admin.index',[
+        
+        'user_count'=>$user_count , 
+        'profiles_count'=>$profiles_count,
+
+         'websiteViews_count' => $websiteViews_count , 
+
+
+         'websiteViews_days' => $websiteViewsChart_days,
+         'websiteViewsChart_views' => $websiteViewsChart_views,
+        
+        
+        ]);
+      
     }
 
 

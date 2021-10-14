@@ -7,7 +7,7 @@ var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels:  websiteViewsChart.map(item => new Date(item['created_at'])),
+    labels:  websiteViews_days,
     datasets: [{
       label: "Sessions",
       lineTension: 0.3,
@@ -20,7 +20,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBackgroundColor: "rgba(2,117,216,1)",
       pointHitRadius: 50,
       pointBorderWidth: 2,
-      data: [10000, 30162, 26263, 18394, 18287, 28682, 31274, 33259, 25849, 24159, 32651, 31984, 38451],
+      data: websiteViewsChart_views,
     }],
   },
   options: {
@@ -36,12 +36,13 @@ var myLineChart = new Chart(ctx, {
           maxTicksLimit: 7
         }
       }],
-      yAxes: [{
-        ticks: {
-          min: 0,
-          max: 40000,
-          maxTicksLimit: 5
-        },
+      yAxes: [
+        {
+        // ticks: {
+        //   min: 0,
+        //   max: 40000,
+        //   maxTicksLimit: 5
+        // },
         gridLines: {
           color: "rgba(0, 0, 0, .125)",
         }

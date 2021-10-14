@@ -8,7 +8,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
       <div class="toast-body" style="color: green">
-        {{ session()->get('success') }}
+        {{ $message != null ? $message  : session()->get('success') }}
       </div>
     </div>
   </div>
