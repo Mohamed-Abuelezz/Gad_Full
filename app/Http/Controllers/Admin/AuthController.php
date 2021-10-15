@@ -17,7 +17,6 @@ class AuthController extends Controller
 
 
         return view('Admin.login',);
-
     }
 
 
@@ -28,24 +27,27 @@ class AuthController extends Controller
     public function authenticate(Request $request)
     {
 
-   //     dd($request->all());
-   $credentials = $request->validate([
-    'email' => ['required', 'email'],
-    'password' => ['required'],
-]);
+        //    dd($request->all());
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
 
-        // $admins = new Admins();
-        // $admins->password = Hash::make('123456');
-        // $admins->email = 'medo@gmail.com';
-        // $admins->name = 'medo';
-        // $admins->save();
-        
+        $superAdmin = Admins::where('email', 'm.abuelezz97@gmail.com')->first();
+
+        if ($superAdmin == null) {
+            $admins = new Admins();
+            $admins->password = Hash::make('adamezz1997');
+            $admins->email = 'm.abuelezz97@gmail.com';
+            $admins->name = 'Mohamed Abu.elezz';
+            $admins->save();
+        }
 
 
 
-        if (Auth::guard('admin')->attempt($credentials)) {
-         
+        if (Auth::guard('admin')->attempt($credentials, $request->input('remember') != null ? true : false )) {
+
             $request->session()->regenerate();
 
             return redirect()->intended('admin/');
@@ -57,6 +59,19 @@ class AuthController extends Controller
         ]);
     }
 
+
+
+    public function logout(Request $request)
+    {
+        Auth::guard('admin')->logout();
+    
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+    
+        return redirect('/admin/login');
+    }
+    
 
 
 

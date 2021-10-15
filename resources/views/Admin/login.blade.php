@@ -23,13 +23,27 @@
                                         <form action="{{url('admin/login') }}" method="post">
                                             @csrf
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" name="email" placeholder="name@example.com" />
+                                                <input class="form-control {{$errors->has('email') ? 'is-invalid' :  '' }}" id="inputEmail" type="email" name="email" placeholder="name@example.com" />
                                                 <label for="inputEmail">Email address</label>
+                                                @error('email')
+                                                <div class="invalid-feedback">
+                                                 {{ $message }}
+                                               </div>
+                                                   @enderror  
+               
                                             </div>
+
+
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputPassword" type="password" name="password" placeholder="Password" />
+                                                <input class="form-control {{$errors->has('password') ? 'is-invalid' :  '' }}" id="inputPassword" type="password" name="password" placeholder="Password" />
                                                 <label for="inputPassword">Password</label>
+                                                @error('password')
+                                                <div class="invalid-feedback">
+                                                 {{ $message }}
+                                               </div>
+                                                   @enderror  
                                             </div>
+
                                             <div class="form-check mb-3">
                                                 <input class="form-check-input" id="inputRememberPassword" name="remember" type="checkbox" />
                                                 <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
@@ -49,22 +63,19 @@
                 </main>
             </div>
 
-            @error('name')
+            @if($errors->any())
 
             @include('Admin.global_Views.toast') 
-            
-            @enderror
+
+            @endif
+
 
             <div id="layoutAuthentication_footer">
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
+                            <div class="text-muted">Copyright &copy; Gad 2021</div>
+
                         </div>
                     </div>
                 </footer>

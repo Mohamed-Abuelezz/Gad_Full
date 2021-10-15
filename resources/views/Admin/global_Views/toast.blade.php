@@ -7,8 +7,8 @@
         <small>1s</small>
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
-      <div class="toast-body" style="color: green">
-        {{ $message != null ? $message  : session()->get('success') }}
+      <div class="toast-body" style="color:{{  session()->get('success') == null  ?  'red' : 'green'}} ">
+        {{  session()->get('success') == null ?   $errors->first()  : session()->get('success') }}
       </div>
     </div>
   </div>

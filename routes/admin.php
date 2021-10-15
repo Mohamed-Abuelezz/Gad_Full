@@ -9,15 +9,16 @@ use App\Http\Controllers\Admin\ReportsController;
 use App\Http\Controllers\Admin\WebsiteConfigController;
 use App\Http\Controllers\Admin\ProfilesController;
 use App\Http\Controllers\Admin\AuthController;
-
+use App\Http\Controllers\Admin\AdminsController;
 
 Route::get("admin/login", [AuthController::class,'showLogin'])->name('login');
 Route::post("admin/login", [AuthController::class,'authenticate']);
 
+Route::get("admin/logout", [AuthController::class,'logout'])->name('logout');
 
 
 // Admin Routes
-Route::prefix("admin")->group(function(){
+Route::prefix("admin")->middleware(['adminauth'])->group(function(){
    
 
    
@@ -30,8 +31,15 @@ Route::prefix("admin")->group(function(){
    Route::get("/deleteUser/{userId}", [UsersController::class,'deleteUser']);
    Route::get("/addorEditUser/{userId?}", [UsersController::class,'showAddOrEditUser'])->name('addOrEditUser');
    Route::post("/addorEditUser/{userId?}", [UsersController::class,'addorEditUser']);
+   
+   
 
+   //admins
+   Route::get("/admins", [AdminsController::class,'showAdmins'])->name('admins');
+   Route::post("/addAdmin", [AdminsController::class,'addAdmin']);
+   Route::get("/deleteAdmin/{adminId}", [AdminsController::class,'deleteAdmin']);
 
+   
    //profiles
    Route::get("/profiles/{profilesId?}", [ProfilesController::class,'showProfiles'])->name('profiles');
    Route::get("/addorEditProfile/{profilesId?}", [ProfilesController::class,'showAddorEditProfile'])->name('addOrEditUser');
