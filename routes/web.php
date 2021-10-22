@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Website\AuthController;
+use Illuminate\Support\Facades\Config;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,38 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('setlocale/{locale}', function ($locale) {
+
+
+
+    if (in_array($locale, ['en', 'ar'])) {
+
+      session(['locale' => $locale]);
+
+    }
+    return redirect()->back();
+
+  });
+
+  
 Route::get('/', function () {
-    return view('welcome');
+    return view('Website.index');
+});
+
+
+
+Route::get('/authentication', [AuthController::class,'showLogin'])->name('authentication');
+
+
+
+Route::get('/forgetpassword', function () {
+    return view('Website.screens.auth.forgetPassword');
+});
+
+Route::get('/resetpassword', function () {
+    return view('Website.screens.auth.resetPassword');
+});
+
+Route::get('/home', function () {
+    return view('Website.screens.home');
 });

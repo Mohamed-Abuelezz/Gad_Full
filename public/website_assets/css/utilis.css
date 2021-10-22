@@ -1,0 +1,159 @@
+
+/* All */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'myfont';
+    list-style-type: none;
+    
+}
+body{
+    overflow-x: hidden;
+    
+}
+
+
+:root {
+    --primary: #7C83FD;
+    --secondry: #96BAFF;
+    --third: #7DEDFF;
+    --fourth: #88FFF7;
+    --animate-delay: .7s;
+
+  }
+  
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: var(--secondry); 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--primary); 
+  }
+
+  
+.parent{
+    padding: 0px 100px;
+    
+}
+
+.page-content{
+    min-height: 100vh;
+    margin-top: 100px;
+}
+
+.checked{/* ratong */
+    color: gold;
+}
+.back-to-top { /* scroll to top*/
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: none;
+}
+.show{/* Show Element */
+    display: block;
+}
+.hidden{/* hidden Element */
+    display: none;
+}
+@media (max-width: 991.98px) { 
+
+    .parent{
+        padding: 0px 10px; 
+    }
+ }
+
+/* a */
+a{
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #333;
+    transition: color 1s;
+}
+
+a:hover{
+color: whitesmoke;
+
+}
+
+
+/* btn */
+
+.btn{
+padding: 10px 20px;
+background-color:var(--primary);
+color: white;
+
+}
+
+.btn:hover{
+    transform: scale(.90);
+    color: white;
+}
+
+.btn-outline{
+display: inline-block;
+padding: 10px 20px;
+background-color:transparent;
+border: 1px solid white;
+color: white;
+}
+
+.btn-outline:hover{
+
+transform: scale(.90);
+color: white;
+
+}
+
+/* fonts */
+@font-face {
+    font-family: myfont;
+    src: url('../assets/fonts/Almarai-Regular.ttf');
+  }
+  
+.text-white-color{
+    color: white;
+}
+
+.text-small{
+    font-size: 15px;
+    color: #333;
+}
+
+.text-medium{
+    font-size: 18px;
+    color: #333;
+}
+
+.text-larg{
+    font-size: 20px;
+    color: #333;
+}
+
+.text-headerBG{
+    font-size: 26px;
+    color: #333;
+    font-weight: bolder;
+}
+
+.text-headerSM{
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+}
+
+

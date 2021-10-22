@@ -1,0 +1,59 @@
+.page-content{
+    margin-top: 100px;
+}
+
+.content-us{
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+.content-us .profile-details .all-inputs{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    margin: auto;
+}
+
+
+.tinyDesc-input{
+    width: 100%;
+    font-size: 12px;
+    color: grey;
+    text-align: right;
+    }
+
+
+    .title{
+
+        text-align: center;
+        font-weight: bolder;
+        margin-bottom: 30px;
+        color: var(--primary);
+        }
+
+        .send-btn{
+            width: 30%;
+            margin: auto;
+        }
+
+        @media (max-width: 991.98px) {
+            .page-content{
+                margin-top: 0px;
+            } 
+            .content-us{
+                margin-bottom: 20px;
+                margin-top: 20px;
+            }
+            
+            .content-us .profile-details .all-inputs{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                width: 90%;
+                margin: auto;
+            }
+            .content-us    .btn{
+                width: 40%;
+                margin: auto;
+            }
+        }

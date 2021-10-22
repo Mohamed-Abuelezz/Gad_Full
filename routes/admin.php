@@ -42,7 +42,7 @@ Route::prefix("admin")->middleware(['adminauth'])->group(function(){
    
    //profiles
    Route::get("/profiles/{profilesId?}", [ProfilesController::class,'showProfiles'])->name('profiles');
-   Route::get("/addorEditProfile/{profilesId?}", [ProfilesController::class,'showAddorEditProfile'])->name('addOrEditUser');
+   Route::get("/addorEditProfile/{profilesId?}", [ProfilesController::class,'showAddorEditProfile'])->name('addorEditProfile');
    Route::post("/addorEditProfile/{profilesId?}", [ProfilesController::class,'addorEditProfile']);
    Route::get("/deleteProfile/{profilesId}", [ProfilesController::class,'deleteProfile']);
 
@@ -66,7 +66,7 @@ Route::prefix("admin")->middleware(['adminauth'])->group(function(){
    Route::post("/addSubject", [WebsiteCoresControllers::class,'addSubject']);
    Route::get("/deleteSubject/{SubjectId}", [WebsiteCoresControllers::class,'deleteSubject']);
 
-   Route::get("/packages", [WebsiteCoresControllers::class,'showPackages'])->name('subjects');
+   Route::get("/packages", [WebsiteCoresControllers::class,'showPackages'])->name('packages');
    Route::post("/addPackages", [WebsiteCoresControllers::class,'addPackages']);
 
 // Reports

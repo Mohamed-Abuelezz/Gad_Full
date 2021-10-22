@@ -1,0 +1,99 @@
+.taps {
+    list-style: none;
+    border-bottom: 1px solid grey;
+    margin-bottom: 2em;
+    width: 20%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    
+  }
+  .taps li {
+    display: inline;
+    margin: 0 4px;
+    width: auto;
+    position: relative;
+    width: 50%;
+  }
+  
+  .taps button {
+    color: gray;
+    font-family: "Work Sans", sans-serif;
+    font-weight: 300;
+    background: none;
+    border: 1px solid gray;
+    border-bottom: 0;
+    border-radius: 4px 4px 0 0;
+    padding: 8px 0;
+    cursor: pointer;
+    width: 100%;
+  }
+  .taps button:hover {
+    background: var(--primary);
+    color: #fdfcfc;
+    font-weight: 500;
+    -webkit-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+  }
+  .taps button.active {
+    background: var(--primary);
+    color: #fdfcfc;
+    font-weight: 500;
+  }
+
+  .tabsContents div.content {
+    display: none;
+  }
+  .tabsContents  div.content.show {
+    display: initial;
+  }
+
+
+
+
+
+.all-inputs{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+.all-inputs:first-child{
+  margin-top: 30px;
+}
+
+
+    .all-inputs .btn{
+        margin: auto;;margin-top: 30px;margin-bottom: 50px;width: 20%;
+    }
+
+
+
+
+
+@media (max-width: 991.98px) {
+  
+    .taps {
+        list-style: none;
+        border-bottom: 1px solid grey;
+        margin-bottom: 2em;
+        width: 80%;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        padding: 0;
+        
+      }
+  
+    .all-inputs .input-div{
+        margin: auto;
+        margin-top: 40px;
+           width: 90%;
+           position: relative;
+       }
+       .all-inputs .btn{
+        margin: auto;;margin-top: 30px;margin-bottom: 50px;width: 40%;
+       }
+}

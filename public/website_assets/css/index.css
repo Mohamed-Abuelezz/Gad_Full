@@ -1,0 +1,204 @@
+/* Slider Css *******************************/
+
+.section-slider{
+
+}
+
+.slider{
+	height:100vh;
+	overflow: hidden;
+	position: relative;
+}
+.slider .item {
+	position: relative;
+	height: 100vh;
+}
+
+.slider .item .content{
+	width: 100%;
+	height: 100%;
+	background-attachment: fixed;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+.slider .item .content .info{
+position: absolute;
+top: 25vh;
+left: 40px;
+color: white;
+font-size: 50px;
+font-weight: bolder;
+width: 50%;
+background-color: rgba(83, 83, 83, 0.096);
+}
+
+[dir="rtl"] .slider .item .content .info{
+
+left: unset;
+right: 40px;
+
+}
+
+.slider .item .content .info a{
+	margin-top: 50px;
+	margin:50px auto;
+	text-align: center;
+	padding: 20px 30px;
+}
+@media (max-width: 991.98px) { 
+
+	.slider .item .content .info{
+
+		position: absolute;
+		top: 30vh;
+		left: 40px;
+		color: white;
+		font-size: 20px;
+		font-weight: bolder;
+		width: 50%;
+	}
+	.slider .item .content .info a{
+		padding: 15px 25px;
+
+	}
+ }
+/*End Slider Css ******************************/
+
+/* Our Message Css ******************************/
+
+.section-ourmessage{
+height: 100vh;
+width: 100%;
+position: relative;
+}
+
+
+.section-ourmessage .content{
+	height: 100%;
+	width: 100%;
+	background-attachment: fixed;
+	object-fit: cover;
+	background-repeat:repeat;
+	background-size: 100% 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.section-ourmessage .items{
+	padding: 90px;
+	color: white;
+	text-align: center;
+}
+.section-ourmessage .items .title,.section-ourmessage .items .desc{
+	color: white;
+}
+
+
+@media (max-width: 991.98px) { 
+
+	.section-ourmessage .items{
+		padding: 0px;
+	}
+
+}
+
+
+
+
+/*End Our Message Css ******************************/
+
+/*People Rates Css ******************************/
+
+
+  
+  .background-2 {
+	min-height: 30em;
+	background-image: url('/assets/images/peoplerates.jpg');
+	background-attachment: fixed;
+	background-size: 100% 100%;
+  }
+  
+  .quotes-carousel-container {
+	max-width: 62rem;
+	height: 28em;
+	margin: 0 auto;
+	overflow-x: hidden;
+	overflow-y: hidden;
+  }
+  
+  .quotes-carousel {
+	position: relative;
+	min-height: 22em;
+	width: 100%;
+  }
+  .quotes-carousel .quote-person {
+	background-size: 100%;
+	border-radius: 50%;
+	box-shadow: 0 2px 4px 0 rgba(31, 0, 33, 0.5);
+	height: 7em;
+	left: calc(50% - 3.5em);
+	position: absolute;
+	top: -7em;
+	width: 7em;
+	transition: all 0.4s 0.5s ease-out;
+  }
+  .quotes-carousel .quotee {
+	display: block;
+  }
+  .quotes-carousel .quote {
+	cursor: pointer;
+	left: 50%;
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	transform: translate(calc(100% + 12rem), -50%) scale(0.6);
+	transition: transform 1s cubic-bezier(0.77, 0, 0.35, 1), opacity 0.5s ease-out;
+	display: block;
+	margin: 8em auto 4em;
+	max-width: 18em;
+	min-width: 12em;
+	padding: 1em;
+  }
+  .quotes-carousel .quote.previous {
+	transform: translate(-150%, -50%) scale(0.8);
+	opacity: 0.5;
+	transition: transform 1s cubic-bezier(0.77, 0, 0.35, 1), opacity 1s 0.4s ease-out;
+  }
+  @media only screen and (max-width: 520px) {
+	.quotes-carousel .quote.previous {
+	  transform: translate(-140%, -50%) scale(0.8);
+	}
+	.quotes-carousel .quote.previous .quote-person {
+	  transform: translateX(1rem);
+	}
+  }
+  .quotes-carousel .quote.current {
+	transform: translate(-50%, -50%);
+	opacity: 1;
+	height: auto;
+  }
+  .quotes-carousel .quote.next {
+	transform: translate(50%, -50%) scale(0.8);
+	opacity: 0.5;
+	transition: transform 1s cubic-bezier(0.77, 0, 0.35, 1), opacity 1s 0.6s ease-out;
+  }
+  @media only screen and (max-width: 520px) {
+	.quotes-carousel .quote.next {
+	  transform: translate(40%, -50%) scale(0.8);
+	}
+	.quotes-carousel .quote.next .quote-person {
+	  transform: translateX(-1rem);
+	}
+  }
+  .quotes-carousel .quote.remove-left {
+	transform: translate(calc(-150% - 12rem), -50%) scale(0.8);
+  }
+  .quotes-carousel .quote.place-left {
+	transform: translate(calc(-150% - 12rem), -50%) scale(0.6);
+	transition: none;
+  }
+
+/*End People Rates Css ******************************/
+
+
