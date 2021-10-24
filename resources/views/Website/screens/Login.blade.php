@@ -87,7 +87,8 @@
 
             <div id="one" class="content show">
 
-                <form action="">
+                <form action="{{ url('authentication') }}" method="POST">
+@csrf
                     <div class="profile-details ">
 
                         <div class="all-inputs">
@@ -96,18 +97,20 @@
 
                             <div class="form" style="">
 
-                                <input type="email" id="email" class="form__input" autocomplete="off" placeholder=" "
-                                    aria-describedby="validationServer05Feedback" />
+                                <input type="email" id="email-login" class="form__input {{ $errors->has('email-login') ? 'is-invalid' : '' }}" autocomplete="off" placeholder=" "
+                                    aria-describedby="validationServer05Feedback" value="{{ old('email-login') }}" name="email-login"/>
 
-                                <label for="email" class="form__label is-invalid">
+                                <label for="email-login" class="form__label ">
                                     {{ Config::get('app.locale') == 'ar' ? 'البريد الاليكتروني' : 'Email' }}
                                 </label>
 
 
-
-                                <div id="validationServer05Feedback" class="invalid-feedback" style="font-size: 8px;">
-                                    Please provide a valid zip.
+                                @error('email-login')
+                                <div  class="invalid-feedback">
+                                    {{ $message }}
                                 </div>
+                            @enderror
+
 
 
                             </div>
@@ -115,15 +118,22 @@
 
 
                             <div class="form" style="">
-                                <input type="password" id="password" class="form__input" autocomplete="off"
-                                    placeholder=" " />
-                                <label for="password" class="form__label">
+                                <input type="password" id="password" class="form__input {{ $errors->has('password-login') ? 'is-invalid' : '' }}" autocomplete="off"
+                                    placeholder=" "  value="{{ old('password-login') }}" name="password-login"/>
+                                <label for="password" class="form__label" >
                                     {{ Config::get('app.locale') == 'ar' ? 'الرقم السري' : 'Password' }} </label>
-                            </div>
+                         
+                                    @error('password-login')
+                                    <div  class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                         
+                                </div>
 
 
 
-                            <input href="#" class="btn input-div wow  animate__zoomInDown"
+                            <input href="#" class="btn input-div wow  animate__zoomInDown" type="submit"
                                 value="{{ Config::get('app.locale') == 'ar' ? 'الدخول' : 'login' }}" style="" />
 
 
@@ -142,7 +152,7 @@
             <div id="two" class="content cardsTab">
 
 
-                <form action="{{ url('authentication') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ url('register') }}" method="POST" enctype="multipart/form-data">
 
                     @csrf
 
@@ -334,7 +344,7 @@
 
     <!--End----------------------------------------------------------------------------->
 
-    @if(session()->has('success'))
+    @if(session()->has('success') || session()->has('error'))
 
     @include('Website.global widgets.toast')
     

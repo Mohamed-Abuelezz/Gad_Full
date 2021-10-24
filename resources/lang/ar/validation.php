@@ -27,7 +27,7 @@ return [
     'min' => [
         'numeric' => 'ال :attribute يجب ان يكون علي الاقل :min ارقام',
         'file' => 'The :attribute must be at least :min kilobytes.',
-        'string' => 'ال :attribute يجب ان يكون علي الاقل :min احرف',
+        'string' => 'هذا الحقل يجب عن يحتوي علي :min احرف علي الاقل',
         'array' => 'The :attribute must have at least :min items.',
     ],
 

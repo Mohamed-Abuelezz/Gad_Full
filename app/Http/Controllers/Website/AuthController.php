@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\App;
+use Illuminate\Auth\Events\Registered;
 use App\Http\Controllers\MyHelpersFunctios;
 use App\Models\Countries;
 use App\Models\User;
@@ -20,17 +22,16 @@ class AuthController extends Controller
         $myHelpersFunctios = new MyHelpersFunctios();
         $countries = Countries::all();
 
-
         return view('Website.screens.Login', [
             'meta' => $myHelpersFunctios->getMetaData($request),
             'countries' => $countries,
         ]);
+        
     }
 
 
-    public function login(Request $request){
-      //  $request->flash();
-//dd($request->all());
+    public function register(Request $request){
+
         $validated = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users',
@@ -40,7 +41,6 @@ class AuthController extends Controller
             'password_confirmation' => 'required|min:8|same:password',
         ]);
 
-  //     dd($request->all());
 
         $myHelpersFunctios = new MyHelpersFunctios();
         $image_name =  $myHelpersFunctios->saveImages($request, 'image', 'users_images', array('w' => 300, 'h' => 300));
@@ -54,14 +54,47 @@ class AuthController extends Controller
         $user->password = Hash::make($request->input('password'));
         $user->save();
 
+        event(new Registered($user));
+
 
         return redirect()->back()->with('success',  __('Website.success') );
 
 
 
 
-        dd($request->all());
+    
     }
+
+    public function login(Request $request){
+       
+        $credentials = $request->validate([
+            'email-login' => 'required|email',
+            'password-login' => 'required|min:8',
+        ]);
+
+        if (Auth::attempt(['email' => $request->input('email-login'), 'password' => $request->input('password-login'),])) {
+            $request->session()->regenerate();
+
+            return redirect('/home');
+        }
+
+        return redirect()->back()->with('error', Config::get('app.locale') == 'ar' ? 'حدث خطأ يرجي التأكد من البريد الاليكتروني او الرقم السري مرة اخري' : 'An error occurred, please check your email or password again.' );
+
+
+    }
+
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+    
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+    
+        return redirect('/authentication');
+    }
+
 
 
 
