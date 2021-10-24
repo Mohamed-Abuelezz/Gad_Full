@@ -87,6 +87,7 @@ class UsersController extends Controller
 
             return redirect()->back()->with('success', 'تم اضافة المستخدم بنجاح');
         }
+        
     }
 
 

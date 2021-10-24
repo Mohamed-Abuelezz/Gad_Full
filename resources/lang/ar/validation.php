@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'email' => 'يجب ان يكون :attribute بريد اليكتروني',
+    'email' => 'يرجي ادخال بريد اليكتروني صالح',
     'image' => 'يجب ان تكون من نوع صورة فقط',
     'in' => 'The selected :attribute is invalid.',
     'mimes' => 'The :attribute must be a file of type: :values.',
@@ -21,6 +21,15 @@ return [
     'numeric' => 'هذا الحقل يجب ان يكون رقم.',
     'password' => 'الرقم السري خطأ',
     'required' => 'هذا الحقل اجباري',
+    'confirmed' => 'التأكيد لا يتطابق .',
+    'same' =>   'ال :attribute وال :other يجب ان يكونوا متطابقين',
+    'unique' => 'ال :attribute تم اخذه من قبل',
+    'min' => [
+        'numeric' => 'ال :attribute يجب ان يكون علي الاقل :min ارقام',
+        'file' => 'The :attribute must be at least :min kilobytes.',
+        'string' => 'ال :attribute يجب ان يكون علي الاقل :min احرف',
+        'array' => 'The :attribute must have at least :min items.',
+    ],
 
     /*
     |--------------------------------------------------------------------------

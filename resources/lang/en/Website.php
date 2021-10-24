@@ -2,6 +2,11 @@
 
 
 return [
+        //toast messages
+        'success' => 'successfully done 😄',
+
+
+
     // navbar section
     'home' => 'Home',
     'contactus' => 'Contact Us',

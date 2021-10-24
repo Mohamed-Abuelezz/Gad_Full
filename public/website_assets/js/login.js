@@ -19,3 +19,17 @@ tabs.forEach(tab => {
     document.querySelector(selectedContent).classList.add('show');
   })
 })
+
+
+
+// Form
+
+$(".dropdown-menu li").click(function(){
+  $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+ // $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+
+  console.log($(this).attr('data-id'));
+
+ $("#country").val($(this).attr('data-id'));
+  
+});

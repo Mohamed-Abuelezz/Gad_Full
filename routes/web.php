@@ -36,6 +36,7 @@ Route::get('/', function () {
 
 
 Route::get('/authentication', [AuthController::class,'showLogin'])->name('authentication');
+Route::post('/authentication', [AuthController::class,'login']);
 
 
 

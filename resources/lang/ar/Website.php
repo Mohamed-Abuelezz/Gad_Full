@@ -3,6 +3,11 @@
 
 
 return [
+
+    //toast messages
+    'success' => 'تمت العملية بنجاح 😄',
+
+
     // navbar section
     'home' => 'الرئيسية',
     'contactus' => 'تواصل معنا',
