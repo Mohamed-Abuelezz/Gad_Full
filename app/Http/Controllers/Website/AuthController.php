@@ -23,7 +23,7 @@ class AuthController extends Controller
         $countries = Countries::all();
 
         return view('Website.screens.Login', [
-            'meta' => $myHelpersFunctios->getMetaData($request),
+            'meta' => $myHelpersFunctios->getMetaData(),
             'countries' => $countries,
         ]);
         
@@ -56,8 +56,14 @@ class AuthController extends Controller
 
         event(new Registered($user));
 
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password'),])) {
+            $request->session()->regenerate();
 
-        return redirect()->back()->with('success',  __('Website.success') );
+            return redirect('/home');
+        }
+
+
+        return redirect('/email/verification-notification')->with('success',  __('Website.success') );
 
 
 

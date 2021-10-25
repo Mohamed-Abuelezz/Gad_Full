@@ -44,7 +44,7 @@ if(!empty($request->input($request_Input_Name))){
     }
 
 
-    public  function getMetaData(Request $request,)
+    public  function getMetaData()
     {
 
         $websiteConfigs = WebsiteConfigs::first();
