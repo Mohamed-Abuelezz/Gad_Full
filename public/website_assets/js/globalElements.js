@@ -3,7 +3,7 @@ var isScreenReady=  {
   value: false,
   set: function (value) {
       this.value = value;
-     // this.getOnChange();
+   //  this.getOnChange();
   }
 }
 
@@ -12,13 +12,29 @@ $(document).ready(function(){
 
 //splash
 if(globalUsageElement['Splash'] == true){
+  var count=0;
 
 $('body').loading({
 
   onStop: function(loading) {
+    if(count < 1){
+       count++;
+
     loading.overlay.fadeOut(3000);
     isScreenReady.set(true);
-    },
+
+    if(globalUsageElement['Toast'] == true){
+      var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+      var toastList = toastElList.map(function (toastEl) {
+        return new bootstrap.Toast(toastEl, {})
+      })
+      var myToastEl = document.getElementById('myToastEl');
+      var myToast = bootstrap.Toast.getInstance(myToastEl); // Returns a Bootstrap toast instance
+      myToast.show();
+      }
+
+    }
+  },
   overlay: $("#splash"),
 message:'ok',
 //theme: 'dark'
@@ -57,15 +73,15 @@ myOffcanvas.addEventListener('show.bs.offcanvas', function () {
 
 
 // Toast 
-if(globalUsageElement['Toast'] == true){
-var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-var toastList = toastElList.map(function (toastEl) {
-  return new bootstrap.Toast(toastEl, {})
-})
-var myToastEl = document.getElementById('myToastEl');
-var myToast = bootstrap.Toast.getInstance(myToastEl); // Returns a Bootstrap toast instance
-myToast.show()
-}
+// if(globalUsageElement['Toast'] == true){
+// var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+// var toastList = toastElList.map(function (toastEl) {
+//   return new bootstrap.Toast(toastEl, {})
+// })
+// var myToastEl = document.getElementById('myToastEl');
+// var myToast = bootstrap.Toast.getInstance(myToastEl); // Returns a Bootstrap toast instance
+// myToast.show()
+// }
 
 // // Splash Js
 

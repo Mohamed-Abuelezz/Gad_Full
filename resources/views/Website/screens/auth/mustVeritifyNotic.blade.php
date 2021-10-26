@@ -125,7 +125,7 @@
   <!---------------------------------------------------------------------------------------->
   <script>
     var globalUsageElement = {
-      'Toast': false,
+      'Toast': true,
       'Offside': true,
       'Splash': true,
       'AvatarCover': false,
@@ -149,7 +149,14 @@
   <!--All Screen JS-->
   <script src="{{ URL::asset('website_assets/js/forgetspassword.js') }}"></script>
 
+<script>
 
+
+
+
+
+
+</script>
 
 
 

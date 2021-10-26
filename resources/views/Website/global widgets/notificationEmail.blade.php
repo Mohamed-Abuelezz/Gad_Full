@@ -30,7 +30,7 @@
                <br>
                <br>
                <br>
-        <a href="{{ url($url) }}" class="btn" style="background:#7C83FD;color: white;text-decoration: unset;padding: 10px 20px;border-radius: 5px"> OK </a>
+        <a href="{{ url($url) }}" class="btn" style="background:#7C83FD;color: white;text-decoration: unset;padding: 10px 20px;border-radius: 5px"> {{Config::get('app.locale') == 'ar' ? 'الذهاب' : 'OK'}} </a>
 
             </td>
          </tr>

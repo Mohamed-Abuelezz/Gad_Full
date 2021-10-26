@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Notifications\myMailNotification;
+use Illuminate\Support\Facades\Config;
 
 class User extends Authenticatable  implements MustVerifyEmail
 {
@@ -48,4 +50,19 @@ class User extends Authenticatable  implements MustVerifyEmail
     {
         return $this->belongsTo(Countries::class);
     }
+
+
+    public function sendPasswordResetNotification($token)
+    {
+        $url = url('/reset-password/'.$token);
+    
+        $this->notify(new myMailNotification( 
+            Config::get('app.locale') == 'ar' ? 'اعادة تعيين الرقم السري' : 'Password Reseting',
+            Config::get('app.locale') == 'ar' ? 'يرجي الذهاب لاعادة تعيين الرقم السري الخاص بك من جديد ' : 'Please go to reset your password again',
+            $url));
+    }
+    
+
+
+
 }

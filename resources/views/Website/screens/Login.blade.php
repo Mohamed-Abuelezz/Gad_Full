@@ -28,7 +28,6 @@
 
 <body dir="{{ Config::get('app.locale') == 'ar' ? 'rtl' : 'ltr' }}" lang="{{ Config::get('app.locale') }}">
 
-    <!-- Splash 
   <div id="splash">
 
     <div class="loader">
@@ -39,7 +38,6 @@
 
   </div>
 
--->
 
 
     <!-- Float Scroll top btn-->
@@ -134,11 +132,13 @@
 
 
                             <input href="#" class="btn input-div wow  animate__zoomInDown" type="submit"
-                                value="{{ Config::get('app.locale') == 'ar' ? 'الدخول' : 'login' }}" style="" />
+                                value="{{ Config::get('app.locale') == 'ar' ? 'الدخول' : 'login' }}" style="margin: 5px auto;" />
 
+      <div style="margin: auto;text-align: center;font-size:15px">
+        {{ Config::get('app.locale') == 'ar' ? 'هل' : ' Did you' }}      <a href="{{ url('/forgot-password') }}" style="text-decoration: underline;color: blue;font-size:15px">  {{ Config::get('app.locale') == 'ar' ? ' كلمة السر' : 'forget password' }} </a>      
+    </div>     
 
                         </div>
-
 
 
 
@@ -356,7 +356,7 @@
         var globalUsageElement = {
             'Toast': true,
             'Offside': true,
-            'Splash': false,
+            'Splash': true,
             'AvatarCover': true,
             'Wow': true,
             'authNav': false

@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Config;
 use App\Http\Controllers\MyHelpersFunctios;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,39 +28,27 @@ Route::get('setlocale/{locale}', function ($locale) {
 
     if (in_array($locale, ['en', 'ar'])) {
 
-      session(['locale' => $locale]);
-
+        session(['locale' => $locale]);
     }
     return redirect()->back();
+});
 
-  });
 
-  
 Route::get('/', function () {
     return view('Website.index');
 });
 
 
 
-Route::get('/authentication', [AuthController::class,'showLogin'])->name('authentication');
-Route::post('/authentication', [AuthController::class,'login']);
-Route::post('/register', [AuthController::class,'register']);
-Route::get('/logout', [AuthController::class,'logout']);
-
-
-
-Route::get('/forgetpassword', function () {
-    return view('Website.screens.auth.forgetPassword');
-});
-
-Route::get('/resetpassword', function () {
-    return view('Website.screens.auth.mustVeritifyNotic');
-});
+Route::get('/authentication', [AuthController::class, 'showLogin'])->name('authentication');
+Route::post('/authentication', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::get('/email/verify', function (Request $request) {
     $myHelpersFunctios = new MyHelpersFunctios();
 
-    return view('Website.screens.auth.mustVeritifyNotic',['meta' => $myHelpersFunctios->getMetaData($request),]);
+    return view('Website.screens.auth.mustVeritifyNotic', ['meta' => $myHelpersFunctios->getMetaData($request),]);
 })->middleware('auth')->name('verification.notice');
 
 /*
@@ -78,8 +70,70 @@ Route::get('/email/verification-notification', function (Request $request) {
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 
+/*
+Forget Password 
+*/
+Route::get('/forgot-password', function (Request $request) {
+    $myHelpersFunctios = new MyHelpersFunctios();
+
+    return view('Website.screens.auth.forgetPassword', ['meta' => $myHelpersFunctios->getMetaData($request),]);
+})->middleware('guest')->name('password.request');
+
+/*
+Reset Password
+*/
+
+Route::post('/forgot-password', function (Request $request) {
+    $request->validate(['email' => 'required|email']);
+
+    $status = Password::sendResetLink(
+        $request->only('email')
+    );
+
+    return $status === Password::RESET_LINK_SENT
+        ? back()->with(['success' =>  __($status)])
+        : back()->with(['error' => __($status)]);
+})->middleware('guest')->name('password.email');
+
+
+
+Route::get('/reset-password/{token}', function ($token, Request $request) {
+    $myHelpersFunctios = new MyHelpersFunctios();
+
+
+    return view('Website.screens.auth.resetPassword', ['token' => $token, 'meta' => $myHelpersFunctios->getMetaData($request),]);
+})->middleware('guest')->name('password.reset');
+
+
+Route::post('/reset-password', function (Request $request) {
+    $request->validate([
+        'token' => 'required',
+        'email' => 'required|email',
+        'password' => 'required|min:8|confirmed',
+    ]);
+
+    $status = Password::reset(
+        $request->only('email', 'password', 'password_confirmation', 'token'),
+        function ($user, $password) {
+            $user->forceFill([
+                'password' => Hash::make($password)
+            ])->setRememberToken(Str::random(60));
+
+            $user->save();
+
+            event(new PasswordReset($user));
+        }
+    );
+
+    return $status === Password::PASSWORD_RESET
+        ? redirect()->route('authentication')->with('success', __($status))
+        : back()->with(['error' => __($status)]);
+
+})->middleware('guest')->name('password.update');
+
+
 ///////////////////////////////////////////////////////////////
 
 Route::get('/home', function () {
     return view('Website.screens.home');
-})->middleware(['verified','auth']);
+})->middleware(['verified', 'auth']);
