@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-
+use App\Http\Controllers\Website\HomeController;
+use App\Http\Controllers\Website\IndexController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,9 +35,6 @@ Route::get('setlocale/{locale}', function ($locale) {
 });
 
 
-Route::get('/', function () {
-    return view('Website.index');
-});
 
 
 
@@ -134,6 +132,20 @@ Route::post('/reset-password', function (Request $request) {
 
 ///////////////////////////////////////////////////////////////
 
-Route::get('/home', function () {
-    return view('Website.screens.home');
-})->middleware(['verified', 'auth']);
+Route::get('/',[IndexController::class, 'showIndex']);
+
+
+
+
+
+Route::middleware(['verified', 'auth'])->group(function () {
+
+Route::get('/home',[HomeController::class, 'showHome']);
+
+
+
+
+
+
+});
+

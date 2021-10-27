@@ -30,7 +30,7 @@ color: white;
 font-size: 50px;
 font-weight: bolder;
 width: 50%;
-background-color: rgba(83, 83, 83, 0.096);
+background-color: rgba(83, 83, 83, 0.2);
 }
 
 [dir="rtl"] .slider .item .content .info{

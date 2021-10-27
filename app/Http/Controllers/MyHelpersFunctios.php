@@ -16,7 +16,6 @@ class MyHelpersFunctios
     {
 
         //  dd($request->hasFile('image'));
-if(!empty($request->input($request_Input_Name))){
         if ($request->hasFile($request_Input_Name)) {
 
             $image      = $request->file($request_Input_Name);
@@ -35,12 +34,12 @@ if(!empty($request->input($request_Input_Name))){
             Storage::disk('public')->put('images/' . $folderName . '/' . $fileName, $img,);
 
             return $fileName;
-        }
-        
-    }else{
+        }else{
             $fileName = 'default.png';
             return $fileName;
         }
+        
+    
     }
 
 

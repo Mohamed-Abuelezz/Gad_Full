@@ -2,22 +2,22 @@
 
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header" style="text-align: center;">
-          <h5 id="offcanvasRightLabel">GAD</h5>
+          <h5 id="offcanvasRightLabel">{{ Config::get('app.locale') == 'ar' ? $meta->website_name_ar : $meta->website_name_ar }}</h5>
           <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
           <ul>
             <li class="sideMenuItem"><a href="#"><img
-                  src="https://st3.depositphotos.com/1037987/15097/i/600/depositphotos_150975580-stock-photo-portrait-of-businesswoman-in-office.jpg"
+                  src="{{ asset('storage/images/users_images/'.Auth::user()->image) }}"
                   style="width: 100px;height: 100px;border-radius: 50%;" /></a></li>
-            <li class="sideMenuItem">Mohamed Abo.elezz</li>
-            <li class="sideMenuItem"><a href="#">Profile</a></li>
-            <li class="sideMenuItem"><a href="#">Edit Profile</a></li>
+            <li class="sideMenuItem">{{Auth::user()->name}}</li>
+            <li class="sideMenuItem"><a href="#">{{ Config::get('app.locale') == 'ar' ?  'الصفحة الشخصية':'Profile'  }}</a></li>
+            <li class="sideMenuItem"><a href="#">{{ Config::get('app.locale') == 'ar' ?  'تعديل الصفحة الشخصية':'Edit Profile'  }}</a></li>
             <hr style="border-width: 2px;">
     
-            <li class="sideMenuItem"><a href="#">Account Settings</a></li>
-            <li class="sideMenuItem"><a href="#">Contact Us</a></li>
-            <li class="sideMenuItem"><a href="#">Logout</a></li>
+            <li class="sideMenuItem"><a href="#">{{ Config::get('app.locale') == 'ar' ? 'اعدادات الحساب' : 'Account Settings' }}</a></li>
+            <li class="sideMenuItem"><a href="#">{{ __('Website.contactus') }}</a></li>
+            <li class="sideMenuItem"><a href="{{ url('logout') }}">{{ Config::get('app.locale') == 'ar' ? 'تسجبل الخروج' : 'Logout'}}</a></li>
           </ul>
         </div>
       </div>
@@ -33,14 +33,14 @@
         <div class="nav-items">
     
           <ul>
-            <li><a href="#" class="text-small"><img src="../assets/icons/logo.png"
+            <li><a href="#" class="text-small"><img src="{{ URL::asset('website_assets/assets/icons/logo.png') }}"
                   class="logo animate__animated animate__pulse  animate__infinite" alt="logo"></a>
             </li>
             <li>
     
     
               <div class="menu-container">
-                <button class="menu-button"><img src="http://i.pravatar.cc/50">
+                <button class="menu-button"><img src="{{ asset('storage/images/users_images/'.Auth::user()->image) }}">
     
                 </button>
     
@@ -55,7 +55,7 @@
                       <li>Edit Profile</li>
                       <hr style="border-width: 2px;">
                       <li>Account Settings</li>
-                      <li>Logout</li>
+                      <li ><a href="{{ url('authentication') }}">{{ Config::get('app.locale') == 'ar' ? 'تسجبل الخروج' : 'Logout'}}</a></li>
                     </ul>
                   </div>
                 </div>

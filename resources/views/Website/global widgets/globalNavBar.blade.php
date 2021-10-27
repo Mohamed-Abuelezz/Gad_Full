@@ -37,7 +37,7 @@
             <li><a href="#" class="text-small"><img src="{{ URL::asset('website_assets/assets/icons/logo.png') }}"
                   class="logo animate__animated animate__pulse  animate__infinite" alt="logo"></a>
             </li>
-            <li ><a href="#" class="text-small ">{{ __('Website.home') }}</a></li>
+            <li ><a href="{{ url('/') }}" class="text-small ">{{ __('Website.home') }}</a></li>
             <li><a href="#" class="text-small">{{ __('Website.contactus') }}</a></li>
             <li><a href="{{ url('authentication') }}" class="text-small">{{ __('Website.login-register') }}</a></li>
 

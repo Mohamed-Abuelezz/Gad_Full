@@ -177,7 +177,7 @@ class WebsiteConfigController extends Controller
 
 
         $myHelpersFunctios = new MyHelpersFunctios();
-        $image_name =  $myHelpersFunctios->saveImages($request, 'image', 'website_images', array('w' => 300, 'h' => 300));
+        $image_name =  $myHelpersFunctios->saveImages($request, 'image', 'website_images', null);
 
 
         $websiteconfigs_sliders = new Websiteconfigs_sliders();

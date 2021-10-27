@@ -280,7 +280,7 @@ user image dropDown
   flex-direction: column;
 
 }
-.menu-dropdown .content > ul > li {
+.menu-dropdown .content > ul > li  {
   list-style: none;
   font-size: 16px;
   margin: 0 0 15px;
@@ -290,6 +290,10 @@ user image dropDown
   width: 150px;
   text-align: center;
 
+}
+.menu-dropdown .content > ul > li  a{
+
+color: black;
 }
 .menu-dropdown > .menu-button {
   border: none;
