@@ -51,6 +51,10 @@ class User extends Authenticatable  implements MustVerifyEmail
         return $this->belongsTo(Countries::class);
     }
 
+    public function profileRates()
+    {
+        return $this->hasMany(ProfileRates::class);
+    }
 
     public function sendPasswordResetNotification($token)
     {

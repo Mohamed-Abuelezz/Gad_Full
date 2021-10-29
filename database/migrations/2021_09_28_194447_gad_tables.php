@@ -275,7 +275,26 @@ class GadTables extends Migration
         });
 
 
+        // profiles_rates_Table
+        Schema::create('profiles_rates', function (Blueprint $table) {
+            $table->id();
 
+            $table->foreignId('users_id')
+                ->constrained('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+
+            $table->foreignId('profiles_id')
+                ->constrained('profiles')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->integer('rate');
+
+
+            $table->timestamps();
+        });
 
 ///////////////////////////////////////////////////////////
                 // website_views_Table
@@ -352,6 +371,7 @@ class GadTables extends Migration
     public function down()
     {
         //
+        Schema::dropIfExists('profiles_rates');
         Schema::dropIfExists('websiteConfigs_availbalePayments');
         Schema::dropIfExists('websiteConfigs_sliders');
         Schema::dropIfExists('websiteConfigs');

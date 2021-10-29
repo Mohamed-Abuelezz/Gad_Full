@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GAD</title>
+    <!-- Required meta tags -->
+    @include('Website.global widgets.metaOfHeader')
+
 
   <!--Css Packages-->
   <link rel="stylesheet" href="{{ URL::asset('website_assets/packages/bootstrap-5.0.1-dist/css/bootstrap.min.css') }}"> <!--All Screen Css-->
@@ -30,6 +29,18 @@
 
   </div>
 
+  <div id='myLoading' style="">
+           
+    <div class="load-wrapp">
+      <div class="load-9">
+        <div class="spinner">
+          <div class="bubble-1"></div>
+          <div class="bubble-2"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
 <!-- Float Scroll top btn-->
 <a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top  animate__animated animate__bounce animate__infinite" role="button" style="color: white;background-color: var(--primary);z-index: 999;"><i class="fas fa-chevron-up"></i></a>
@@ -57,52 +68,76 @@
 
     <div class="dropdown">
         <button class="btn  btn-outline dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-          Country
+          {{Config::get('app.locale') == 'ar' ? 'الدولة' : 'Country' }}   
+          
         </button>
         <ul class="dropdown-menu" style="z-index: 9999;" aria-labelledby="dropdownMenu2">
-          <li><button class="dropdown-item" type="button">Action</button></li>
-          <li><button class="dropdown-item" type="button">Another action</button></li>
-          <li><button class="dropdown-item" type="button">Something else here</button></li>
+          
+          @foreach ($countries as $item)
+              
+
+
+          <li><button class="dropdown-item" type="button">{{Config::get('app.locale') == 'ar' ?  $item->name_ar :  $item->name_en }}</button></li>
+
+
+          @endforeach
+
         </ul>
       </div>
 
       <div class="dropdown">
         <button class="btn btn-outline dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-          Profile Type
+          {{Config::get('app.locale') == 'ar' ? 'نوع الصفحة الشخصية' : 'Profile Type' }}   
+         
         </button>
         <ul class="dropdown-menu" style="z-index: 9999;" aria-labelledby="dropdownMenu2">
-          <li><button class="dropdown-item" type="button">Action</button></li>
-          <li><button class="dropdown-item" type="button">Another action</button></li>
-          <li><button class="dropdown-item" type="button">Something else here</button></li>
+          @foreach ($profiles_Type as $item)
+              
+
+
+          <li><button class="dropdown-item" type="button">{{Config::get('app.locale') == 'ar' ?  $item->name_ar :  $item->name_en }}</button></li>
+
+
+          @endforeach
         </ul>
       </div>
 
       <div class="dropdown">
         <button class="btn btn-outline  dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-          Specialties
+          {{Config::get('app.locale') == 'ar' ? 'التخصص' : 'Specialties' }}   
+          
         </button>
         <ul class="dropdown-menu" style="z-index: 9999;" aria-labelledby="dropdownMenu2">
-          <li><button class="dropdown-item" type="button">Action</button></li>
-          <li><button class="dropdown-item" type="button">Another action</button></li>
-          <li><button class="dropdown-item" type="button">Something else here</button></li>
+          @foreach ($specialties as $item)
+              
+
+
+          <li><button class="dropdown-item" type="button">{{Config::get('app.locale') == 'ar' ?  $item->name_ar :  $item->name_en }}</button></li>
+
+
+          @endforeach
         </ul>
       </div>
 
       <div class="dropdown">
         <button class="btn btn-outline dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-            Subjects
+          {{Config::get('app.locale') == 'ar' ? 'المواد الدراسية' : 'Subjects' }}   
         </button>
         <ul class="dropdown-menu" style="z-index: 9999;" aria-labelledby="dropdownMenu2">
-          <li><button class="dropdown-item" type="button">Action</button></li>
-          <li><button class="dropdown-item" type="button">Another action</button></li>
-          <li><button class="dropdown-item" type="button">Something else here</button></li>
-        </ul>
+          @foreach ($subjects as $item)
+              
+
+
+          <li><button class="dropdown-item" type="button">{{Config::get('app.locale') == 'ar' ?  $item->name_ar :  $item->name_en }}</button></li>
+
+
+          @endforeach        </ul>
       </div>
 
 </div>
 
 <br>
-<a href="#" class="btn-outline" style="font-weight: 200;">Search &emsp;<i class="fas fa-search"></i></a>
+<a href="#" class="btn-outline" style="font-weight: 200;"> {{Config::get('app.locale') == 'ar' ? 'بحث' : 'Search' }} &emsp;<i class="fas fa-search"></i></a>
 
 
   </div>
@@ -137,9 +172,13 @@
   
         <div class="fieldSearch">
 
+
           <div class="form" style="width: 100%">
             <input type="text" id="confirmPassword" name="search"  class="form__input" autocomplete="off"  placeholder=" "/>
             <label for="confirmPassword" class="form__label"> Search By Name</label>
+           
+           <div class="loadBox" style=""></div>
+
           </div>
 
         </div>
@@ -171,159 +210,30 @@
 
       <div class="row  justify-content-around">
       
+        @foreach ($profiles as $item)
+            
         <div class="col-12 col-md-5 col-lg-4">
           <div class="container wow animate__jackInTheBox">
             <div class="cover-photo">
-              <img  src="https://scontent-cdg2-1.xx.fbcdn.net/v/t1.15752-9/239767875_250990213558541_4885779344105767793_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=ae9488&_nc_ohc=Y8yaBhJEaP4AX9FAAUU&_nc_ht=scontent-cdg2-1.xx&oh=6d6e4390f3e311b461ceea451078fbde&oe=6167877A" class="profile animate__animated animate__pulse animate__infinite">
+              <img  src="{{ asset('storage/images/users_images/'.$item->user->image) }}" class="profile animate__animated animate__pulse animate__infinite">
             </div>
-            <div class="profile-name text-medium" style="color: white;">Mr.Sherif Abu.elezz</div>
+            <div class="profile-name text-medium" style="color: white;">{{$item->display_name}}</div>
             <div class="profile-rate" style="color: white;">
               <div class="stars">
+                @for ($i = 1; $i <= 5; $i++)
+                    @if ($i <  $item->profileRates->avg('rate'))
                 <span class="fas fa-star checked"></span>
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star checked"></span>
+                        
+                    @else
                 <span class="fas fa-star"></span>
-                <span class="fas fa-star"></span>
+                        
+                    @endif
+                @endfor
+            </div> 
+            <div>       {{count($item->profileRates)}}              </div>
             </div>
-            <div>                55564            </div>
-            </div>
-            <p class="about text-small" style="color: white;">  Am a teacher and and working in campridge Am a teacher and and working in campridg ...</p>
-            <a class="btn-outline"  href="./profile.html" style="width: 80%;">More</a>
-            <div>
-              <i class="fas fa-share-alt"></i>
-              <i class="fab fa-whatsapp"></i>
-              <i class="fas fa-heart"></i>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-5 col-lg-4">
-          <div class="container wow animate__jackInTheBox">
-            <div class="cover-photo">
-              <img  src="https://scontent-cdg2-1.xx.fbcdn.net/v/t1.15752-9/239767875_250990213558541_4885779344105767793_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=ae9488&_nc_ohc=Y8yaBhJEaP4AX9FAAUU&_nc_ht=scontent-cdg2-1.xx&oh=6d6e4390f3e311b461ceea451078fbde&oe=6167877A" class="profile animate__animated animate__pulse animate__infinite">
-            </div>
-            <div class="profile-name text-medium" style="color: white;">Mr.Sherif Abu.elezz</div>
-            <div class="profile-rate" style="color: white;">
-              <div class="stars">
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star"></span>
-                <span class="fas fa-star"></span>
-            <div>                55564            </div>
-                
-            </div>
-            </div>
-            <p class="about text-small" style="color: white;">  Am a teacher and and working in campridge Am a teacher and and working in campridg ...</p>
-            <button class="btn-outline">More</button>
-            <div>
-              <i class="fas fa-share-alt"></i>
-              <i class="fab fa-whatsapp"></i>
-              <i class="fas fa-heart"></i>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-5 col-lg-4">
-          <div class="container wow animate__jackInTheBox">
-            <div class="cover-photo">
-              <img  src="https://scontent-cdg2-1.xx.fbcdn.net/v/t1.15752-9/239767875_250990213558541_4885779344105767793_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=ae9488&_nc_ohc=Y8yaBhJEaP4AX9FAAUU&_nc_ht=scontent-cdg2-1.xx&oh=6d6e4390f3e311b461ceea451078fbde&oe=6167877A" class="profile animate__animated animate__pulse animate__infinite">
-            </div>
-            <div class="profile-name text-medium" style="color: white;">Mr.Sherif Abu.elezz</div>
-            <div class="profile-rate" style="color: white;">
-              <div class="stars">
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star"></span>
-                <span class="fas fa-star"></span>
-            <div>                55564            </div>
-                
-            </div>
-            </div>
-            <p class="about text-small" style="color: white;">  Am a teacher and and working in campridge Am a teacher and and working in campridg ...</p>
-            <button class="btn-outline">More</button>
-            <div>
-              <i class="fas fa-share-alt"></i>
-              <i class="fab fa-whatsapp"></i>
-              <i class="fas fa-heart"></i>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-5 col-lg-4">
-          <div class="container wow animate__jackInTheBox">
-            <div class="cover-photo">
-              <img  src="https://scontent-cdg2-1.xx.fbcdn.net/v/t1.15752-9/239767875_250990213558541_4885779344105767793_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=ae9488&_nc_ohc=Y8yaBhJEaP4AX9FAAUU&_nc_ht=scontent-cdg2-1.xx&oh=6d6e4390f3e311b461ceea451078fbde&oe=6167877A" class="profile animate__animated animate__pulse animate__infinite">
-            </div>
-            <div class="profile-name text-medium" style="color: white;">Mr.Sherif Abu.elezz</div>
-            <div class="profile-rate" style="color: white;">
-              <div class="stars">
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star"></span>
-                <span class="fas fa-star"></span>
-            <div>                55564            </div>
-                
-            </div>
-            </div>
-            <p class="about text-small" style="color: white;">  Am a teacher and and working in campridge Am a teacher and and working in campridg ...</p>
-            <button class="btn-outline">More</button>
-            <div>
-              <i class="fas fa-share-alt"></i>
-              <i class="fab fa-whatsapp"></i>
-              <i class="fas fa-heart"></i>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-5 col-lg-4">
-          <div class="container wow animate__jackInTheBox">
-            <div class="cover-photo">
-              <img  src="https://scontent-cdg2-1.xx.fbcdn.net/v/t1.15752-9/239767875_250990213558541_4885779344105767793_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=ae9488&_nc_ohc=Y8yaBhJEaP4AX9FAAUU&_nc_ht=scontent-cdg2-1.xx&oh=6d6e4390f3e311b461ceea451078fbde&oe=6167877A" class="profile animate__animated animate__pulse animate__infinite">
-            </div>
-            <div class="profile-name text-medium" style="color: white;">Mr.Sherif Abu.elezz</div>
-            <div class="profile-rate" style="color: white;">
-              <div class="stars">
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star"></span>
-                <span class="fas fa-star"></span>
-            <div>                55564            </div>
-                
-            </div>
-            </div>
-            <p class="about text-small" style="color: white;">  Am a teacher and and working in campridge Am a teacher and and working in campridg ...</p>
-            <button class="btn-outline">More</button>
-            <div>
-              <i class="fas fa-share-alt"></i>
-              <i class="fab fa-whatsapp"></i>
-              <i class="fas fa-heart"></i>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-5 col-lg-4">
-          <div class="container wow animate__jackInTheBox">
-            <div class="cover-photo">
-              <img  src="https://scontent-cdg2-1.xx.fbcdn.net/v/t1.15752-9/239767875_250990213558541_4885779344105767793_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=ae9488&_nc_ohc=Y8yaBhJEaP4AX9FAAUU&_nc_ht=scontent-cdg2-1.xx&oh=6d6e4390f3e311b461ceea451078fbde&oe=6167877A" class="profile animate__animated animate__pulse animate__infinite">
-            </div>
-            <div class="profile-name text-medium" style="color: white;">Mr.Sherif Abu.elezz</div>
-            <div class="profile-rate" style="color: white;">
-              <div class="stars">
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star"></span>
-                <span class="fas fa-star"></span>
-            <div>                55564            </div>
-                
-            </div>
-            </div>
-            <p class="about text-small" style="color: white;">  Am a teacher and and working in campridge Am a teacher and and working in campridg ...</p>
-            <button class="btn-outline">More</button>
+            <p class="about text-small" style="color: white;">  {{$item->bio}}</p>
+            <a class="btn-outline"  href="./profile.html" style="width: 80%;">{{  Config::get('app.locale') == 'ar' ? 'المزيد' : 'More'   }}</a>
             <div>
               <i class="fas fa-share-alt"></i>
               <i class="fab fa-whatsapp"></i>
@@ -333,108 +243,21 @@
         </div>
 
 
-        <div class="col-12 col-md-5 col-lg-4">
-          <div class="container wow animate__jackInTheBox">
-            <div class="cover-photo">
-              <img  src="https://scontent-cdg2-1.xx.fbcdn.net/v/t1.15752-9/239767875_250990213558541_4885779344105767793_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=ae9488&_nc_ohc=Y8yaBhJEaP4AX9FAAUU&_nc_ht=scontent-cdg2-1.xx&oh=6d6e4390f3e311b461ceea451078fbde&oe=6167877A" class="profile animate__animated animate__pulse animate__infinite">
-            </div>
-            <div class="profile-name text-medium" style="color: white;">Mr.Sherif Abu.elezz</div>
-            <div class="profile-rate" style="color: white;">
-              <div class="stars">
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star"></span>
-                <span class="fas fa-star"></span>
-            <div>                55564            </div>
-                
-            </div>
-            </div>
-            <p class="about text-small" style="color: white;">  Am a teacher and and working in campridge Am a teacher and and working in campridg ...</p>
-            <button class="btn-outline">More</button>
-            <div>
-              <i class="fas fa-share-alt"></i>
-              <i class="fab fa-whatsapp"></i>
-              <i class="fas fa-heart"></i>
-            </div>
-          </div>
-        </div>
 
-        <div class="col-12 col-md-5 col-lg-4">
-          <div class="container wow animate__jackInTheBox">
-            <div class="cover-photo">
-              <img  src="https://scontent-cdg2-1.xx.fbcdn.net/v/t1.15752-9/239767875_250990213558541_4885779344105767793_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=ae9488&_nc_ohc=Y8yaBhJEaP4AX9FAAUU&_nc_ht=scontent-cdg2-1.xx&oh=6d6e4390f3e311b461ceea451078fbde&oe=6167877A" class="profile animate__animated animate__pulse animate__infinite">
-            </div>
-            <div class="profile-name text-medium" style="color: white;">Mr.Sherif Abu.elezz</div>
-            <div class="profile-rate" style="color: white;">
-              <div class="stars">
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star"></span>
-                <span class="fas fa-star"></span>
-            <div>                55564            </div>
-                
-            </div>
-            </div>
-            <p class="about text-small" style="color: white;">  Am a teacher and and working in campridge Am a teacher and and working in campridg ...</p>
-            <button class="btn-outline">More</button>
-            <div>
-              <i class="fas fa-share-alt"></i>
-              <i class="fab fa-whatsapp"></i>
-              <i class="fas fa-heart"></i>
-            </div>
-          </div>
-        </div>
+        @endforeach
 
-        <div class="col-12 col-md-5 col-lg-4">
-          <div class="container wow animate__jackInTheBox">
-            <div class="cover-photo">
-              <img  src="https://scontent-cdg2-1.xx.fbcdn.net/v/t1.15752-9/239767875_250990213558541_4885779344105767793_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=ae9488&_nc_ohc=Y8yaBhJEaP4AX9FAAUU&_nc_ht=scontent-cdg2-1.xx&oh=6d6e4390f3e311b461ceea451078fbde&oe=6167877A" class="profile animate__animated animate__pulse animate__infinite">
-            </div>
-            <div class="profile-name text-medium" style="color: white;">Mr.Sherif Abu.elezz</div>
-            <div class="profile-rate" style="color: white;">
-              <div class="stars">
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star checked"></span>
-                <span class="fas fa-star"></span>
-                <span class="fas fa-star"></span>
-            <div>                55564            </div>
-                
-            </div>
-            </div>
-            <p class="about text-small" style="color: white;">  Am a teacher and and working in campridge Am a teacher and and working in campridg ...</p>
-            <button class="btn-outline">More</button>
-            <div>
-              <i class="fas fa-share-alt"></i>
-              <i class="fab fa-whatsapp"></i>
-              <i class="fas fa-heart"></i>
-            </div>
-          </div>
-        </div>
 
+      
 
     </div>
 <br>
 <br>
-    <nav aria-label="Page navigation example">
-      <ul class="pagination" style="width: 200px;margin: auto;color: var(--primary);" >
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+
+<div style="margin: auto; display: flex;justify-content: center" style="color: var(--primary)">
+  {{$profiles->links('Website.global widgets.pagination')}}
+
+</div>
+
 
 </div>
 
@@ -473,7 +296,17 @@
   <!---------------------------------------------------------------------------------------->
   <script>
     var globalUsageElement = {'Toast':false,'Offside':true,'Splash':true,'AvatarCover':true,'Wow':true,'authNav':true};
-  </script>
+ 
+    var url = {!! json_encode(Request::root()) !!};
+    var lang = document.getElementsByTagName("body")[0].getAttribute("lang");
+ 
+    console.log(lang);
+
+    var profiles_all = {!! json_encode($profiles_all, JSON_HEX_TAG) !!};
+    console.log(profiles_all);
+ 
+ 
+ </script>
 
   <!--Js Packages-->
   <script src=" {{ URL::asset('website_assets/packages/jquery/jquery.js') }}"></script> <!--All Screen JS-->

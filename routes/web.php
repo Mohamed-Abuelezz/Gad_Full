@@ -141,6 +141,7 @@ Route::get('/',[IndexController::class, 'showIndex']);
 Route::middleware(['verified', 'auth'])->group(function () {
 
 Route::get('/home',[HomeController::class, 'showHome']);
+Route::post('/search',[HomeController::class, 'search']);
 
 
 

@@ -35,4 +35,13 @@ class Profiles extends Model
         return $this->belongsTo(Profiles_Type::class,'profiles_type_id');
     }
 
+
+
+    
+
+    public function profileRates()
+    {
+        return $this->hasMany(ProfileRates::class);
+    }
+
 }

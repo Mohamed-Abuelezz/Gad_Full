@@ -15,6 +15,7 @@
             <li class="sideMenuItem"><a href="#">{{ Config::get('app.locale') == 'ar' ?  'تعديل الصفحة الشخصية':'Edit Profile'  }}</a></li>
             <hr style="border-width: 2px;">
     
+            <li class="sideMenuItem"><a href="#">{{ __('Website.home') }}</a></li>
             <li class="sideMenuItem"><a href="#">{{ Config::get('app.locale') == 'ar' ? 'اعدادات الحساب' : 'Account Settings' }}</a></li>
             <li class="sideMenuItem"><a href="#">{{ __('Website.contactus') }}</a></li>
             <li class="sideMenuItem"><a href="{{ url('logout') }}">{{ Config::get('app.locale') == 'ar' ? 'تسجبل الخروج' : 'Logout'}}</a></li>
@@ -51,10 +52,10 @@
                   <div class="content">
                     <ul>
     
-                      <li>Profile</li>
-                      <li>Edit Profile</li>
+                      <li>  {{ Config::get('app.locale') == 'ar' ?  'الصفحة الشخصية':'Profile'  }}</li>
+                      <li>{{ Config::get('app.locale') == 'ar' ?  'تعديل الصفحة الشخصية':'Edit Profile'  }}</li>
                       <hr style="border-width: 2px;">
-                      <li>Account Settings</li>
+                      <li>{{ Config::get('app.locale') == 'ar' ? 'اعدادات الحساب' : 'Account Settings' }}</li>
                       <li ><a href="{{ url('authentication') }}">{{ Config::get('app.locale') == 'ar' ? 'تسجبل الخروج' : 'Logout'}}</a></li>
                     </ul>
                   </div>
@@ -64,15 +65,15 @@
     
             </li>
             <li><a href="#" class="text-small ">|</a></li>
-            <li><a href="#" class="text-small ">Home</a></li>
-            <li><a href="#" class="text-small">Contact Us</a></li>
-            <li><a href="#" class="text-small">Terms And Conditions</a></li>
+            <li><a href="#" class="text-small ">{{ __('Website.home') }}</a></li>
+            <li><a href="#" class="text-small">{{ __('Website.contactus') }}</a></li>
+            <li><a href="#" class="text-small">{{ Config::get('app.locale') == 'ar' ? 'الشروط والاحكام' : 'Terms And Conditions'}}</a></li>
           </ul>
     
         </div>
     
         <div>
-          <a href="#" class="text-small">عربي <i class="fas fa-globe" aria-hidden="true"></i> </a>
+          <a href="{{ Config::get('app.locale') == 'ar' ? url('setlocale/en') : url('setlocale/ar') }}" class="text-small">{{ __('Website.lang') }} <i class="fas fa-globe" aria-hidden="true"></i> </a>
         </div>
     
     

@@ -1,13 +1,13 @@
 /******* Advanced Search ********************************/
-.section-advancedSearch{
-background-color: var(--primary);
-text-align: center;
-padding: 10px;
-border-radius:8px;
-color: white;
+.section-advancedSearch {
+    background-color: var(--primary);
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
 }
 
-.section-advancedSearch .search-drops{
+.section-advancedSearch .search-drops {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
@@ -15,27 +15,27 @@ color: white;
     padding: 20px;
 }
 
-@media (max-width: 991.98px) { 
-  .section-advancedSearch .search-drops{
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: row;
-  
-    flex-wrap: wrap;
-    padding: 20px;
-}
+@media (max-width: 991.98px) {
+    .section-advancedSearch .search-drops {
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: row;
 
-.section-advancedSearch .search-drops .dropdown{
- width: 40%;
+        flex-wrap: wrap;
+        padding: 20px;
+    }
 
-}
+    .section-advancedSearch .search-drops .dropdown {
+        width: 40%;
+
+    }
 
 
 }
 
 
 /****** Profile Reuslts  *****************************************/
-.sectionProfilesResults{
+.sectionProfilesResults {
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -49,24 +49,24 @@ color: white;
     display: flex;
     justify-content: center;
     padding: 0;
-    
-  }
 
-  @media (max-width: 991.98px) { 
-    .sectionProfilesResults .taps{
+}
+
+@media (max-width: 991.98px) {
+    .sectionProfilesResults .taps {
         width: 60%;
     }
- }
+}
 
-  .sectionProfilesResults .taps li {
+.sectionProfilesResults .taps li {
     display: inline;
     margin: 0 4px;
     width: auto;
     position: relative;
     width: 50%;
-  }
-  
-  .sectionProfilesResults button {
+}
+
+.sectionProfilesResults button {
     color: gray;
     font-family: "Work Sans", sans-serif;
     font-weight: 300;
@@ -77,31 +77,34 @@ color: white;
     padding: 8px 0;
     cursor: pointer;
     width: 100%;
-  }
-  .sectionProfilesResults button:hover {
+}
+
+.sectionProfilesResults button:hover {
     background: var(--primary);
     color: #fdfcfc;
     font-weight: 500;
     -webkit-transition: all 0.2s ease-in-out;
     -ms-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
-  }
-  .sectionProfilesResults button.active {
+}
+
+.sectionProfilesResults button.active {
     background: var(--primary);
     color: #fdfcfc;
     font-weight: 500;
-  }
-  
-  .sectionProfilesResults div.content {
+}
+
+.sectionProfilesResults div.content {
     display: none;
-  }
-  .sectionProfilesResults  div.content.show {
+}
+
+.sectionProfilesResults div.content.show {
     display: initial;
-  }
+}
 
 
 /* Search Profiles Results **/
- .search-bar{
+.search-bar {
     display: flex;
     width: 100%;
     flex-direction: row;
@@ -112,118 +115,145 @@ color: white;
     gap: 20px;
     margin-top: 15px;
 
-  }
+}
 
-  .search-bar .fieldSearch{
+.search-bar .fieldSearch {
     width: 30%;
     position: relative;
-  }
-  .suggestItems {
+}
+
+.suggestItems {
     z-index: 9999;
     position: absolute;
-    top:88px;
- background-color: var(--primary);
- padding: 5px;
- height: 200px;
- overflow: auto;
- display: none;
-  }
-  .suggestItems .item{
+    top: 88px;
+    background-color: var(--primary);
+    padding: 5px;
+    height: 200px;
+    overflow: auto;
+    display: none;
+}
+
+.suggestItems .item {
     display: flex;
     flex-direction: row;
-   align-self: center;
-   margin-top: 10px;
-   transition: 1s;
-   padding: 5px;
-  }
+    align-self: center;
+    margin-top: 10px;
+    transition: 1s;
+    padding: 5px;
+}
 
-  .suggestItems .item:hover{
+.suggestItems .item:hover {
     cursor: pointer;
     background-color: var(--secondry);
-  }
-  .suggestItems img{
+}
+
+.suggestItems img {
     width: 70px;
     height: 70px;
     border-radius: 50%;
     display: block;
-  }
+}
 
-  .suggestItems .details{
+.suggestItems .details {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-left: 5px;
-  }
+}
 
 
-  .suggestItems .details p{
+.suggestItems .details p {
     color: white;
     padding: 0;
-    margin: 0 ;
+    margin: 0;
     text-align: left;
 
-    
-  }
-  @media (max-width: 991.98px) { 
-    .search-bar{
-      display: flex;
-      width: 100%;
-      flex-direction: column-reverse;
-      justify-content: space-between;
-      
-      align-items: flex-start;
-      align-self: flex-start;
-    }
-  
-  
-    .search-bar .fieldSearch{
-      width: 100%;
-    }
-    .suggestItems img{
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      display: block;
-    }
-    .suggestItems .details p{
-      font-size: 10px;
-    }
-    .suggestItems .details p:first-of-type{
 
-  font-size: 15px;
-      
+}
+
+@media (max-width: 991.98px) {
+    .search-bar {
+        display: flex;
+        width: 100%;
+        flex-direction: column-reverse;
+        justify-content: space-between;
+
+        align-items: flex-start;
+        align-self: flex-start;
     }
-  
- }
 
-  /* Cards Style */
 
-  .sectionProfilesResults{
+    .search-bar .fieldSearch {
+        width: 100%;
+    }
 
-  }
-  .sectionProfilesResults .container{
+    .suggestItems img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: block;
+    }
+
+    .suggestItems .details p {
+        font-size: 10px;
+    }
+
+    .suggestItems .details p:first-of-type {
+
+        font-size: 15px;
+
+    }
+
+}
+
+.loadBox {
+    width: 50px;
+    height: 45px;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+}
+
+[dir='rtl'] .loadBox{
+  width: 50px;
+  height: 45px;
+  position: absolute;
+  top: 0;
+  right: unset;
+  left: 0;
+}
+
+/* Cards Style */
+
+.sectionProfilesResults {}
+
+.sectionProfilesResults .container {
     user-select: none;
     margin: 5px auto;
     background: var(--primary);
     color: white;
     border-radius: 5px;
     text-align: center;
-    box-shadow: 0 10px 20px -10px rgba(0,0,0,.75);
+    box-shadow: 0 10px 20px -10px rgba(0, 0, 0, .75);
     transition: 2s;
-  }
-  .sectionProfilesResults .container:hover{
+}
+
+.sectionProfilesResults .container:hover {
     cursor: pointer;
     transform: scale(1.1);
     background: var(--secondry);
 
-  }
-  .sectionProfilesResults .cover-photo{
+}
+
+.sectionProfilesResults .cover-photo {
     background: url(https://images.unsplash.com/photo-1540228232483-1b64a7024923?ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80);
     height: 160px;
     width: 100%;
     border-radius: 5px 5px 0 0;
-  }
-  .sectionProfilesResults  .profile{
+}
+
+.sectionProfilesResults .profile {
     height: 120px;
     width: 120px;
     border-radius: 50%;
@@ -231,91 +261,104 @@ color: white;
     border: 1px solid #1f1a32;
     padding: 7px;
     background: var(--secondry);
-  }
-  .sectionProfilesResults  .profile-name{
+}
+
+.sectionProfilesResults .profile-name {
     font-weight: bold;
     margin: 27px 0 0 120px;
-  }
-  .sectionProfilesResults .profile-rate{
+}
+
+.sectionProfilesResults .profile-rate {
     margin: 5px 0 0 120px;
 
-  }
-  .sectionProfilesResults  .about{
+}
+
+.sectionProfilesResults .about {
     margin-top: 20px;
     line-height: 21px;
-  }
-  .sectionProfilesResults  .btn-outline{
+}
+
+.sectionProfilesResults .btn-outline {
     margin: 10px 0 40px 0;
-  }
-  .sectionProfilesResults  .btn-outline{
+}
+
+.sectionProfilesResults .btn-outline {
     border: 1px solid white;
     padding: 10px 25px;
     color: #231e39;
     border-radius: 3px;
     cursor: pointer;
-  }
-  .sectionProfilesResults .btn-outline{
+}
+
+.sectionProfilesResults .btn-outline {
     margin-left: 10px;
     background: transparent;
     color: white;
-  }
-  .sectionProfilesResults  .btn-outline:hover{
+}
+
+.sectionProfilesResults .btn-outline:hover {
     color: #231e39;
     background: var(--secondry);
     transition: .5s;
-  }
-  .sectionProfilesResults .container i{
+}
+
+.sectionProfilesResults .container i {
     padding-left: 20px;
     font-size: 20px;
     margin-bottom: 20px;
     cursor: pointer;
     transition: .5s;
-  }
-  .sectionProfilesResults  .container i:hover{
-    color: #03bfbc;
-  }
-  
-
-
-  /*Map Style*/
-  .sectionProfilesResults #map{
-    width: 100%;
-    height:80vh;
 }
 
-  .gm-style .gm-style-iw-d::-webkit-scrollbar-track, 
-  .gm-style .gm-style-iw-d::-webkit-scrollbar-track-piece,
-  .gm-style .gm-style-iw-c,
-  .gm-style .gm-style-iw-t:hover{
-      background-color:var(--primary);
-      color: white;
-      padding: 0px;
-  margin: 0;   
-height: auto;
-  }
-  .gm-style-iw-d {
+.sectionProfilesResults .container i:hover {
+    color: #03bfbc;
+}
+
+
+
+/*Map Style*/
+.sectionProfilesResults #map {
+    width: 100%;
+    height: 80vh;
+}
+
+.gm-style .gm-style-iw-d::-webkit-scrollbar-track,
+.gm-style .gm-style-iw-d::-webkit-scrollbar-track-piece,
+.gm-style .gm-style-iw-c,
+.gm-style .gm-style-iw-t:hover {
+    background-color: var(--primary);
+    color: white;
+    padding: 0px;
+    margin: 0;
+    height: auto;
+}
+
+.gm-style-iw-d {
     overflow: hidden !important;
 }
 
-  .mapInfoClick{
-      margin: auto;
-      text-align: center;
-      font-size: 14px;
-      background-color: var(--primary);
-      width: 100%;
-      gap: 4px;
-  }
-  .mapInfoClick p{
-      margin-top: 5px;
-      font-family:myFontsBold ;
-      padding: 0;
-  
-  }
-  .mapInfoClick img{
-  width: 100%;
-  height: 120px;
-  }
-  .mapInfoClick a{
-  margin: 15px auto;
-  background-color: red;
-  }
+.mapInfoClick {
+    margin: auto;
+    text-align: center;
+    font-size: 14px;
+    background-color: var(--primary);
+    width: 100%;
+    gap: 4px;
+}
+
+.mapInfoClick p {
+    margin-top: 5px;
+    font-family: myFontsBold;
+    padding: 0;
+
+}
+
+.mapInfoClick img {
+    width: 100%;
+    height: 120px;
+}
+
+.mapInfoClick a {
+    margin: 15px auto;
+    background-color: red;
+}

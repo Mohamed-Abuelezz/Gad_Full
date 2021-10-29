@@ -6,11 +6,9 @@
 
 .slider{
 	height:100vh;
-	overflow: hidden;
 	position: relative;
 }
 .slider .item {
-	position: relative;
 	height: 100vh;
 }
 
@@ -34,7 +32,7 @@ background-color: rgba(83, 83, 83, 0.2);
 }
 
 [dir="rtl"] .slider .item .content .info{
-
+	position: absolute;
 left: unset;
 right: 40px;
 

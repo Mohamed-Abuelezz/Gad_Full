@@ -24,7 +24,7 @@ $(document).ready(function(){
 'fade':true,
 'loop':true,
 'speed':500,
-'rtl':false
+'rtl': false
 
 	}).on('beforeChange', function(event, slick, currentSlide, nextSlide) {
 

@@ -1,5 +1,6 @@
   <!-- Required meta tags -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta charset="{{$meta->charset}}">
   <meta name="author" content="{{$meta->auther}}">
   <meta name="keywords" content="{{$meta->keywords}}">

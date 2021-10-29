@@ -20,7 +20,7 @@ $('body').loading({
     if(count < 1){
        count++;
 
-    loading.overlay.fadeOut(3000);
+   loading.overlay.fadeOut(3000);
     isScreenReady.set(true);
 
     if(globalUsageElement['Toast'] == true){

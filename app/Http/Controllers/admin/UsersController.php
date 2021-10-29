@@ -72,7 +72,7 @@ class UsersController extends Controller
 
 
             $myHelpersFunctios = new MyHelpersFunctios();
-            $image_name =  $myHelpersFunctios->saveImages($request, 'image', 'users_images', array('w' => 300, 'h' => 300));
+            $image_name =  $myHelpersFunctios->saveImages($request, 'image', 'users_images', array('w' => 400, 'h' => 400));
 
 
             $user = new User();

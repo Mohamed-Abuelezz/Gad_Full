@@ -55,6 +55,13 @@ class MyHelpersFunctios
     }
 
 
+    public  function myJsonResponse(Request $request,$data)
+    {
+    return    response()->json([
+            'data' => $data,
+            'message' => 'success',
+        ],200);
+    }
     // Not Calling
 
     private  function generateRandomString($length)
