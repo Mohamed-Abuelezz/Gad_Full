@@ -38,7 +38,7 @@ $('body').loading({
   overlay: $("#splash"),
 message:'ok',
 //theme: 'dark'
-
+stoppable:false
 });
 
 $(window).on('load',function(){
@@ -46,7 +46,7 @@ $(window).on('load',function(){
 
   $('body').loading('stop');
 
-  },2000);
+  },0);
 });
 
 }

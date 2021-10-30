@@ -31,10 +31,10 @@ class HomeController extends Controller
         $subjects = Subjects::all();
 
         $profiles = Profiles::paginate(1);
-        $profiles_all = Profiles::with(['user','profiles_type','profileRates'])->get();
+        $profiles_all = Profiles::with(['user', 'profiles_type', 'profileRates'])->get();
 
 
-       // $profiles_all->push('avgs',[]);
+        // $profiles_all->push('avgs',[]);
 
         return view('Website.screens.home', [
             'meta' => $myHelpersFunctios->getMetaData(),
@@ -44,23 +44,50 @@ class HomeController extends Controller
             'specialties' =>  $specialties,
             'subjects' =>  $subjects,
             'profiles' =>  $profiles,
-            'profiles_all'=>$profiles_all
+            'profiles_all' => $profiles_all
         ]);
-        
     }
 
 
-    public function  search(Request $request){
-    $search_profiles =    Profiles::where('display_name', 'LIKE', '%'.$request->input('key').'%')->with(['user.country','profiles_type','profileRates',])->get();
+    public function  search(Request $request)
+    {
+        $search_profiles =    Profiles::where('display_name', 'LIKE', '%' . $request->input('key') . '%')->with(['user.country', 'profiles_type', 'profileRates',])->get();
 
-    $myHelpersFunctios = new MyHelpersFunctios();
+        $myHelpersFunctios = new MyHelpersFunctios();
 
-   //  $myHelpersFunctios->getMetaData($request,$search_profiles);
+        //  $myHelpersFunctios->getMetaData($request,$search_profiles);
 
-   return    response()->json([
-    'data' => $search_profiles,
-    'message' => 'success',
-],200);
+        return    response()->json([
+            'data' => $search_profiles,
+            'message' => 'success',
+        ], 200);
+    }
+
+
+    public function  getOthersDepends(Request $request){
+
+        if($request->input('key') == 'country'){
+
+            
+
+
+
+
+     return       response()->json([
+                'data' => 'ok mohamed',
+                'message' => 'success',
+            ], 200);}
+        
+            
+        
+
+    }
+
+
+
+
+    public function advancedSearch(Request $request){
+      //  $myHelpersFunctios = new MyHelpersFunctios();
 
     }
 

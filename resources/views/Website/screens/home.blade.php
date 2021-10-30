@@ -29,8 +29,9 @@
 
   </div>
 
-  <div id='myLoading' style="">
-           
+
+  <div id='myLoading'>
+
     <div class="load-wrapp">
       <div class="load-9">
         <div class="spinner">
@@ -40,6 +41,10 @@
       </div>
     </div>
 
+          
+          
+           
+    
   </div>
 
 <!-- Float Scroll top btn-->
@@ -77,7 +82,7 @@
               
 
 
-          <li><button class="dropdown-item" type="button">{{Config::get('app.locale') == 'ar' ?  $item->name_ar :  $item->name_en }}</button></li>
+          <li><button id="" class="dropdown-item country-btn" data-id="{{$item->id}}" type="button">{{Config::get('app.locale') == 'ar' ?  $item->name_ar :  $item->name_en }}</button></li>
 
 
           @endforeach
@@ -86,16 +91,16 @@
       </div>
 
       <div class="dropdown">
-        <button class="btn btn-outline dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn btn-outline dropdown-toggle" type="button" id="ProfileType" data-bs-toggle="dropdown" aria-expanded="false">
           {{Config::get('app.locale') == 'ar' ? 'نوع الصفحة الشخصية' : 'Profile Type' }}   
          
         </button>
-        <ul class="dropdown-menu" style="z-index: 9999;" aria-labelledby="dropdownMenu2">
+        <ul class="dropdown-menu" style="z-index: 9999;" aria-labelledby="ProfileType">
           @foreach ($profiles_Type as $item)
               
 
 
-          <li><button class="dropdown-item" type="button">{{Config::get('app.locale') == 'ar' ?  $item->name_ar :  $item->name_en }}</button></li>
+          <li><button class="dropdown-item profileType-btn" data-id="{{$item->id}}" type="button">{{Config::get('app.locale') == 'ar' ?  $item->name_ar :  $item->name_en }}</button></li>
 
 
           @endforeach
@@ -112,7 +117,7 @@
               
 
 
-          <li><button class="dropdown-item" type="button">{{Config::get('app.locale') == 'ar' ?  $item->name_ar :  $item->name_en }}</button></li>
+          <li><button class="dropdown-item specialties-btn" data-id="{{$item->id}}" type="button">{{Config::get('app.locale') == 'ar' ?  $item->name_ar :  $item->name_en }}</button></li>
 
 
           @endforeach
@@ -128,7 +133,7 @@
               
 
 
-          <li><button class="dropdown-item" type="button">{{Config::get('app.locale') == 'ar' ?  $item->name_ar :  $item->name_en }}</button></li>
+          <li><button class="dropdown-item subjects-btn" data-id="{{$item->id}}" type="button">{{Config::get('app.locale') == 'ar' ?  $item->name_ar :  $item->name_en }}</button></li>
 
 
           @endforeach        </ul>
@@ -137,7 +142,7 @@
 </div>
 
 <br>
-<a href="#" class="btn-outline" style="font-weight: 200;"> {{Config::get('app.locale') == 'ar' ? 'بحث' : 'Search' }} &emsp;<i class="fas fa-search"></i></a>
+<a href="#" class="btn-outline " id="advSearch-btn" style="font-weight: 200;"> {{Config::get('app.locale') == 'ar' ? 'بحث' : 'Search' }} &emsp;<i class="fas fa-search"></i></a>
 
 
   </div>
