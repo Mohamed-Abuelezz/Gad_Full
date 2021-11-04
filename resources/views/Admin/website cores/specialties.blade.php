@@ -38,7 +38,7 @@
                     </ol>
 
 
-                    <form class="row g-3" action="{{ url('admin/addSpecialties') }}" method="post">
+                    <form class="row g-3" action="{{ url('admin/addSpecial') }}" method="post">
                         @csrf
                         <div class="col-auto">
                             <input type="text" class="form-control  {{ $errors->has('name_ar') ? 'is-invalid' : '' }}"
@@ -65,56 +65,33 @@
                         </div>
 
 
-                        <div class="col-auto country">
+                        <div class="col-auto fields">
 
-                            <div class="dropdown {{ $errors->has('country') ? 'is-invalid' : '' }}">
+                            <div class="dropdown {{ $errors->has('field_id') ? 'is-invalid' : '' }}">
                                 <button class="btn btn-secondary dropdown-toggle " type="button"
                                     id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ (old('country') == null ? 'البلد' : $countries->where('id', old('country'))[0]->name_ar) }}
+                                    {{ (old('field_id') == null ? 'المجال' : $fields->where('id', old('field_id'))[0]->name_ar)  }}
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    @foreach ($countries as $item)
+                                    @foreach ($fields as $item)
                                         <li><a class="dropdown-item" href="#"
-                                                data-id="{{ $item->id }}">{{ $item->name_ar }}</a></li>
+                                                data-id="{{ $item->id }}">{{ $item->name_ar }}[{{$item->country->name_ar}}]</a></li>
                                     @endforeach
                                 </ul>
                             </div>
 
-                            @error('country')
+                            @error('field_id')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
-                            <input type="hidden" class=" " name="country"
-                                value="{{  old('country') }}">
+                            <input type="hidden" class=" " name="field_id"
+                                value="{{  old('field_id') }}">
 
                         </div>
 
 
-                        <div class="col-auto profile_type">
 
-                            <div class="dropdown {{ $errors->has('profile_type') ? 'is-invalid' : '' }}">
-                                <button class="btn btn-secondary dropdown-toggle " type="button"
-                                    id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ (old('profile_type') == null ? 'نوع البروفايل' : $profiles_type->where('id', old('profile_type'))[0]->name_ar) }}
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    @foreach ($profiles_type as $profile_type)
-                                        <li><a class="dropdown-item" href="#"
-                                                data-id="{{ $profile_type->id }}">{{ $profile_type->name_ar }}</a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
-
-                            @error('profile_type')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                            <input type="hidden" class=" " name="profile_type"
-                                value="{{  old('profile_type') }}">
-
-                        </div>
 
 
 
@@ -139,8 +116,7 @@
                                     <tr>
                                         <th>id</th>
                                         <th>الاسم</th>
-                                        <th> نوع البروفايل </th>
-                                        <th>الدولة</th>
+                                        <th> التخصص </th>
                                         <th>التحكم</th>
                                     </tr>
                                 </thead>
@@ -151,11 +127,10 @@
                                         <tr>
                                             <td>{{ $specialtie->id }}</td>
                                             <td>{{ $specialtie->name_ar }}</td>
-                                            <td>{{ $specialtie->profiles_type->name_ar }}</td>
-                                            <td>{{ $specialtie->country->name_ar }}</td>
+                                            <td>{{ $specialtie->fields->name_ar }} [{{$specialtie->fields->country->name_ar}}]</td>
                                             <td>
                                                 <a class="btn btn-danger"
-                                                    href="{{ url('admin/deleteSpecialties/' . $specialtie->id) }}"
+                                                    href="{{ url('admin/deleteSpecial/' . $specialtie->id) }}"
                                                     role="button">حذف</a>
                                             </td>
 
@@ -191,38 +166,24 @@
 
     <script>
 
+
+
+
 $(function(){
 
+$(".fields .dropdown-menu li a").click(function(){
 
- $(function(){
+  $(".fields .dropdown .btn:first-child").text($(this).text());
+  $(".fields .dropdown .btn:first-child").val($(this).text());
 
-$(".profile_type .dropdown-menu li a").click(function(){
-
-  $(".profile_type .dropdown .btn:first-child").text($(this).text());
-  $(".profile_type .dropdown .btn:first-child").val($(this).text());
-
-  $(".profile_type input[name=profile_type]").val($(this).attr("data-id"));
-
-});
-
-});
-
-//////////////////////////////////////
-$(function(){
-
-$(".country .dropdown-menu li a").click(function(){
-
-  $(".country .dropdown .btn:first-child").text($(this).text());
-  $(".country .dropdown .btn:first-child").val($(this).text());
-
-  $(".country input[name=country]").val($(this).attr("data-id"));
-
+  $(".fields input[name=field_id]").val($(this).attr("data-id"));
+console.log('ok');
 });
 
 });
 
 
-});
+
 
 
     </script>

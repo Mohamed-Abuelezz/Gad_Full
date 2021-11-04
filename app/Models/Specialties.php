@@ -13,14 +13,11 @@ class Specialties extends Model
 
 
 
-    public function country()
+    public function fields()
     {
-        return $this->belongsTo(Countries::class);
+        return $this->belongsTo(Fields::class,'field_id');
     }
 
-    public function profiles_type()
-    {
-        return $this->belongsTo(Profiles_Type::class);
-    }
+
 
 }

@@ -18,6 +18,7 @@
 </head>
 
 <body dir="{{ Config::get('app.locale') == 'ar' ? 'rtl' : 'ltr' }}" lang="{{ Config::get('app.locale') }}">
+  <!--
 
   <div id="splash">
 
@@ -28,6 +29,7 @@
     </div>
 
   </div>
+  -->
 
 
   <div id='myLoading'>
@@ -40,12 +42,9 @@
         </div>
       </div>
     </div>
-
-          
-          
-           
-    
   </div>
+
+
 
 <!-- Float Scroll top btn-->
 <a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top  animate__animated animate__bounce animate__infinite" role="button" style="color: white;background-color: var(--primary);z-index: 999;"><i class="fas fa-chevron-up"></i></a>
@@ -92,7 +91,7 @@
 
       <div class="dropdown">
         <button class="btn btn-outline dropdown-toggle" type="button" id="ProfileType" data-bs-toggle="dropdown" aria-expanded="false">
-          {{Config::get('app.locale') == 'ar' ? 'نوع الصفحة الشخصية' : 'Profile Type' }}   
+          {{Config::get('app.locale') == 'ar' ? 'نوع الصفحة الشخصية' : 'Profiles Type' }}   
          
         </button>
         <ul class="dropdown-menu" style="z-index: 9999;" aria-labelledby="ProfileType">
@@ -107,37 +106,42 @@
         </ul>
       </div>
 
+      <!--
       <div class="dropdown">
-        <button class="btn btn-outline  dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-          {{Config::get('app.locale') == 'ar' ? 'التخصص' : 'Specialties' }}   
+        <button class="btn btn-outline  dropdown-toggle ProfileFields" type="button" id="ProfileFields" data-bs-toggle="dropdown" aria-expanded="false">
+          {{Config::get('app.locale') == 'ar' ? 'المجالات' : 'Fields' }}   
           
         </button>
-        <ul class="dropdown-menu" style="z-index: 9999;" aria-labelledby="dropdownMenu2">
-          @foreach ($specialties as $item)
+        <ul class="dropdown-menu" style="z-index: 9999;" aria-labelledby="ProfileFields">
+          @foreach ($fields as $item)
               
 
 
-          <li><button class="dropdown-item specialties-btn" data-id="{{$item->id}}" type="button">{{Config::get('app.locale') == 'ar' ?  $item->name_ar :  $item->name_en }}</button></li>
+          <li><button class="dropdown-item specialties-btn" data-id="{{$item->id}}" type="button">{{Config::get('app.locale') == 'ar' ?  $item->name_ar :  $item->name_en }} [{{ Config::get('app.locale') == 'ar' ? $item->country->name_ar :  $item->country->name_en}}]</button></li>
 
 
           @endforeach
         </ul>
       </div>
-
+    -->
+      <!--
       <div class="dropdown">
-        <button class="btn btn-outline dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-          {{Config::get('app.locale') == 'ar' ? 'المواد الدراسية' : 'Subjects' }}   
+        <button class="btn btn-outline dropdown-toggle" type="button" id="specialties" data-bs-toggle="dropdown" aria-expanded="false">
+          {{Config::get('app.locale') == 'ar' ? 'التخصصات' : 'Specialties' }}   
         </button>
-        <ul class="dropdown-menu" style="z-index: 9999;" aria-labelledby="dropdownMenu2">
-          @foreach ($subjects as $item)
+        <ul class="dropdown-menu" style="z-index: 9999;" aria-labelledby="specialties">
+          @foreach ($specialties as $item)
               
 
 
-          <li><button class="dropdown-item subjects-btn" data-id="{{$item->id}}" type="button">{{Config::get('app.locale') == 'ar' ?  $item->name_ar :  $item->name_en }}</button></li>
+          <li><button class="dropdown-item subjects-btn" data-id="{{$item->id}}" type="button">{{Config::get('app.locale') == 'ar' ?  $item->name_ar :  $item->name_en }} [{{Config::get('app.locale') == 'ar' ?  $item->fields->country->name_ar : $item->fields->country->name_en}}]</button></li>
 
 
           @endforeach        </ul>
       </div>
+   
+    -->
+
 
 </div>
 
@@ -294,13 +298,15 @@
     @include('Website.global widgets.toast')
     
             @endif
-    
+          
+       @include('Website.global widgets.toast')
+
 
 
 
   <!---------------------------------------------------------------------------------------->
   <script>
-    var globalUsageElement = {'Toast':false,'Offside':true,'Splash':true,'AvatarCover':true,'Wow':true,'authNav':true};
+    var globalUsageElement = {'Toast':true,'Offside':true,'Splash':false,'AvatarCover':true,'Wow':true,'authNav':true};
  
     var url = {!! json_encode(Request::root()) !!};
     var lang = document.getElementsByTagName("body")[0].getAttribute("lang");

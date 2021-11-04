@@ -891,6 +891,9 @@ input[type=checkbox]:checked , input[type=radio]:checked {
 .dropdown-menu{
   position: absolute !important;
   z-index: 1000 !important;
+  max-height: 200px;
+  overflow-y: auto;
+
 }
 
 

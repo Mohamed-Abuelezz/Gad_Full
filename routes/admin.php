@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\WebsiteCoresControllers;
@@ -10,6 +11,8 @@ use App\Http\Controllers\Admin\WebsiteConfigController;
 use App\Http\Controllers\Admin\ProfilesController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\AdminsController;
+
+//Auth::routes();
 
 Route::get("admin/login", [AuthController::class,'showLogin'])->name('login');
 Route::post("admin/login", [AuthController::class,'authenticate']);
@@ -24,7 +27,7 @@ Route::prefix("admin")->middleware(['adminauth'])->group(function(){
    
 
 
-   Route::get("/", [IndexController::class,'showIndex'])->name('index');
+   Route::get("/", [IndexController::class,'showIndex'])->name('home');
 
    //user
    Route::get("/users", [UsersController::class,'showUsers'])->name('users');
@@ -58,13 +61,13 @@ Route::prefix("admin")->middleware(['adminauth'])->group(function(){
    Route::post("/addprofileType", [WebsiteCoresControllers::class,'addprofileType']);
    Route::get("/deleteProfileType/{profileTypeId}", [WebsiteCoresControllers::class,'deleteProfileType']);
 
-   Route::get("/specialties", [WebsiteCoresControllers::class,'showSpecialties'])->name('specialties');
-   Route::post("/addSpecialties", [WebsiteCoresControllers::class,'addSpecialties']);
-   Route::get("/deleteSpecialties/{SpecialtiesId}", [WebsiteCoresControllers::class,'deleteSpecialties']);
+   Route::get("/fields", [WebsiteCoresControllers::class,'showFields'])->name('fields');
+   Route::post("/addfield", [WebsiteCoresControllers::class,'addField']);
+   Route::get("/deletefield/{fieldId}", [WebsiteCoresControllers::class,'deleteField']);
 
-   Route::get("/subjects", [WebsiteCoresControllers::class,'showSubjects'])->name('subjects');
-   Route::post("/addSubject", [WebsiteCoresControllers::class,'addSubject']);
-   Route::get("/deleteSubject/{SubjectId}", [WebsiteCoresControllers::class,'deleteSubject']);
+   Route::get("/specialties", [WebsiteCoresControllers::class,'showspecialties'])->name('subjects');
+   Route::post("/addSpecial", [WebsiteCoresControllers::class,'addSpecial']);
+   Route::get("/deleteSpecial/{specialId}", [WebsiteCoresControllers::class,'deleteSpecial']);
 
    Route::get("/packages", [WebsiteCoresControllers::class,'showPackages'])->name('packages');
    Route::post("/addPackages", [WebsiteCoresControllers::class,'addPackages']);

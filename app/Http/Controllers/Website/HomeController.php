@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Auth\Events\Registered;
 use App\Http\Controllers\MyHelpersFunctios;
 use App\Models\Countries;
+use App\Models\Fields;
 use App\Models\Profiles_Type;
 use App\Models\Specialties;
 use App\Models\Subjects;
@@ -28,7 +29,7 @@ class HomeController extends Controller
         $countries = Countries::all();
         $profiles_Type = Profiles_Type::all();
         $specialties = Specialties::all();
-        $subjects = Subjects::all();
+        $fields = Fields::all();
 
         $profiles = Profiles::paginate(1);
         $profiles_all = Profiles::with(['user', 'profiles_type', 'profileRates'])->get();
@@ -41,8 +42,8 @@ class HomeController extends Controller
 
             'countries' => $countries,
             'profiles_Type' =>  $profiles_Type,
+            'fields' =>  $fields,
             'specialties' =>  $specialties,
-            'subjects' =>  $subjects,
             'profiles' =>  $profiles,
             'profiles_all' => $profiles_all
         ]);
@@ -66,20 +67,23 @@ class HomeController extends Controller
 
     public function  getOthersDepends(Request $request){
 
-        if($request->input('key') == 'country'){
+        if($request->has('country_id')){
 
-            
-
-
+             $fields = Fields::where('country_id',$request->input('key'))->get();
 
 
-     return       response()->json([
-                'data' => 'ok mohamed',
-                'message' => 'success',
-            ], 200);}
+     return     response()->json([
+        'data' => $request->missing(['country_id']),
+        'message' => 'success',
+    ], 200);
+        
+        }else if($request->has('country_id')){
+
+
+        }
         
             
-        
+
 
     }
 

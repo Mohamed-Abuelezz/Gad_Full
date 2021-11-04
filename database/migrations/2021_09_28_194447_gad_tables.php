@@ -55,8 +55,8 @@ class GadTables extends Migration
             $table->timestamps();
         });
 
-        // specialties_Table
-        Schema::create('specialties', function (Blueprint $table) {
+        // fields_Table
+        Schema::create('fields', function (Blueprint $table) {
             $table->id();
             $table->string('name_ar');
             $table->string('name_en');
@@ -75,14 +75,14 @@ class GadTables extends Migration
         });
 
 
-        // subjects_Table
-        Schema::create('subjects', function (Blueprint $table) {
+        // specialties_Table
+        Schema::create('specialties', function (Blueprint $table) {
             $table->id();
             $table->string('name_ar');
             $table->string('name_en');
 
-            $table->foreignId('specialties_id')
-                ->constrained('specialties')
+            $table->foreignId('field_id')
+                ->constrained('fields')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
@@ -143,12 +143,12 @@ class GadTables extends Migration
         });
 
 
-        // subjects_profiles_Table
-        Schema::create('subjects_profiles', function (Blueprint $table) {
+        // specialties_profiles_Table
+        Schema::create('specialties_profiles', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('subjects_id')
-                ->constrained('subjects')
+            $table->foreignId('specialties_id')
+                ->constrained('specialties')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
@@ -162,12 +162,12 @@ class GadTables extends Migration
         });
 
 
-        // specialties_profiles_Table
-        Schema::create('specialties_profiles', function (Blueprint $table) {
+        // fields_profiles_Table
+        Schema::create('fields_profiles', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('specialties_id')
-                ->constrained('specialties')
+            $table->foreignId('field_id')
+                ->constrained('fields')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
@@ -382,12 +382,12 @@ class GadTables extends Migration
         Schema::dropIfExists('contact_Us');
         Schema::dropIfExists('favourite_profiles');
         Schema::dropIfExists('profiles_views');
+        Schema::dropIfExists('fields_profiles');
         Schema::dropIfExists('specialties_profiles');
-        Schema::dropIfExists('subjects_profiles');
         Schema::dropIfExists('profiles_comments');
         Schema::dropIfExists('profiles');
-        Schema::dropIfExists('subjects');
         Schema::dropIfExists('specialties');
+        Schema::dropIfExists('fields');
         Schema::dropIfExists('profiles_type');
         Schema::dropIfExists('users');
         Schema::dropIfExists('countries');

@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Countries;
 use App\Models\Profiles_Type;
+use App\Models\Fields;
 use App\Models\Specialties;
-use App\Models\Subjects;
 use App\Models\Packages;
 
 class WebsiteCoresControllers extends Controller
@@ -95,89 +95,89 @@ class WebsiteCoresControllers extends Controller
     Specialties Methods
     */
 
+    public function showFields(Request $request)
+    {
+
+        $fields = Fields::all();
+
+        $countries = Countries::all();
+        $profiles_type = Profiles_Type::all();
+
+        return view('Admin.website cores.fields', ['fields' => $fields, 'countries' => $countries, 'profiles_type' => $profiles_type]);
+    }
+
+
+    public function addField(Request $request)
+    {
+
+
+        $validated = $request->validate([
+            'name_ar' => 'required|',
+            'name_en' => 'required|',
+            'country' => 'required',
+            'profile_type' => 'required',
+        ]);
+        $fields = new fields;
+
+        $fields->name_ar = $request->input('name_ar');
+        $fields->name_en = $request->input('name_en');
+        $fields->country_id = $request->input('country');
+        $fields->profiles_type_id = $request->input('profile_type');
+
+        $fields->save();
+
+        return back()->with('success', 'تم الاضافة بنجاح');
+    }
+
+    public function deletefield(Request $request, $fieldId)
+    {
+        $fields =  Fields::find($fieldId);
+
+        $fields->delete();
+
+        return back()->with('success', 'تم الحذف بنجاح');
+    }
+
+    /* 
+    Specials Methods
+    */
+
     public function showSpecialties(Request $request)
     {
 
         $specialties = Specialties::all();
 
-        $countries = Countries::all();
-        $profiles_type = Profiles_Type::all();
+        $fields = Fields::all();
 
-        return view('Admin.website cores.specialties', ['specialties' => $specialties, 'countries' => $countries, 'profiles_type' => $profiles_type]);
+        return view('Admin.website cores.specialties', ['specialties' => $specialties, 'fields' => $fields,]);
     }
 
 
-    public function addSpecialties(Request $request)
+    public function addSpecial(Request $request)
     {
-
 
         $validated = $request->validate([
             'name_ar' => 'required|unique:specialties',
             'name_en' => 'required|unique:specialties',
-            'country' => 'required',
-            'profile_type' => 'required',
+            'field_id' => 'required',
         ]);
         $specialties = new Specialties;
 
         $specialties->name_ar = $request->input('name_ar');
         $specialties->name_en = $request->input('name_en');
-        $specialties->country_id = $request->input('country');
-        $specialties->profiles_type_id = $request->input('profile_type');
+        $specialties->field_id = $request->input('field_id');
 
         $specialties->save();
 
         return back()->with('success', 'تم الاضافة بنجاح');
     }
 
-    public function deleteSpecialties(Request $request, $SpecialtiesId)
+
+    public function deleteSpecial(Request $request, $SubjectId)
     {
-        $specialties =  Specialties::find($SpecialtiesId);
+        $specialties =  Specialties::find($SubjectId);
 
         $specialties->delete();
-
-        return back()->with('success', 'تم الحذف بنجاح');
-    }
-
-    /* 
-    Subjects Methods
-    */
-
-    public function showSubjects(Request $request)
-    {
-
-        $subjects = Subjects::all();
-
-        $specialties = Specialties::all();
-
-        return view('Admin.website cores.subjects', ['subjects' => $subjects, 'specialties' => $specialties,]);
-    }
-
-
-    public function addSubject(Request $request)
-    {
-
-        $validated = $request->validate([
-            'name_ar' => 'required|unique:subjects',
-            'name_en' => 'required|unique:subjects',
-            'specialties' => 'required',
-        ]);
-        $subjects = new Subjects;
-
-        $subjects->name_ar = $request->input('name_ar');
-        $subjects->name_en = $request->input('name_en');
-        $subjects->specialties_id = $request->input('specialties');
-
-        $subjects->save();
-
-        return back()->with('success', 'تم الاضافة بنجاح');
-    }
-
-
-    public function deleteSubject(Request $request, $SubjectId)
-    {
-        $subjects =  Subjects::find($SubjectId);
-
-        $subjects->delete();
 
         return back()->with('success', 'تم الحذف بنجاح');
     }

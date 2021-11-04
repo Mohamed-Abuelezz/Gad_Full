@@ -61,8 +61,8 @@
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="{{ url('admin/countries') }}">البلاد</a>
                                 <a class="nav-link" href="{{ url('admin/profileTypes') }}">نوع البروفايل</a>
-                                <a class="nav-link" href="{{ url('admin/specialties') }}">تخصص البروفايل</a>
-                                <a class="nav-link" href="{{ url('admin/subjects') }}">المواد العلمية</a>
+                                <a class="nav-link" href="{{ url('admin/fields') }}">مجال البروفايل</a>
+                                <a class="nav-link" href="{{ url('admin/specialties') }}">التخصصات</a>
                                 <a class="nav-link" href="{{ url('admin/packages') }}"> الباقات</a>
                             </nav>
                         </div>

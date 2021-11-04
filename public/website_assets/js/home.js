@@ -341,65 +341,99 @@ request.fail(function(jqXHR, textStatus) {
 /////////////////////////////////////////////////
 var country_id;
 var profileType_id;
+var field_id;
 var specialties_id;
-var subjects_id;
 
 
-$('#ProfileType').loading({
-  onStart: function(event,loadingObj) { 
- // event.stopPropagation();
-
-   },
-
-  onStop: function(loading) {
-    loading.overlay.fadeOut(0);
-   loading.event
-   console.log(loading.event);
-  },
-overlay: $("#myLoading"),
-message:'ok',
-start:false
-});
 
 
+//$('#ProfileType').loading('start',);
 
 
 $(".country-btn").click(function(){
+
+
+
   country_id = $(this).data('id');
 
-  $('#ProfileType').loading('start',);
+ initNewLoading('ProfileFields');
+ initNewLoading('specialties');
+
+
+  $('#ProfileFields').loading('start');
+  $('#specialties').loading('start');
 
   
+//   var request = $.ajax({
+//     headers: {
+//       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//     },
+//     url: url+"/getOthersDepends",
+//     type: "GET",
+//     data: {'key' : 'country','country_id':country_id},
+//     dataType: "json"
+//   });
+  
+//   request.done(function(msg) {
+//   console.log(msg);
+//  //  $('#ProfileType').loading('stop',);
+//  $('#specialties').loading('stop');
+//  $('#ProfileFields').loading('stop');
+
+//   });
+  
+//   request.fail(function(jqXHR, textStatus) {
+//     console.log( jqXHR);
+  
+//   $("span.test:first").text("Welcome");
+
+//   showAlert(jqXHR['statusText'],'error');
+
+
+  
+// });
+});
+
+$(".profileType-btn").click(function(){
+  profileType_id = $(this).data('id');
+
+
   var request = $.ajax({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     },
     url: url+"/getOthersDepends",
     type: "GET",
-    data: {'key' : 'country'},
-    dataType: "json"
+    data: {'profileType_id':profileType_id,'country_id':country_id},
+    dataType: "json",
+    cache: false 
   });
   
   request.done(function(msg) {
-  console.log(msg['data']);
-  
-  $('#ProfileType').loading('stop',);
-  
+  console.log(msg);
+ //  $('#ProfileType').loading('stop',);
+//  $('#specialties').loading('stop');
+//  $('#ProfileFields').loading('stop');
+
   });
   
   request.fail(function(jqXHR, textStatus) {
-    alert( "Request failed: " + textStatus + jqXHR );
+    console.log( jqXHR);
   
-    $('#ProfileType').loading('stop',);
+ // $("span.test:first").text("Welcome");
+
+ // showAlert(jqXHR['statusText'],'error');
+
+
   
-  });
-
-
-
 });
 
-$(".profileType-btn").click(function(){
-  profileType_id = $(this).data('id');
+
+
+
+
+
+
 });
 
 $(".specialties-btn").click(function(){
@@ -462,3 +496,65 @@ $("#advSearch-btn").click(function(){
 
 
 });
+
+
+
+
+/*
+
+Helpers Methods
+
+*/
+
+
+function initNewLoading($idElement) {
+
+var loadElement_id =  (Math.random() + 1).toString(36).substring(7);
+
+
+  var element = `<div id='${loadElement_id}'>
+
+  <div class="load-wrapp">
+    <div class="load-9">
+      <div class="spinner">
+        <div class="bubble-1"></div>
+        <div class="bubble-2"></div>
+      </div>
+    </div>
+  </div>
+</div>`;
+
+  $(document.body).append(element);
+
+  $('#'+$idElement).loading({
+
+    onStop: function(loading) {
+      loading.overlay.fadeOut(3000);
+    },
+  //message:'ok',
+  //theme: 'dark'
+  overlay: $("#"+loadElement_id),
+  stoppable:false,
+  start:false
+  });
+
+
+  return $idElement;
+}
+
+
+function showAlert($msg,$type){
+
+  $(".toast-body").text($msg);
+  $(".toast-body").addClass($type == 'error' ? "red" : 'green');
+
+  var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+  var toastList = toastElList.map(function (toastEl) {
+    return new bootstrap.Toast(toastEl, {})
+  });
+  var myToastEl = document.getElementById('myToastEl');
+  var myToast = bootstrap.Toast.getInstance(myToastEl); // Returns a Bootstrap toast instance
+  myToast.show();
+
+
+}
