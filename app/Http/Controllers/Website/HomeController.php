@@ -65,29 +65,57 @@ class HomeController extends Controller
     }
 
 
-    public function  getOthersDepends(Request $request){
-
-        if($request->has('country_id')){
-
-             $fields = Fields::where('country_id',$request->input('key'))->get();
-
-
-     return     response()->json([
-        'data' => $request->missing(['country_id']),
-        'message' => 'success',
-    ], 200);
+    public function  getFields(Request $request){
+        $fields = null;
         
-        }else if($request->has('country_id')){
+        if($request->input('key')== 'country'){
 
+
+            if($request->has('profileType_id')){
+                $fields =  Fields::where('country_id',$request->input('country_id'))->where('profiles_type_id',$request->input('profileType_id'))->with(['country',])->get();
+        
+                }else{
+                    $fields =  Fields::where('country_id',$request->input('country_id'))->with(['country',])->get();
+                }
+
+
+
+
+        }else if($request->input('key')== 'profileType'){
+
+            if($request->has('country_id')){
+                $fields =  Fields::where('country_id',$request->input('country_id'))->where('profiles_type_id',$request->input('profileType_id'))->with(['country',])->get();
+        
+                }else{
+                    $fields =  Fields::where('profiles_type_id',$request->input('profileType_id'))->with(['country',])->get();
+                }
 
         }
+
+
         
-            
+
+            return     response()->json([
+                'data' =>  $fields,
+                'message' => 'success',
+            ], 200);
+
+        
+        
 
 
     }
 
+    public function getSpecials(Request $request){
 
+        $specialties =  Specialties::where('field_id',$request->input('field_id'))->get();
+
+        return     response()->json([
+            'data' =>  $specialties,
+            'message' => 'success',
+        ], 200);
+
+    }
 
 
     public function advancedSearch(Request $request){

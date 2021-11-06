@@ -144,7 +144,8 @@ Route::get('/home',[HomeController::class, 'showHome']);
 Route::post('/search',[HomeController::class, 'search']);
 
 
-Route::get('/getOthersDepends',[HomeController::class, 'getOthersDepends']);
+Route::get('/getFields',[HomeController::class, 'getFields']);
+Route::get('/getSpecials',[HomeController::class, 'getSpecials']);
 
 Route::post('/advancedSearch',[HomeController::class, 'advancedSearch']);
 
