@@ -18,6 +18,7 @@ use App\Models\Subjects;
 use App\Models\Profiles;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -119,7 +120,28 @@ class HomeController extends Controller
 
 
     public function advancedSearch(Request $request){
-      //  $myHelpersFunctios = new MyHelpersFunctios();
+        $myHelpersFunctios = new MyHelpersFunctios();
+
+        $profiles_all= null;
+//return 'ssss';
+      if ($request->input('country_id') != null ) {
+          # code...
+          $profiles_all = DB::table('users')->where('country_id',$request->input('country_id'))->join('profiles', 'users.id', '=', 'profiles.users_id')->get();
+          
+          
+          
+       //   first()->profiles();
+       //   $profiles_all =     $users->profiles()->get();
+      }
+
+
+
+   //   $profiles_all = Profiles::where('')->with(['user', 'profiles_type', 'profileRates'])->get();
+
+     return     response()->json([
+        'data' =>  $profiles_all,
+        'message' => 'success',
+    ], 200);
 
     }
 

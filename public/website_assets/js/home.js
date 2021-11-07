@@ -359,7 +359,9 @@ var specialties_id;
 
 $(".country-btn").click(function () {
 
-  $('#spec').remove();
+    $('#spec').remove();
+    field_id = null;
+    specialties_id = null;
 
 
     country_id = $(this).data('id');
@@ -440,7 +442,9 @@ $(".country-btn").click(function () {
 });
 
 $(".profileType-btn").click(function () {
-  $('#spec').remove();
+    $('#spec').remove();
+    field_id = null;
+    specialties_id= null;
 
     profileType_id = $(this).data('id');
     initNewLoading('ProfileFields');
@@ -571,59 +575,65 @@ ${btns}
 
 
 $("#advSearch-btn").click(function () {
-  // var country_id;
-  // var profileType_id;
-  // var field_id;
-  // var specialties_id;
-  
-  console.log(country_id);
-  console.log(profileType_id);
-  console.log(field_id);
-  console.log(specialties_id);
+    // var country_id;
+    // var profileType_id;
+    // var field_id;
+    // var specialties_id;
+    initNewLoading('advSearch-btn');
+    initNewLoading('map');
+    initNewLoading('two');
+    $('#advSearch-btn').loading('start');
+    $('#map').loading('start');
+    $('#two').loading('start');
 
-    // var request = $.ajax({
-    //     headers: {
-    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //     },
-    //     url: url + "/search",
-    //     type: "POST",
-    //     data: {
-    //         key: term
-    //     },
-    //     dataType: "json"
-    // });
+    console.log(country_id);
+    console.log(profileType_id);
+    console.log(field_id);
+    console.log(specialties_id);
 
-    // request.done(function (msg) {
-    //     console.log(msg['data']);
-    //     //alert(msg);
+    var request = $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: url + "/advancedSearch",
+        type: "POST",
+        data: {
+            'country_id': country_id,
+            'profileType_id': profileType_id,
+            'field_id': field_id,
+            'specialties_id': specialties_id,
+        },
+        cache:false,
+        dataType: "json"
+    });
 
-    //     msg['data'].forEach((item) => {
+    request.done(function (msg) {
+        console.log(msg);
 
-    //         choices.push({
-    //             display_name: item['display_name'],
-    //             profiles_type: lang == 'ar' ? item['profiles_type']['name_ar'] : item['profiles_type']['name_en'],
-    //             img: url + '/storage/images/users_images/' + item['user']['image'],
-    //             country: lang == 'ar' ? item['user']['country']['name_ar'] : item['user']['country']['name_en']
-    //         })
+     //   updateMarkers();
+   //     $('#advSearch-btn').loading('stop');
+     //   $('#map').loading('stop');
+     //   $('#two').loading('stop');
 
-    //     });
 
-    //     for (i = 0; i < choices.length; i++)
-    //         if (~choices[i]['display_name'].toLowerCase().indexOf(term)) matches.push(choices[i]);
 
-    //     $('.loadBox').loading('stop');
 
-    //     suggest(matches);
 
-    // });
 
-    // request.fail(function (jqXHR, textStatus) {
-    //     alert("Request failed: " + textStatus + jqXHR);
 
-    //     $('.loadBox').loading('stop');
-    //     //  suggest(matches);
 
-    // });
+    
+    
+    });
+
+    request.fail(function (jqXHR, textStatus) {
+       console.log(jqXHR);
+       showAlert(jqXHR['statusText'], 'error');
+
+        $('.loadBox').loading('stop');
+
+
+    });
 
 
 
@@ -659,17 +669,18 @@ function initNewLoading($idElement) {
 
     $(document.body).append(element);
 
-    $('#' + $idElement).loading({
+        $('#' + $idElement).loading({
 
-        onStop: function (loading) {
-            loading.overlay.fadeOut(3000);
-        },
-        //message:'ok',
-        //theme: 'dark'
-        overlay: $("#" + loadElement_id),
-        stoppable: false,
-        start: false
-    });
+            onStop: function (loading) {
+                loading.overlay.fadeOut(3000);
+            },
+            //message:'ok',
+            //theme: 'dark'
+            overlay: $("#" + loadElement_id) ,
+            stoppable: false,
+            start: false
+        });
+    
 
 
     return $idElement;
@@ -698,49 +709,49 @@ function showAlert($msg, $type) {
 
 
 
-function handleFieldClick(){
-  $(".ProfileFields-btn").click(function () {
-    console.log('field is click');
-    initNewLoading('Specialties');
-    $('#Specialties').loading('start');
- 
-    console.log('ooookkkkkk mohamed 11111');
-    field_id = $(this).data('id');
+function handleFieldClick() {
+    $(".ProfileFields-btn").click(function () {
+        console.log('field is click');
+        initNewLoading('Specialties');
+        $('#Specialties').loading('start');
 
-    var request = $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: url + "/getSpecials",
-        type: "GET",
-        data: {
-            'field_id': field_id,
-            'key': 'specials'
-        },
-        dataType: "json",
-        cache: false
-    });
+        console.log('ooookkkkkk mohamed 11111');
+        field_id = $(this).data('id');
 
-    request.done(function (msg) {
-        console.log(msg);
-        const element = document.getElementById("Specialties");
+        var request = $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: url + "/getSpecials",
+            type: "GET",
+            data: {
+                'field_id': field_id,
+                'key': 'specials'
+            },
+            dataType: "json",
+            cache: false
+        });
 
-        if (element == null) {
-            var btns = '';
+        request.done(function (msg) {
+            console.log(msg);
+            const element = document.getElementById("Specialties");
 
-            msg['data'].forEach(function (item) {
+            if (element == null) {
+                var btns = '';
 
-                btns += lang == 'ar' ?
+                msg['data'].forEach(function (item) {
 
-                    `<li><button class="dropdown-item specialties-btn" data-id="${item['id']}" type="button">${item['name_ar']} </button></li>` :
-                    ` <li><button class="dropdown-item specialties-btn" data-id="${item['id']}" type="button">${item['name_en']} </button></li>`;
+                    btns += lang == 'ar' ?
 
-            });
+                        `<li><button class="dropdown-item specialties-btn" data-id="${item['id']}" type="button">${item['name_ar']} </button></li>` :
+                        ` <li><button class="dropdown-item specialties-btn" data-id="${item['id']}" type="button">${item['name_en']} </button></li>`;
 
-
+                });
 
 
-            var new_element = `  
+
+
+                var new_element = `  
 <div class="dropdown" id='spec'>
 <button class="btn btn-outline  dropdown-toggle specialties" type="button" id="Specialties" data-bs-toggle="dropdown" aria-expanded="false">
 ${lang == 'ar' ? 'التخصص'   : 'Specialties' }
@@ -757,78 +768,78 @@ ${btns}
 `;
 
 
-            $("#search-drops").append(new_element);
+                $("#search-drops").append(new_element);
 
 
-            // DropDown 
-            $(".dropdown-menu li").click(function () {
-                $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
-                $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
-            });
+                // DropDown 
+                $(".dropdown-menu li").click(function () {
+                    $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+                    $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+                });
 
-            $(".specialties-btn").click(function () {
-                console.log('ooookkkkkk mohamed');
-                specialties_id = $(this).data('id');
-            });
-
-
-
-        } else {
-
-            var btns = '';
-
-            msg['data'].forEach(function (item) {
-
-                btns += lang == 'ar' ?
-
-                    `<li><button class="dropdown-item specialties-btn" data-id="${item['id']}" type="button">${item['name_ar']} </button></li>` :
-                    ` <li><button class="dropdown-item specialties-btn" data-id="${item['id']}" type="button">${item['name_en']} </button></li>`;
-
-            });
-
-            $("#btns-menu2").html(btns);
-            $("#Specialties").html(lang == 'ar' ? 'التخصص' : 'Specialties');
-            // DropDown 
-            $(".dropdown-menu li").click(function () {
-                $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
-                $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
-            });
-
-            // DropDown 
-            $(".dropdown-menu li").click(function () {
-              $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
-              $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
-          });
-
-          $(".specialties-btn").click(function () {
-              console.log('ooookkkkkk mohamed');
-              specialties_id = $(this).data('id');
-          });
+                $(".specialties-btn").click(function () {
+                    console.log('ooookkkkkk mohamed');
+                    specialties_id = $(this).data('id');
+                });
 
 
-          $('#Specialties').loading('stop');
+
+            } else {
+
+                var btns = '';
+
+                msg['data'].forEach(function (item) {
+
+                    btns += lang == 'ar' ?
+
+                        `<li><button class="dropdown-item specialties-btn" data-id="${item['id']}" type="button">${item['name_ar']} </button></li>` :
+                        ` <li><button class="dropdown-item specialties-btn" data-id="${item['id']}" type="button">${item['name_en']} </button></li>`;
+
+                });
+
+                $("#btns-menu2").html(btns);
+                $("#Specialties").html(lang == 'ar' ? 'التخصص' : 'Specialties');
+                // DropDown 
+                $(".dropdown-menu li").click(function () {
+                    $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+                    $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+                });
+
+                // DropDown 
+                $(".dropdown-menu li").click(function () {
+                    $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+                    $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+                });
+
+                $(".specialties-btn").click(function () {
+                    console.log('ooookkkkkk mohamed');
+                    specialties_id = $(this).data('id');
+                });
 
 
-        }
+                $('#Specialties').loading('stop');
+
+
+            }
+
+        });
+
+        request.fail(function (jqXHR, textStatus) {
+            console.log(jqXHR);
+
+            showAlert(jqXHR['statusText'], 'error');
+
+
+
+        });
+
+
+
+
+
+
+
 
     });
-
-    request.fail(function (jqXHR, textStatus) {
-        console.log(jqXHR);
-
-        showAlert(jqXHR['statusText'], 'error');
-
-
-
-    });
-
-
-
-
-
-
-
-
-});
 
 }
