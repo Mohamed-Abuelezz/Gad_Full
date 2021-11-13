@@ -24,6 +24,10 @@ class Profiles extends Model
         'more_information',
     ];
 
+    public function mymorph()
+    {
+        return $this->morphTo();
+    }
 
     public function user()
     {
@@ -43,5 +47,12 @@ class Profiles extends Model
     {
         return $this->hasMany(ProfileRates::class);
     }
+
+    public function profileFields()
+    {
+        return $this->hasMany(Fields::class);
+    }
+
+
 
 }

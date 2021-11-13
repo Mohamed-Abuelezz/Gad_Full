@@ -17,7 +17,7 @@ position: relative;
   height: 10px;
   border-radius: 5px;
   text-align: center;
-margin: auto auto  !important ;
+margin: auto auto   !important ;
  /* top: 0  !important; */
 /*  left: 0 !important;*/
  /* background-color: #d8d8d8;*/
@@ -26,6 +26,9 @@ margin: auto auto  !important ;
 /*.load-wrapp p {
   padding: 0 0 20px;
 }*/
+/* .loading-shown{
+  width: 100% !important; 
+} */
 .load-wrapp:last-child {
   margin-right: 0;
 }

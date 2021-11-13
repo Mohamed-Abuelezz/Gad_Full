@@ -148,6 +148,7 @@ Route::get('/getFields',[HomeController::class, 'getFields']);
 Route::get('/getSpecials',[HomeController::class, 'getSpecials']);
 
 Route::post('/advancedSearch',[HomeController::class, 'advancedSearch']);
+Route::get('/advancedSearch',[HomeController::class, 'advancedSearch']);
 
 
 

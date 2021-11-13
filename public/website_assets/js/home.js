@@ -1,3 +1,14 @@
+var country_id = advancedSearchVals['country_id'] != null ?  advancedSearchVals['country_id']   : null;
+var profileType_id = advancedSearchVals['profileType_id'] != null ?  advancedSearchVals['profileType_id']   : null;
+var field_id = advancedSearchVals['field_id'] != null ?  advancedSearchVals['field_id']   : null;
+var specialties_id = advancedSearchVals['specialties_id'] != null ?  advancedSearchVals['specialties_id']   : null;
+
+//iNITS fUNCTIONS WHEN OPEN
+
+getInitFields();
+getInitSpecialest();
+
+
 /**** Profile Results Tap */
 
 const tabs = document.querySelectorAll('.tab');
@@ -346,10 +357,6 @@ $('input[name="search"]').autoComplete({
 });
 
 /////////////////////////////////////////////////
-var country_id;
-var profileType_id;
-var field_id;
-var specialties_id;
 
 
 
@@ -487,11 +494,10 @@ $(".profileType-btn").click(function () {
 
 
 
-
             var new_element = `  
  <div class="dropdown">
 <button class="btn btn-outline  dropdown-toggle ProfileFields" type="button" id="ProfileFields" data-bs-toggle="dropdown" aria-expanded="false">
-${lang == 'ar' ? 'المجال'   : 'Fields' }
+${ lang == 'ar' ? 'المجال'   : 'Fields' }
   
 </button>
 <ul class="dropdown-menu " id="btns-menu" style="z-index: 9999;" aria-labelledby="ProfileFields">
@@ -518,7 +524,7 @@ ${btns}
 
 
         } else {
-
+console.log('start ooookkkk Fileds >>>>');
             var btns = '';
 
             msg['data'].forEach(function (item) {
@@ -579,17 +585,15 @@ $("#advSearch-btn").click(function () {
     // var profileType_id;
     // var field_id;
     // var specialties_id;
+
     initNewLoading('advSearch-btn');
     initNewLoading('map');
-    initNewLoading('two');
+ //   initNewLoading('two');
     $('#advSearch-btn').loading('start');
     $('#map').loading('start');
-    $('#two').loading('start');
+  //  $('#two').loading('start');
 
-    console.log(country_id);
-    console.log(profileType_id);
-    console.log(field_id);
-    console.log(specialties_id);
+    console.log('field id is >>>.'+field_id);
 
     var request = $.ajax({
         headers: {
@@ -609,13 +613,13 @@ $("#advSearch-btn").click(function () {
 
     request.done(function (msg) {
         console.log(msg);
+    //     profiles_all = msg['data'];
+    //    updateMarkers();
+       $('#advSearch-btn').loading('stop');
+       $('#map').loading('stop');
+      // $('#two').loading('stop');
 
-     //   updateMarkers();
-   //     $('#advSearch-btn').loading('stop');
-     //   $('#map').loading('stop');
-     //   $('#two').loading('stop');
-
-
+      $('#two').html(msg['data'])
 
 
 
@@ -627,7 +631,7 @@ $("#advSearch-btn").click(function () {
     });
 
     request.fail(function (jqXHR, textStatus) {
-       console.log(jqXHR);
+       console.log(jqXHR['responseJSON']['message']);
        showAlert(jqXHR['statusText'], 'error');
 
         $('.loadBox').loading('stop');
@@ -655,7 +659,7 @@ function initNewLoading($idElement) {
     var loadElement_id = (Math.random() + 1).toString(36).substring(7);
 
 
-    var element = `<div id='${loadElement_id}' style="display:none">
+    var element = `<div id='${loadElement_id}' style="display:none;">
 
   <div class="load-wrapp">
     <div class="load-9">
@@ -717,6 +721,7 @@ function handleFieldClick() {
 
         console.log('ooookkkkkk mohamed 11111');
         field_id = $(this).data('id');
+        console.log(field_id);
 
         var request = $.ajax({
             headers: {
@@ -843,3 +848,212 @@ ${btns}
     });
 
 }
+
+
+
+
+
+function getInitFields(){
+
+    if(advancedSearchVals['profileType_id'] != null){
+        // field_id = null;
+        // specialties_id= null;
+    
+        profileType_id =advancedSearchVals['profileType_id'];
+        country_id = advancedSearchVals['country_id'];
+     //   initNewLoading('ProfileFields');
+    
+    
+        $('#ProfileFields').loading('start');
+    
+    
+        var request = $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: url + "/getFields",
+            type: "GET",
+            data: {
+                'profileType_id': profileType_id,
+                'country_id': country_id,
+                'key':country_id != null ? 'country' : 'profileType'
+            },
+            dataType: "json",
+            cache: false
+        });
+    
+        request.done(function (msg) {
+            console.log(msg);
+            const element = document.getElementById("ProfileFields");
+            console.log(element);
+    
+            if (element == null) {
+                var btns = '';
+    
+                msg['data'].forEach(function (item) {
+    
+                    btns += lang == 'ar' ?
+    
+                        `<li><button class="dropdown-item ProfileFields-btn" data-id="${item['id']}" type="button">${item['name_ar']} [${item['country']['name_ar']}]</button></li>` :
+                        ` <li><button class="dropdown-item ProfileFields-btn" data-id="${item['id']}" type="button">${item['name_en']} [${item['country']['name_en']}]</button></li>`;
+    
+                });
+    
+    //const advancedFieldVal= msg['data'].find(object => object.id == advancedSearchVals['field_id'])['name_ar'];
+    //console.log(advancedFieldVal);
+                var new_element = `  
+     <div class="dropdown">
+    <button class="btn btn-outline  dropdown-toggle ProfileFields" type="button" id="ProfileFields" data-bs-toggle="dropdown" aria-expanded="false">
+    ${ advancedSearchVals['field_id'] != null  ? lang == 'ar' ? msg['data'].find(object => object.id == advancedSearchVals['field_id'])['name_ar'] : msg['data'].find(object => object.id == advancedSearchVals['field_id'])['name_en']  :   lang == 'ar' ? 'المجال'   : 'Fields' } [${ advancedSearchVals['field_id'] != null  ? lang == 'ar' ? msg['data'].find(object => object.id == advancedSearchVals['field_id'])['country']['name_en'] : msg['data'].find(object => object.id == advancedSearchVals['field_id'])['country']['name_en'] : '' }]
+      
+    </button>
+    <ul class="dropdown-menu " id="btns-menu" style="z-index: 9999;" aria-labelledby="ProfileFields">
+          
+    
+    
+    ${btns}
+    
+    </ul>
+    </div>
+    `;
+    
+    console.log(msg['data'].find(object => object.id == advancedSearchVals['field_id']));
+    console.log(msg['data'].find(object => object.id == 1));
+    
+                $("#search-drops").append(new_element);
+    
+                // DropDown 
+                $(".dropdown-menu li").click(function () {
+                    $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+                    $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+                });
+    
+    
+                handleFieldClick();
+    
+    
+            } 
+    
+    
+        
+    
+    
+    
+    
+    
+            
+    
+    
+    
+        });
+    
+        request.fail(function (jqXHR, textStatus) {
+            console.log(jqXHR);
+    
+            showAlert(jqXHR['statusText'], 'error');
+    
+    
+    
+        });
+    
+    }
+    
+    
+    
+    
+    
+    }
+
+    function getInitSpecialest(){
+
+        if(advancedSearchVals['specialties_id'] != null || advancedSearchVals['field_id'] != null){
+
+           // field_id = $(this).data('id');
+            console.log('>>>>>> '+advancedSearchVals['field_id']);
+    
+            var request = $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: url + "/getSpecials",
+                type: "GET",
+                data: {
+                    'field_id': advancedSearchVals['field_id'],
+                    'key': 'specials'
+                },
+                dataType: "json",
+                cache: false
+            });
+    
+            request.done(function (msg) {
+                console.log(msg);
+                const element = document.getElementById("Specialties");
+    
+                    var btns = '';
+    
+                    msg['data'].forEach(function (item) {
+    
+                        btns += lang == 'ar' ?
+    
+                            `<li><button class="dropdown-item specialties-btn" data-id="${item['id']}" type="button">${item['name_ar']} </button></li>` :
+                            ` <li><button class="dropdown-item specialties-btn" data-id="${item['id']}" type="button">${item['name_en']} </button></li>`;
+    
+                    });
+    
+    
+    
+    
+                    var new_element = `  
+    <div class="dropdown" id='spec'>
+    <button class="btn btn-outline  dropdown-toggle specialties" type="button" id="Specialties" data-bs-toggle="dropdown" aria-expanded="false">
+
+    ${ advancedSearchVals['specialties_id'] != null  ? lang == 'ar' ? msg['data'].find(object => object.id == advancedSearchVals['specialties_id'])['name_ar'] : msg['data'].find(object => object.id == advancedSearchVals['specialties_id'])['name_en']  :   lang == 'ar' ? 'التخصص'   : 'Specialties' } 
+    
+    </button>
+    <ul class="dropdown-menu " id="btns-menu2" style="z-index: 9999;" aria-labelledby="Specialties">
+    
+    
+    
+    ${btns}
+    
+    </ul>
+    </div>
+    `;
+    
+    
+                    $("#search-drops").append(new_element);
+    
+    
+                    // DropDown 
+                    $(".dropdown-menu li").click(function () {
+                        $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+                        $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+                    });
+    
+                    $(".specialties-btn").click(function () {
+                        console.log('ooookkkkkk mohamed');
+                        specialties_id = $(this).data('id');
+                    });
+    
+    
+                });
+    
+
+
+    request.fail(function (jqXHR, textStatus) {
+            console.log(jqXHR);
+
+            showAlert(jqXHR['statusText'], 'error');
+
+
+
+        }); 
+
+        
+        }
+        
+        
+        
+        
+        
+        }

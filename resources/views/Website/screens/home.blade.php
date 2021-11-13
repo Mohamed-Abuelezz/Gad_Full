@@ -81,7 +81,7 @@
                 <div class="dropdown">
                     <button class="btn  btn-outline dropdown-toggle" type="button" id="dropdownMenu2"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ Config::get('app.locale') == 'ar' ? 'الدولة' : 'Country' }}
+                        {{ $country_id != null ? (Config::get('app.locale') == 'ar' ?  $countries->where('id', '=', $country_id)->first()['name_ar'] : $countries->where('id', '=', $country_id)->first()['name_en'] )  :  (Config::get('app.locale') == 'ar' ? 'الدولة' : 'Country') }}
 
                     </button>
                     <ul class="dropdown-menu" style="z-index: 9999;" aria-labelledby="dropdownMenu2">
@@ -91,7 +91,7 @@
 
 
                             <li><button id="" class="dropdown-item country-btn" data-id="{{ $item->id }}"
-                                    type="button">{{ Config::get('app.locale') == 'ar' ? $item->name_ar : $item->name_en }}</button>
+                                    type="button">  {{ Config::get('app.locale') == 'ar' ? $item->name_ar : $item->name_en }}</button>
                             </li>
 
 
@@ -103,7 +103,7 @@
                 <div class="dropdown">
                     <button class="btn btn-outline dropdown-toggle" type="button" id="ProfileType"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ Config::get('app.locale') == 'ar' ? 'نوع الصفحة الشخصية' : 'Profiles Type' }}
+                        {{  $profileType_id != null ? (Config::get('app.locale') == 'ar' ?  $profiles_Type->where('id', '=', $profileType_id)->first()['name_ar'] : $profiles_Type->where('id', '=', $profileType_id)->first()['name_en'] )  : (Config::get('app.locale') == 'ar' ? 'نوع الصفحة الشخصية' : 'Profiles Type') }}
 
                     </button>
                     <ul class="dropdown-menu" style="z-index: 9999;" aria-labelledby="ProfileType">
@@ -234,59 +234,10 @@
             <div id="two" class="content cardsTab">
 
 
+                @include('Website.custome Screens.homeCards')
 
-                <div class="row  justify-content-around">
-
-                    @foreach ($profiles as $item)
-
-                        <div class="col-12 col-md-5 col-lg-4">
-                            <div class="container wow animate__jackInTheBox">
-                                <div class="cover-photo">
-                                    <img src="{{ asset('storage/images/users_images/' . $item->user->image) }}"
-                                        class="profile animate__animated animate__pulse animate__infinite">
-                                </div>
-                                <div class="profile-name text-medium" style="color: white;">{{ $item->display_name }}
-                                </div>
-                                <div class="profile-rate" style="color: white;">
-                                    <div class="stars">
-                                        @for ($i = 1; $i <= 5; $i++)
-                                            @if ($i < $item->profileRates->avg('rate'))
-                                                <span class="fas fa-star checked"></span>
-
-                                            @else
-                                                <span class="fas fa-star"></span>
-
-                                            @endif
-                                        @endfor
-                                    </div>
-                                    <div> {{ count($item->profileRates) }} </div>
-                                </div>
-                                <p class="about text-small" style="color: white;"> {{ $item->bio }}</p>
-                                <a class="btn-outline" href="./profile.html"
-                                    style="width: 80%;">{{ Config::get('app.locale') == 'ar' ? 'المزيد' : 'More' }}</a>
-                                <div>
-                                    <i class="fas fa-share-alt"></i>
-                                    <i class="fab fa-whatsapp"></i>
-                                    <i class="fas fa-heart"></i>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                    @endforeach
-
-
-
-
-                </div>
-                <br>
-                <br>
-
-                <div style="margin: auto; display: flex;justify-content: center" style="color: var(--primary)">
-                    {{ $profiles->links('Website.global widgets.pagination') }}
-
-                </div>
+          
+           
 
 
             </div>
@@ -339,10 +290,28 @@
         var url = {!! json_encode(Request::root()) !!};
         var lang = document.getElementsByTagName("body")[0].getAttribute("lang");
 
+
         console.log(lang);
 
         var profiles_all = {!! json_encode($profiles_all, JSON_HEX_TAG) !!};
         console.log(profiles_all);
+
+
+        var advancedSearchVals={
+'country_id': {!! json_encode($country_id,JSON_HEX_TAG) !!},
+'profileType_id': {!! json_encode($profileType_id,JSON_HEX_TAG) !!},
+'field_id': {!! json_encode($field_id,JSON_HEX_TAG) !!},
+'specialties_id': {!! json_encode($specialties_id, JSON_HEX_TAG) !!},
+        };
+        console.log(advancedSearchVals);
+
+
+
+
+
+
+
+
     </script>
 
     <!--Js Packages-->
@@ -361,7 +330,7 @@
     <script src=" {{ URL::asset('website_assets/packages/jquery-loading-master/dist/jquery.loading.min.js') }}"></script>
 
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhwUPb_bGJzGj0Wnj89dcnU5NZQhGx9jY&callback=initMap&libraries=&v=weekly"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANkqJZZHe2AVsUpY6mJ8G8qHKil5VznUs&callback=initMap&libraries=&v=weekly"
         async></script>
 
     <!--Js Screen-->
