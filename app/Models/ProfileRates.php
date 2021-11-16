@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class ProfileRates extends Model
 {
@@ -21,5 +22,9 @@ class ProfileRates extends Model
     {
         return $this->belongsTo(Profiles::class,'profile_id');
     }
+
+
+
+
 
 }

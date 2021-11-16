@@ -24,7 +24,6 @@
 </head>
 
 <body dir="{{ Config::get('app.locale') == 'ar' ? 'rtl' : 'ltr' }}" lang="{{ Config::get('app.locale') }}">
-    <!--
 
   <div id="splash">
 
@@ -35,7 +34,7 @@
     </div>
 
   </div>
-  -->
+
 
 
     <div id='myLoading'>
@@ -182,15 +181,15 @@
 
 
             <div class="orderBy">
-                <div class="dropdown">
+                <div class="dropdown"  id="OrderBy-drop">
                     <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        Order By
+                     {{Config::get('app.locale') == 'ar' ?   'الترتيب بواسطة' :  'Order By' }}
                     </button>
                     <ul class="dropdown-menu" style="z-index: 9999;" aria-labelledby="dropdownMenu2">
-                        <li><button class="dropdown-item" type="button">Action</button></li>
-                        <li><button class="dropdown-item" type="button">Another action</button></li>
-                        <li><button class="dropdown-item" type="button">The Nearset</button></li>
+                        <li><button class="dropdown-item order-btn" data-key="hRating" type="button"> {{Config::get('app.locale') == 'ar' ?   'الاعلي تقييم' :  'highest rating' }}</button></li>
+                        <li><button class="dropdown-item order-btn" data-key="lRating" type="button"> {{Config::get('app.locale') == 'ar' ?   'الاقل تقييم' :  'lowest rated' }}</button></li>
+                        <li><button class="dropdown-item order-btn" data-key="nRating" type="button"> {{Config::get('app.locale') == 'ar' ?   'الاقرب من موقعك' :  'the nearset' }}</button></li>
                     </ul>
                 </div>
             </div>
@@ -271,7 +270,6 @@
 
     @endif
 
-    @include('Website.global widgets.toast')
 
 
 
@@ -281,7 +279,7 @@
         var globalUsageElement = {
             'Toast': true,
             'Offside': true,
-            'Splash': false,
+            'Splash': true,
             'AvatarCover': true,
             'Wow': true,
             'authNav': true

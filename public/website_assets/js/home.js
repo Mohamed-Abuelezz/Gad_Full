@@ -613,13 +613,14 @@ $("#advSearch-btn").click(function () {
 
     request.done(function (msg) {
         console.log(msg);
-    //     profiles_all = msg['data'];
-    //    updateMarkers();
+         profiles_all = msg['data']['profiles_all'];
+         console.log(profiles_all);
+        updateMarkers();
        $('#advSearch-btn').loading('stop');
        $('#map').loading('stop');
       // $('#two').loading('stop');
 
-      $('#two').html(msg['data'])
+      $('#two').html(msg['data']['views'])
 
 
 
@@ -645,7 +646,137 @@ $("#advSearch-btn").click(function () {
 });
 
 
+//////////////////////////////////////////////////////
+$(".order-btn").click(function () { 
 
+console.log($(this).data('key'));
+
+initNewLoading('OrderBy-drop');
+$('#OrderBy-drop').loading('start');
+
+var lat = null;
+var lng = null;
+
+if($(this).data('key') === 'nRating'){
+    console.log('ok right');
+if (navigator.geolocation) {
+   navigator.geolocation.getCurrentPosition(function(position){
+
+    lat = position.coords.latitude;
+    lng = position.coords.longitude;
+    console.log(lat);
+    console.log(lng);
+
+    var request = $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: url + "/orderBy",
+        type: "POST",
+        data: {
+            'country_id': country_id,
+            'profileType_id': profileType_id,
+            'field_id': field_id,
+            'specialties_id': specialties_id,
+    
+            'lat':lat,
+            'lng':lng,
+            'key':'nRating' 
+        },
+        cache:false,
+        dataType: "json"
+    });
+    
+    request.done(function (msg) {
+    
+        console.log(msg);
+      $('#two').html(msg['data']['views'])
+    
+      $('#OrderBy-drop').loading('stop');
+    
+    
+    
+    
+    });
+    
+    request.fail(function (jqXHR, textStatus) {
+       console.log(jqXHR['responseJSON']['message']);
+       showAlert(jqXHR['statusText'], 'error');
+    
+        $('#OrderBy-drop').loading('stop');
+    
+    
+    });
+    
+   });
+ //   console.log(lat);
+
+
+  } else {
+   // x.innerHTML = "Geolocation is not supported by this browser.";
+   showAlert("Geolocation is not supported by this browser.", 'error');
+
+  }
+
+}else{
+var request = $.ajax({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+    url: url + "/orderBy",
+    type: "POST",
+    data: {
+        'country_id': country_id,
+        'profileType_id': profileType_id,
+        'field_id': field_id,
+        'specialties_id': specialties_id,
+
+        'key':$(this).data('key') 
+    },
+    cache:false,
+    dataType: "json"
+});
+
+request.done(function (msg) {
+//     console.log(msg);
+//      profiles_all = msg['data']['profiles_all'];
+//      console.log(profiles_all);
+//     updateMarkers();
+//    $('#advSearch-btn').loading('stop');
+//    $('#map').loading('stop');
+//   // $('#two').loading('stop');
+
+  $('#two').html(msg['data']['views'])
+
+
+
+
+  $('#OrderBy-drop').loading('stop');
+
+
+
+
+});
+
+request.fail(function (jqXHR, textStatus) {
+   console.log(jqXHR['responseJSON']['message']);
+   showAlert(jqXHR['statusText'], 'error');
+
+    $('#OrderBy-drop').loading('stop');
+
+
+});
+
+}
+
+
+
+
+
+
+
+
+});
 
 /*
 
