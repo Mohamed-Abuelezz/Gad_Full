@@ -87,20 +87,20 @@ function initMap() {
 
 
         google.maps.event.addListener(markers, 'click', (function (markers, o) {
-            var rates = [];
-            profiles_all[i]['profile_rates'].forEach((item) => {
-                rates.push(item['rate']);
-            });
-            const avg = rates.reduce((a, c) => a + c, 5) / 5;
+            // var rates = [];
+            // profiles_all[i]['profile_rates'].forEach((item) => {
+            //     rates.push(item['rate']);
+            // });
+           // const avg = rates.reduce((a, c) => a + c, 5) / 5;
 
-            console.log(avg);
+          //  console.log(avg);
 
             var stars = '';
 
             for (var s = 1; s <= 5; s++) {
                 //profiles_all[i]['profileRates'].
 
-                if (s < avg) {
+                if (s < profiles_all[i]['myAvg']) {
 
                     stars += `<span class="fas fa-star checked"></span>`;
 
@@ -149,6 +149,7 @@ function initMap() {
 
 
 function updateMarkers() {
+
     for (i = 0; i < marker.length; i++) {
         marker[i].setMap(null);
     }
@@ -184,21 +185,21 @@ function updateMarkers() {
 
 
         google.maps.event.addListener(markers, 'click', (function (markers, o) {
-            var rates = [];
-            profiles_all[i]['profile_rates'].forEach((item) => {
-                console.log(item['rate']);
-                rates.push(item['rate']);
-            });
-            const avg = rates.reduce((a, c) => a + c, 5) / 5;
+            // var rates = [];
+            // profiles_all[i]['profile_rates'].forEach((item) => {
+            //     console.log(item['rate']);
+            //     rates.push(item['rate']);
+            // });
+            // const avg = rates.reduce((a, c) => a + c, 5) / 5;
 
-            console.log(avg);
+     //       console.log(avg);
 
             var stars = '';
 
             for (var s = 1; s <= 5; s++) {
                 //profiles_all[i]['profileRates'].
 
-                if (s < avg) {
+                if (s < profiles_all[i]['myAvg']) {
 
                     stars += `<span class="fas fa-star checked"></span>`;
 

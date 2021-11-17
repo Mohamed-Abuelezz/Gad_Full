@@ -25,15 +25,15 @@
 
 <body dir="{{ Config::get('app.locale') == 'ar' ? 'rtl' : 'ltr' }}" lang="{{ Config::get('app.locale') }}">
 
-  <div id="splash">
+    <div id="splash">
 
-    <div class="loader">
-      <div class="inner one"></div>
-      <div class="inner two"></div>
-      <div class="inner three"></div>
+        <div class="loader">
+            <div class="inner one"></div>
+            <div class="inner two"></div>
+            <div class="inner three"></div>
+        </div>
+
     </div>
-
-  </div>
 
 
 
@@ -80,7 +80,7 @@
                 <div class="dropdown">
                     <button class="btn  btn-outline dropdown-toggle" type="button" id="dropdownMenu2"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ $country_id != null ? (Config::get('app.locale') == 'ar' ?  $countries->where('id', '=', $country_id)->first()['name_ar'] : $countries->where('id', '=', $country_id)->first()['name_en'] )  :  (Config::get('app.locale') == 'ar' ? 'الدولة' : 'Country') }}
+                        {{ $country_id != null ? (Config::get('app.locale') == 'ar' ? $countries->where('id', '=', $country_id)->first()['name_ar'] : $countries->where('id', '=', $country_id)->first()['name_en']) : (Config::get('app.locale') == 'ar' ? 'الدولة' : 'Country') }}
 
                     </button>
                     <ul class="dropdown-menu" style="z-index: 9999;" aria-labelledby="dropdownMenu2">
@@ -90,7 +90,8 @@
 
 
                             <li><button id="" class="dropdown-item country-btn" data-id="{{ $item->id }}"
-                                    type="button">  {{ Config::get('app.locale') == 'ar' ? $item->name_ar : $item->name_en }}</button>
+                                    type="button">
+                                    {{ Config::get('app.locale') == 'ar' ? $item->name_ar : $item->name_en }}</button>
                             </li>
 
 
@@ -102,7 +103,7 @@
                 <div class="dropdown">
                     <button class="btn btn-outline dropdown-toggle" type="button" id="ProfileType"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        {{  $profileType_id != null ? (Config::get('app.locale') == 'ar' ?  $profiles_Type->where('id', '=', $profileType_id)->first()['name_ar'] : $profiles_Type->where('id', '=', $profileType_id)->first()['name_en'] )  : (Config::get('app.locale') == 'ar' ? 'نوع الصفحة الشخصية' : 'Profiles Type') }}
+                        {{ $profileType_id != null ? (Config::get('app.locale') == 'ar' ? $profiles_Type->where('id', '=', $profileType_id)->first()['name_ar'] : $profiles_Type->where('id', '=', $profileType_id)->first()['name_en']) : (Config::get('app.locale') == 'ar' ? 'نوع الصفحة الشخصية' : 'Profiles Type') }}
 
                     </button>
                     <ul class="dropdown-menu" style="z-index: 9999;" aria-labelledby="ProfileType">
@@ -181,15 +182,43 @@
 
 
             <div class="orderBy">
-                <div class="dropdown"  id="OrderBy-drop">
+                <div class="dropdown" id="OrderBy-drop">
                     <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                     {{Config::get('app.locale') == 'ar' ?   'الترتيب بواسطة' :  'Order By' }}
+
+
+                        @if (!empty($orderKey)) 
+
+                            @switch($orderKey)
+                                @case ('hRating')
+                                    {{ Config::get('app.locale') == 'ar' ? 'الاعلي تقييم' : 'highest rating' }}
+                                @break;
+
+                                @case ('lRating')
+                                    {{ Config::get('app.locale') == 'ar' ? 'الاقل تقييم' : 'lowest rated' }}
+                                @break;
+
+                                @case ('nRating')
+                                    {{ Config::get('app.locale') == 'ar' ? 'الاقرب من موقعك' : 'the nearset' }}
+                                @break;
+
+                            @endswitch
+
+                         @else 
+                            {{Config::get('app.locale') == 'ar' ? 'الترتيب بواسطة' : 'Order By' }}
+                            
+@endif
                     </button>
                     <ul class="dropdown-menu" style="z-index: 9999;" aria-labelledby="dropdownMenu2">
-                        <li><button class="dropdown-item order-btn" data-key="hRating" type="button"> {{Config::get('app.locale') == 'ar' ?   'الاعلي تقييم' :  'highest rating' }}</button></li>
-                        <li><button class="dropdown-item order-btn" data-key="lRating" type="button"> {{Config::get('app.locale') == 'ar' ?   'الاقل تقييم' :  'lowest rated' }}</button></li>
-                        <li><button class="dropdown-item order-btn" data-key="nRating" type="button"> {{Config::get('app.locale') == 'ar' ?   'الاقرب من موقعك' :  'the nearset' }}</button></li>
+                        <li><button class="dropdown-item order-btn" data-key="hRating" type="button">
+                                {{ Config::get('app.locale') == 'ar' ? 'الاعلي تقييم' : 'highest rating' }}</button>
+                        </li>
+                        <li><button class="dropdown-item order-btn" data-key="lRating" type="button">
+                                {{ Config::get('app.locale') == 'ar' ? 'الاقل تقييم' : 'lowest rated' }}</button>
+                        </li>
+                        <li><button class="dropdown-item order-btn" data-key="nRating" type="button">
+                                {{ Config::get('app.locale') == 'ar' ? 'الاقرب من موقعك' : 'the nearset' }}</button>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -200,7 +229,7 @@
                 <div class="form" style="width: 100%">
                     <input type="text" id="confirmPassword" name="search" class="form__input" autocomplete="off"
                         placeholder=" " />
-                    <label for="confirmPassword" class="form__label"> Search By Name</label>
+                    <label for="confirmPassword" class="form__label"> {{ Config::get('app.locale') == 'ar' ?  'البحث بالاسم'  :  'Search By Name'}}</label>
 
                     <div class="loadBox" style=""></div>
 
@@ -214,10 +243,10 @@
         <div class="sectionProfilesResults">
             <ul class="taps">
                 <li>
-                    <button class="tab active" data-content="#one">MAP <i class="fas fa-map"></i></button>
+                    <button class="tab " data-content="#one">MAP <i class="fas fa-map"></i></button>
                 </li>
                 <li>
-                    <button class="tab" data-content="#two">Cards <i
+                    <button class="tab active" data-content="#two">Cards <i
                             class="fas fa-address-card"></i></button>
                 </li>
             </ul>
@@ -225,18 +254,18 @@
 
 
             <!-- Tabs content -->
-            <div id="one" class="content mapTab show">
+            <div id="one" class="content mapTab ">
                 <div class="wrapContent" id="map"></div>
             </div>
 
 
-            <div id="two" class="content cardsTab">
+            <div id="two" class="content cardsTab show">
 
 
                 @include('Website.custome Screens.homeCards')
 
-          
-           
+
+
 
 
             </div>
@@ -295,21 +324,13 @@
         console.log(profiles_all);
 
 
-        var advancedSearchVals={
-'country_id': {!! json_encode($country_id,JSON_HEX_TAG) !!},
-'profileType_id': {!! json_encode($profileType_id,JSON_HEX_TAG) !!},
-'field_id': {!! json_encode($field_id,JSON_HEX_TAG) !!},
-'specialties_id': {!! json_encode($specialties_id, JSON_HEX_TAG) !!},
+        var advancedSearchVals = {
+            'country_id': {!! json_encode($country_id, JSON_HEX_TAG) !!},
+            'profileType_id': {!! json_encode($profileType_id, JSON_HEX_TAG) !!},
+            'field_id': {!! json_encode($field_id, JSON_HEX_TAG) !!},
+            'specialties_id': {!! json_encode($specialties_id, JSON_HEX_TAG) !!},
         };
         console.log(advancedSearchVals);
-
-
-
-
-
-
-
-
     </script>
 
     <!--Js Packages-->

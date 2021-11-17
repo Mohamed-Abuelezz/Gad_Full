@@ -34,7 +34,11 @@ class HomeController extends Controller
         $fields = Fields::all();
 
         $profiles = Profiles::paginate(1);
-        $profiles_all = Profiles::with(['user', 'profiles_type', 'profileRates'])->get();
+        $profiles_all = Profiles::with(['user', 'profiles_type', 'profileRates'])->get()->map(function ($item, $key) {
+               $item->myAvg=$item->profileRates()->avg('rate') ;
+             
+               return $item ;
+           });
 
 //dd($profiles_all);
         // $profiles_all->push('avgs',[]);
@@ -201,11 +205,19 @@ class HomeController extends Controller
 
                     'views' =>  view('Website.custome Screens.homeCards', [
                         'profiles' =>  $profiles->paginate(1),
-                        'profiles_all' => $profiles_all->get()
+                        'profiles_all' => $profiles_all->get()->map(function ($item, $key) {
+                            $item->myAvg=$item->profileRates()->avg('rate') ;
+                          
+                            return $item ;
+                        })
                     ])->render(),
 
 
-                    'profiles_all' => $profiles_all->get(),
+                    'profiles_all' => $profiles_all->get()->map(function ($item, $key) {
+                        $item->myAvg=$item->profileRates()->avg('rate') ;
+                      
+                        return $item ;
+                    }),
 
 
                 ],
@@ -235,7 +247,11 @@ class HomeController extends Controller
                 'fields' =>  $fields,
                 'specialties' =>  $specialties,
                 'profiles' =>  $profiles->paginate(1),
-                'profiles_all' => $profiles_all->get(),
+                'profiles_all' => $profiles_all->get()->map(function ($item, $key) {
+                    $item->myAvg=$item->profileRates()->avg('rate') ;
+                  
+                    return $item ;
+                }),
                 ////////////////////////////////////// ADVANCED SEARCH
 
                 'country_id' => $request->input('country_id'),
@@ -362,11 +378,19 @@ class HomeController extends Controller
 
                     'views' =>  view('Website.custome Screens.homeCards', [
                         'profiles' =>  $profiles->paginate(1),
-                        'profiles_all' => $profiles_all->get()
+                        'profiles_all' => $profiles_all->get()->map(function ($item, $key) {
+                            $item->myAvg=$item->profileRates()->avg('rate') ;
+                          
+                            return $item ;
+                        })
                     ])->render(),
 
 
-                    'profiles_all' => $profiles_all->get(),
+                    'profiles_all' => $profiles_all->get()->map(function ($item, $key) {
+                        $item->myAvg=$item->profileRates()->avg('rate') ;
+                      
+                        return $item ;
+                    }),
 
 
                 ],
@@ -396,7 +420,11 @@ class HomeController extends Controller
                 'fields' =>  $fields,
                 'specialties' =>  $specialties,
                 'profiles' =>  $profiles->paginate(1),
-                'profiles_all' => $profiles_all->get(),
+                'profiles_all' => $profiles_all->get()->map(function ($item, $key) {
+                    $item->myAvg=$item->profileRates()->avg('rate') ;
+                  
+                    return $item ;
+                }),
                 ////////////////////////////////////// ADVANCED SEARCH
 
                 'country_id' => $request->input('country_id'),
@@ -404,6 +432,7 @@ class HomeController extends Controller
                 'field_id' => $request->input('field_id'),
                 'specialties_id' => $request->input('specialties_id'),
 
+                'orderKey' => $request->input('key')
             ]);
         }
     }
