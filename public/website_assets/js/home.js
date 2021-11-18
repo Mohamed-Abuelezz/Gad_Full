@@ -1036,7 +1036,7 @@ function getInitFields(){
                 var new_element = `  
      <div class="dropdown">
     <button class="btn btn-outline  dropdown-toggle ProfileFields" type="button" id="ProfileFields" data-bs-toggle="dropdown" aria-expanded="false">
-    ${ advancedSearchVals['field_id'] != null  ? lang == 'ar' ? msg['data'].find(object => object.id == advancedSearchVals['field_id'])['name_ar'] : msg['data'].find(object => object.id == advancedSearchVals['field_id'])['name_en']  :   lang == 'ar' ? 'المجال'   : 'Fields' } [${ advancedSearchVals['field_id'] != null  ? lang == 'ar' ? msg['data'].find(object => object.id == advancedSearchVals['field_id'])['country']['name_en'] : msg['data'].find(object => object.id == advancedSearchVals['field_id'])['country']['name_en'] : '' }]
+    ${ advancedSearchVals['field_id'] != null  ? lang == 'ar' ? msg['data'].find(object => object.id == advancedSearchVals['field_id'])['name_ar'] : msg['data'].find(object => object.id == advancedSearchVals['field_id'])['name_en']  :   lang == 'ar' ? 'المجال'   : 'Fields' } [${ advancedSearchVals['field_id'] != null  ? lang == 'ar' ? msg['data'].find(object => object.id == advancedSearchVals['field_id'])['country']['name_ar'] : msg['data'].find(object => object.id == advancedSearchVals['field_id'])['country']['name_en'] : '' }]
       
     </button>
     <ul class="dropdown-menu " id="btns-menu" style="z-index: 9999;" aria-labelledby="ProfileFields">

@@ -11,8 +11,17 @@
                   src="{{ asset('storage/images/users_images/'.Auth::user()->image) }}"
                   style="width: 100px;height: 100px;border-radius: 50%;" /></a></li>
             <li class="sideMenuItem">{{Auth::user()->name}}</li>
+            @if (App\Models\Profiles::where('users_id', Auth::id())->exists()  ==  false)
+
+            <li class="sideMenuItem"><a href="#">{{ Config::get('app.locale') == 'ar' ?  'انشاء صفحة شخصية':'Create a Profile'  }}</a></li>
+                
+            @else
             <li class="sideMenuItem"><a href="#">{{ Config::get('app.locale') == 'ar' ?  'الصفحة الشخصية':'Profile'  }}</a></li>
             <li class="sideMenuItem"><a href="#">{{ Config::get('app.locale') == 'ar' ?  'تعديل الصفحة الشخصية':'Edit Profile'  }}</a></li>
+
+            @endif
+
+
             <hr style="border-width: 2px;">
     
             <li class="sideMenuItem"><a href="#">{{ __('Website.home') }}</a></li>
@@ -52,8 +61,20 @@
                   <div class="content">
                     <ul>
     
-                      <li>  {{ Config::get('app.locale') == 'ar' ?  'الصفحة الشخصية':'Profile'  }}</li>
+
+                      @if (App\Models\Profiles::where('users_id', Auth::id())->exists()  ==  false)
+                      
+                      <li class="sideMenuItem"><a href="#">{{ Config::get('app.locale') == 'ar' ?  'انشاء صفحة شخصية':'Create a Profile'  }}</a></li>
+
+                      @else
+
+                      <li> <a href="{{url('profile/'.App\Models\Profiles::where('users_id', Auth::id())->first()->id)}}"> {{  Config::get('app.locale') == 'ar' ?  'الصفحة الشخصية':'Profile'  }}</a></li>
                       <li>{{ Config::get('app.locale') == 'ar' ?  'تعديل الصفحة الشخصية':'Edit Profile'  }}</li>
+
+                      @endif
+                    
+                    
+                    
                       <hr style="border-width: 2px;">
                       <li>{{ Config::get('app.locale') == 'ar' ? 'اعدادات الحساب' : 'Account Settings' }}</li>
                       <li ><a href="{{ url('authentication') }}">{{ Config::get('app.locale') == 'ar' ? 'تسجبل الخروج' : 'Logout'}}</a></li>

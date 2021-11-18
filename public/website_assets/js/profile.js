@@ -62,7 +62,7 @@ location_tab.addEventListener('shown.bs.tab', function (event) {
 })
 
 educationStages_tab.addEventListener('shown.bs.tab', function (event) {
-  $(".tab-content .stgs-subj").addClass("animate__animated animate__bounce");
+  $(".tab-content .stgs-subj").addClass("animate__animated animate__flipInX");
 })
 
 

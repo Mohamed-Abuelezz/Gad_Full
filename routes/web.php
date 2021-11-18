@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Website\HomeController;
 use App\Http\Controllers\Website\IndexController;
+use App\Http\Controllers\Website\ProfileController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -153,6 +156,9 @@ Route::get('/advancedSearch',[HomeController::class, 'advancedSearch']);
 
 Route::post('/orderBy',[HomeController::class, 'orderBy']);
 Route::get('/orderBy',[HomeController::class, 'orderBy']);
+////////////////////////////////////////////////////////////////////
+
+Route::get('/profile/{id}',[ProfileController::class, 'showProfile']);
 
 
 

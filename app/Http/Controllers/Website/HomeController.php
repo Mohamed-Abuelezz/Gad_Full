@@ -39,10 +39,7 @@ class HomeController extends Controller
              
                return $item ;
            });
-
-//dd($profiles_all);
-        // $profiles_all->push('avgs',[]);
-
+//dd(Auth::id());
         return view('Website.screens.home', [
             'meta' => $myHelpersFunctios->getMetaData(),
 
